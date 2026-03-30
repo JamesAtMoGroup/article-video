@@ -5,20 +5,29 @@
   "main": "index.js",
   "scripts": {
     "start": "remotion studio",
-    "build": "remotion render ArticleVideo out/video.mp4 --codec h264"
+    "build": "remotion render ArticleVideo out/video.mp4 --codec h264",
+    "build:2026-03-26": "remotion render ArticleVideo-2026-03-26 out/2026-03-26/2026-03-26.mp4 --codec h264",
+    "build:2026-03-27": "remotion render ArticleVideo-2026-03-27 out/2026-03-27/2026-03-27.mp4 --codec h264 --gl=angle",
+    "build:2026-03-30": "remotion render ArticleVideo-2026-03-30 out/2026-03-30/2026-03-30.mp4 --codec h264"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
     "@remotion/cli": "^4.0.438",
+    "@remotion/google-fonts": "^4.0.438",
     "@remotion/lottie": "^4.0.438",
+    "@remotion/three": "^4.0.441",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.183.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "remotion": "^4.0.438",
+    "three": "^0.183.2",
     "typescript": "^6.0.2"
   }
 }
