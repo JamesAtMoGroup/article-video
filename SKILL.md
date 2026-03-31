@@ -93,6 +93,8 @@ description: 每天自動搜尋最新 AI 資訊，整理成繁體中文學習文
 
 每個主題依 **What / Why / How** 框架撰寫。
 
+**⚠️ 文章大標題（`#` 標題）必須直接使用題目庫中的文字，不得自行改寫或發揮。**
+
 ---
 
 ### Step 3：撰寫繁體中文文章
@@ -107,7 +109,7 @@ description: 每天自動搜尋最新 AI 資訊，整理成繁體中文學習文
 #### 固定文章格式
 
 ```
-# [吸引人的大標題]
+# [直接使用題目庫中的標題文字，不得改寫]
 
 > [一句話摘要]
 
@@ -192,6 +194,9 @@ mnt/article-video/
 ## Part B — Remotion 4K 影片生成
 
 ### 核心規則（強制）
+
+> **每個 Agent 必須在完成任務後，將 checklist 存檔至 `ai-knowledge-YYYY-MM-DD/checklist-[agent].md`。Director 確認所有 checklist 全為 `[x]` 後，才能進入下一 phase 或執行 render。**
+> Checklist 模板詳見 `progress.md` → Agent Checklist 模板。
 
 > **所有 article-video 影片必須以 4K（3840×2160）渲染輸出。**
 > 所有 px 值乘以 `S = 3` 縮放係數。

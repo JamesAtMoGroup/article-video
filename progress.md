@@ -16,12 +16,266 @@ Each video covers 3 topics driven by narrator's own recorded audio, rendered at 
 Director
   ├── [並行]
   │     ├── Audio Agent          — 音訊處理 → processed.wav
-  │     ├── Transcription Agent  — Whisper → .vtt + scene timestamps
-  │     └── Visual Concept Agent — 設計每個 topic 的動畫規格
+  │     │     └── ✅ checklist-audio.md
+  │     └── Script Agent         — 確認逐字稿
+  │           └── ✅ checklist-script.md
   │
-  ├── Scene Dev Agent            — 收到三者輸出，寫 TSX 元件
-  ├── QA Agent                   — 檢查 + iMessage 通知
-  └── Render Agent               — 收到通過後 render
+  ├── Transcription Agent        — Whisper → .vtt
+  │     └── ✅ checklist-transcription.md
+  │
+  ├── VTT QA Agent               — 逐字比對校正 VTT
+  │     └── ✅ checklist-vtt-qa.md
+  │
+  ├── Visual Concept Agent       — VTT-driven 逐句動畫規格
+  │     └── ✅ checklist-visual-concept.md
+  │
+  ├── Scene Dev Agent            — 寫 TSX 元件
+  │     └── ✅ checklist-scene-dev.md
+  │
+  ├── Animation QA Agent         — 逐句對照 VTT 確認時間軸
+  │     └── ✅ checklist-animation-qa.md
+  │
+  └── Render                     — Director 確認所有 checklist 後才能執行
+        └── ✅ checklist-pre-render.md
+```
+
+**Director 規則：每個 phase 開始前，必須讀前一個 agent 的 checklist 檔案，確認所有項目為 `[x]`，才能進入下一步。checklist 有任何 `[ ]` 未完成，該 phase 必須重做。**
+
+---
+
+## Agent Checklist 模板
+
+所有 checklist 存放於 `ai-knowledge-YYYY-MM-DD/` 資料夾。每個 agent 完成任務後必須將 checklist 存檔，Director 讀取確認後才能進入下一 phase。
+
+---
+
+### 📋 Audio Agent Checklist（`checklist-audio.md`）
+
+```markdown
+# Audio Agent Checklist — YYYY-MM-DD
+
+## 輸入確認
+- [ ] 原始音檔路徑：`_______________`（填實際路徑）
+- [ ] 音檔可正常播放，無損壞
+
+## 處理步驟
+- [ ] highpass f=80Hz 已套用
+- [ ] EQ 已套用（120Hz +2dB, 3000Hz +1dB）
+- [ ] acompressor 已套用（threshold=0.06, ratio=4, attack=5, release=100, makeup=4）
+- [ ] loudnorm 已套用（I=-20, LRA=5, TP=-2）
+- [ ] BG music 已混入（volume=0.08, stream_loop=-1）
+- [ ] 無套用 anlmdn（denoise 已禁用）
+
+## 輸出確認
+- [ ] 輸出檔案：`public/audio/ai-knowledge-YYYY-MM-DD-processed.wav`
+- [ ] 輸出檔案存在且可播放
+- [ ] 時長：`_____ 秒`（填實際秒數）
+- [ ] Peak: `_____ dBFS`（目標 -2 dBFS）
+- [ ] Integrated LUFS: `_____`（目標 -20 LUFS）
+
+## Sign-off
+- [ ] Audio Agent 確認以上全部完成
+```
+
+---
+
+### 📋 Transcription Agent Checklist（`checklist-transcription.md`）
+
+```markdown
+# Transcription Agent Checklist — YYYY-MM-DD
+
+## 輸入確認
+- [ ] 使用的音檔：`public/audio/ai-knowledge-YYYY-MM-DD-processed.wav`（必須是 processed，非原始）
+- [ ] 音檔時長確認：`_____ 秒`
+
+## Whisper 執行
+- [ ] 使用指令：`python3 -m whisper`（非 `whisper`）
+- [ ] 參數：`--model medium --language zh --output_format vtt`
+- [ ] 執行完成無報錯
+
+## 輸出確認
+- [ ] VTT 檔案存在：`out/YYYY-MM-DD/ai-knowledge-YYYY-MM-DD.vtt`
+- [ ] VTT 共 `_____` 條 cue
+- [ ] VTT 最後時間戳 `_____` 與音檔時長吻合（誤差 < 3 秒）
+
+## Sign-off
+- [ ] Transcription Agent 確認以上全部完成
+```
+
+---
+
+### 📋 VTT QA Agent Checklist（`checklist-vtt-qa.md`）
+
+```markdown
+# VTT QA Agent Checklist — YYYY-MM-DD
+
+## 掃描步驟（必須執行）
+- [ ] 已執行全文掃描指令：
+  `grep -v "^[0-9]" file.vtt | grep -v "^-->" | grep -v "^WEBVTT" | grep -v "^$" | tr '\n' '|'`
+- [ ] 已將掃描結果與 script.md 逐字比對
+
+## 同音字陷阱檢查（逐一確認）
+- [ ] 常 → 長（長文、長任務）
+- [ ] 斷 → 段（拆段）
+- [ ] 播 → 撥（播報員）
+- [ ] 員 → 源（播報員）
+- [ ] 多餘字（如「英文方不一樣」）
+- [ ] 其他自行發現的錯誤
+
+## 修正記錄（每一處必須列出）
+| 行號 | 錯誤 | 修正後 |
+|------|------|-------|
+| | | |
+
+（若無修正，填「無」）
+
+## 輸出確認
+- [ ] 修正後 VTT 已存回：`out/YYYY-MM-DD/ai-knowledge-YYYY-MM-DD.vtt`
+- [ ] 修正後 VTT 條數：`_____`，時間戳未被更動
+
+## Sign-off
+- [ ] VTT QA Agent 確認逐字比對完成，修正記錄如實填寫
+```
+
+---
+
+### 📋 Visual Concept Agent Checklist（`checklist-visual-concept.md`）
+
+```markdown
+# Visual Concept Agent Checklist — YYYY-MM-DD
+
+## 輸入確認
+- [ ] 已讀取 script.md
+- [ ] 已讀取 corrected VTT（必須是 VTT QA 通過後的版本）
+- [ ] VTT QA checklist 已確認為全 [x]
+
+## 逐句分析
+- [ ] 已對每一條 VTT cue 標記 sentence_type
+- [ ] 無任何 scene 超過 30 秒沒有新視覺元素
+- [ ] 每個視覺元素的 vtt_seconds、frame、local_frame 均已計算（seconds × 30）
+
+## 字幕安全區確認
+- [ ] 所有規劃的視覺元素 bottom edge ≤ 1800px（4K）
+- [ ] AbsoluteFill 置中 scene 已規劃 paddingBottom: SUBTITLE_SAFE
+- [ ] ContentColumn scene 總高度估算 ≤ 1590px（如有多元素，已規劃 element fade-out）
+
+## 輸出確認
+- [ ] visual-spec-YYYY-MM-DD.json 已存檔
+- [ ] JSON 包含所有 scene 的所有 cue
+- [ ] 每個 cue 包含：vtt_seconds / frame / local_frame / sentence_type / visual.element / visual.animation
+
+## Sign-off
+- [ ] Visual Concept Agent 確認以上全部完成
+```
+
+---
+
+### 📋 Scene Dev Agent Checklist（`checklist-scene-dev.md`）
+
+```markdown
+# Scene Dev Agent Checklist — YYYY-MM-DD
+
+## 輸入確認
+- [ ] 已讀取 corrected VTT
+- [ ] 已讀取 visual-spec-YYYY-MM-DD.json
+- [ ] Visual Concept checklist 已確認為全 [x]
+
+## Frame 計算確認
+- [ ] 所有 startFrame / delay 來自 VTT seconds × 30，無猜測值
+- [ ] Scene 邊界 from/to 來自 VTT（填實際值）：
+  - title: `_____` → `_____`
+  - scene2: `_____` → `_____`
+  - scene3: `_____` → `_____`
+  - summary: `_____` → `_____`
+- [ ] TOTAL_FRAMES = `_____`（= 音檔時長秒數 × 30）
+
+## 字幕安全區確認（每個 scene 逐一）
+- [ ] TitleScene：使用 AbsoluteFill，已加 `paddingBottom: SUBTITLE_SAFE` ✓/✗
+- [ ] [Scene 2 名稱]：使用 ContentColumn，估算總高度 `_____px` ≤ 1590px ✓/✗
+- [ ] [Scene 3 名稱]：使用 ContentColumn，估算總高度 `_____px` ≤ 1590px ✓/✗
+- [ ] TipsScene：使用 ContentColumn，估算總高度 `_____px` ≤ 1590px ✓/✗
+- [ ] SummaryScene：使用 AbsoluteFill，已加 `paddingBottom: SUBTITLE_SAFE` ✓/✗
+
+## Element Fade-Out 確認
+- [ ] 所有有多元素堆疊的 scene，已實作 element fade-out（或總高度確認安全）
+- [ ] AnalogyBox delay < scene duration（無 delay ≥ duration 的 bug）
+
+## 程式碼確認
+- [ ] `SUBTITLE_SAFE = 120 * S`（非 80*S）
+- [ ] Audio src 路徑正確：`audio/ai-knowledge-YYYY-MM-DD-processed.wav`
+- [ ] CHAPTERS 包含所有 scene 邊界，含 SummaryScene
+- [ ] TypeScript 無編譯錯誤（`npx tsc --noEmit` 通過）
+- [ ] Remotion Studio 可開啟並顯示正確 composition
+
+## Sign-off
+- [ ] Scene Dev Agent 確認以上全部完成
+```
+
+---
+
+### 📋 Animation QA Agent Checklist（`checklist-animation-qa.md`）
+
+```markdown
+# Animation QA Agent Checklist — YYYY-MM-DD
+
+## 輸入確認
+- [ ] 已讀取 corrected VTT
+- [ ] 已讀取 VideoComposition_YYYY_MM_DD.tsx
+- [ ] Scene Dev checklist 已確認為全 [x]
+
+## 逐 Scene 逐 Cue 確認
+
+### [Scene 名稱 1]（from: _____ to: _____）
+| VTT 時間 | 台詞 | 預期視覺元素 | 實際 startFrame/delay | 對齊？ |
+|---------|------|------------|---------------------|-------|
+| | | | | ✓/✗ |
+
+（每個 scene 填一張表）
+
+## 字幕安全區視覺確認
+- [ ] 已在 Remotion Studio 逐 scene 檢查
+- [ ] 以下 frame 截圖確認無內容進入字幕區：
+  - frame `_____`（最多元素同時出現的時間點）：✓/✗
+  - frame `_____`（TipsScene 最後一個 step 出現時）：✓/✗
+  - frame `_____`（SummaryScene 最後一張卡出現時）：✓/✗
+
+## 30 秒無動畫檢查
+- [ ] 無任何 scene 超過 30 秒沒有新視覺元素出現
+
+## Sign-off
+- [ ] Animation QA Agent 確認以上全部完成，所有 ✗ 項目已反映給 Scene Dev 修正
+```
+
+---
+
+### 📋 Pre-Render Checklist（`checklist-pre-render.md`）— Director 執行
+
+```markdown
+# Pre-Render Checklist — YYYY-MM-DD
+
+## 所有 Agent Checklist 確認
+- [ ] checklist-audio.md：全 [x] ✓
+- [ ] checklist-transcription.md：全 [x] ✓
+- [ ] checklist-vtt-qa.md：全 [x] ✓
+- [ ] checklist-visual-concept.md：全 [x] ✓
+- [ ] checklist-scene-dev.md：全 [x] ✓
+- [ ] checklist-animation-qa.md：全 [x] ✓
+
+## 最終確認
+- [ ] 音檔：`public/audio/ai-knowledge-YYYY-MM-DD-processed.wav` 存在
+- [ ] VTT：`out/YYYY-MM-DD/ai-knowledge-YYYY-MM-DD.vtt` 存在（已校正版本）
+- [ ] Composition ID：`ArticleVideo-YYYY-MM-DD`
+- [ ] 輸出路徑：`out/YYYY-MM-DD/YYYY-MM-DD.mp4`
+- [ ] package.json 有對應 build script：`build:YYYY-MM-DD`
+- [ ] James 已口頭或 iMessage 核准
+
+## 執行
+- [ ] Render 指令：`npm run build:YYYY-MM-DD`
+- [ ] Render 完成，檔案存在
+- [ ] iMessage 通知已發送至 0981928525
+
+## Sign-off
+- [ ] Director 確認所有項目完成，render 已執行
 ```
 
 ---
@@ -161,21 +415,31 @@ Director
 
 ## QA + Render 審核流程（Director Agent 必讀）
 
-Render 前必須執行 QA 並等待 James 核准：
+**Render 前，Director 必須逐一讀取並確認以下所有 checklist 檔案全為 `[x]`：**
+
+```
+ai-knowledge-YYYY-MM-DD/checklist-audio.md
+ai-knowledge-YYYY-MM-DD/checklist-transcription.md
+ai-knowledge-YYYY-MM-DD/checklist-vtt-qa.md
+ai-knowledge-YYYY-MM-DD/checklist-visual-concept.md
+ai-knowledge-YYYY-MM-DD/checklist-scene-dev.md
+ai-knowledge-YYYY-MM-DD/checklist-animation-qa.md
+```
+
+任何 checklist 有未完成項目（`[ ]`），Director 必須退回該 agent 重做，不得繼續。
+
+確認全部通過後：
 
 ```bash
-# Step 1: QA 報告 + 發 iMessage + 背景 polling
-./scripts/qa_and_wait.sh <YYYY-MM-DD>   # e.g. 2026-03-30
+# Step 1: 填寫 checklist-pre-render.md，發 iMessage 給 James
+./scripts/qa_and_wait.sh <YYYY-MM-DD>
 
-# Step 2: 等待核准（雙管道）
-# - James 在對話中說「通過」→ Director 直接呼叫 render
-# - James 用 iMessage 回「通過」→ polling 寫入 flag file → 自動 render
-# 任一先到即可
+# Step 2: 等待 James 核准
+# - 對話中說「通過」→ Director 直接執行 render
+# - iMessage 回「通過」→ polling flag → 自動 render
 
-# Step 3: Render（需加 --gl=angle）
+# Step 3: Render
 npm run build:YYYY-MM-DD
-# 或
-npx remotion render src/index.ts ArticleVideo-YYYY-MM-DD out/YYYY-MM-DD/YYYY-MM-DD.mp4 --gl=angle --codec=h264 --overwrite
 ```
 
 **對話中核准：** James 說「通過」時，Director 應立即執行 render，並 kill 背景 polling。
