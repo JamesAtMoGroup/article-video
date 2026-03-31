@@ -286,15 +286,26 @@ Phase 6 — Render（必須等 Animation QA 通過 + James 核准）
 
 ### 字幕安全區（Subtitle Safe Zone）
 
-在 4K (3840×2160, S=3) 下，字幕出現在畫面底部約 360px（17%）。
-ContentColumn 的 maxHeight 必須留出此空間，避免內容被遮擋：
+字幕是全片都在的，不是某個 scene 才有。**所有 scene 的所有視覺元素，bottom edge 不得低於 `H - SUBTITLE_SAFE = 2160 - 360 = 1800px`。這是絕對邊界。**
 
 ```tsx
-const SUBTITLE_SAFE = 120 * S;  // 360px at 4K (17% of canvas)
+const SUBTITLE_SAFE = 120 * S;  // 360px at 4K (17% of canvas) — 全片共用，勿改
 const H = 720 * S;               // canvas height = 2160
-const contentTop = NAV_H + 20 * S;  // 150 + 60 = 210
-// ContentColumn maxHeight = H - contentTop - SUBTITLE_SAFE = 2160 - 210 - 360 = 1590px
+// 任何元素的 bottom edge 必須 ≤ 1800px
 ```
+
+實作方式依佈局類型：
+
+| 佈局類型 | 實作方式 |
+|---------|---------|
+| ContentColumn（一般 scene） | `maxHeight = H - contentTop - SUBTITLE_SAFE = 1590px` + `overflowY: hidden` |
+| AbsoluteFill 置中（TitleScene / SummaryScene） | `paddingBottom: SUBTITLE_SAFE`（確保 flex 置中不會把內容推到底部） |
+| AbsoluteFill 自訂定位（任何絕對定位元素） | `bottom` 值必須 ≥ `SUBTITLE_SAFE`；或明確計算 `top + height ≤ 1800px` |
+
+**Scene Dev 清單（每個新元件建立前必確認）：**
+- [ ] 這個元件走哪種佈局？
+- [ ] bottom edge 最大值是多少 px？
+- [ ] 是否 ≤ 1800px？
 
 **⚠️ 多元素 Scene 必須做 Element Fade-Out（重要！）**
 

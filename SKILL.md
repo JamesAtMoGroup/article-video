@@ -9,48 +9,183 @@ description: 每天自動搜尋最新 AI 資訊，整理成繁體中文學習文
 
 ## Part A — 文章生成
 
-### 任務目標
-每天產出一篇「每日 AI 知識庫」文章，目標讀者是想學習 AI 的學生。內容重心是知識與學習價值，不是單純新聞報導。
-
 ### ⚙️ 設定
 
 | 設定項目 | 值 |
 |---------|-----|
 | 本地資料夾路徑 | `/Users/jamesshih/Projects/article-video` |
+| VM 掛載路徑 | `mnt/article-video/` |
 
-### Step 1：掛載本地資料夾
+---
 
-使用 `request_cowork_directory` 工具，傳入路徑 `/Users/jamesshih/Projects/article-video`。
+### Step 0：掛載本地資料夾（第一步，不可跳過）
 
-### Step 2：搜尋今天最新的 AI 資訊
+立即呼叫 `request_cowork_directory`，傳入路徑 `/Users/jamesshih/Projects/article-video`。
+掛載成功後，VM 內路徑為 `mnt/article-video/`。若掛載失敗，停止任務並記錄錯誤。
 
-使用 WebSearch，以**英文關鍵字**搜尋今天或本週最新的 AI 相關資訊。
+---
 
-每次至少搜尋 2–3 個類別（輪流挑選）：
-- **AI models & updates**：`"new AI model release [month year]"`, `"ChatGPT update"`, `"Claude update"`
-- **AI coding tools**：`"Cursor AI update"`, `"GitHub Copilot"`, `"AI coding assistant news"`
-- **AI automation**：`"n8n update"`, `"AI workflow automation"`, `"MCP agent news"`
-- **AI literacy / ethics**：`"AI literacy students"`, `"responsible AI use"`, `"AI hallucination"`
-- **AI creative tools**：`"Midjourney update"`, `"Runway AI"`, `"AI image video tool"`
-- **AI in workplace**：`"AI jobs impact"`, `"AI productivity tools 2026"`
+### Step 1：判斷今天的內容類型
+
+| 條件 | 執行類型 |
+|------|---------|
+| 今天是**週五** | → 執行「週五時事型」（Step 2A） |
+| 今天是其他日期 | → 執行「一般觀念型」（Step 2B） |
+
+---
+
+### Step 2A：週五時事型 — 搜尋本週 AI 事件
+
+> 僅週五執行此步驟
+
+使用 WebSearch，以**英文關鍵字**搜尋**本週（近 7 天）**內的 AI 重大事件，含當前年月（例如 "March 2026"）。
+
+搜尋方向（每次至少 2–3 個）：
+- **AI models & releases**：`"new AI model [month year]"`, `"Claude update"`, `"GPT update"`, `"Gemini news"`
+- **AI tools & products**：`"Cursor AI"`, `"GitHub Copilot"`, `"Midjourney"`, `"Runway AI update"`
+- **AI automation**：`"n8n update"`, `"MCP agent"`, `"AI workflow news"`
+- **AI industry events**：`"AI company news this week"`, `"AI regulation"`, `"AI funding"`
+- **AI controversy**：`"AI model removed"`, `"AI safety concern"`, `"AI company decision"`
 
 優先來源：TechCrunch, The Verge, Wired, Ars Technica, Anthropic Blog, OpenAI Blog, Google Blog, VentureBeat。
 **避免中文網站（資訊較慢）。**
 
+挑選 **2–3 個本週最值得講的事件**，每個依以下框架：
+- **發生了什麼（What happened）**
+- **背後原因（Why）**
+- **對我們的意義（So what）**
+
+---
+
+### Step 2B：一般觀念型 — 從題目庫挑選主題
+
+> 非週五執行此步驟
+
+從以下**題目庫**中挑選 1 個尚未產出過的主題：
+
+#### 🧠 AI 基礎概念
+1. AI 為什麼會「幻覺」？它不是在說謊
+2. Token 是什麼？為什麼 AI 有字數限制
+3. RAG 是什麼？讓 AI 記住你的資料
+4. Fine-tuning vs Prompt Engineering，哪個更值得學
+5. 為什麼同一個問題問 AI，每次答案都不一樣
+
+#### 🤖 模型與工具
+6. Claude、GPT、Gemini 到底差在哪
+7. 開源模型 vs 閉源模型，你該選哪個
+8. 什麼是 MCP？為什麼最近大家都在講
+9. AI Agent 和一般 AI 聊天有什麼本質差異
+10. 為什麼模型越來越便宜，但能力越來越強
+
+#### ⚙️ AI 應用與工作流
+11. Prompt 寫不好的人都犯了這個錯
+12. 什麼是 AI 工作流？n8n 能幫你自動化什麼
+13. 用 AI 寫的東西，版權是誰的
+14. AI 幫你做完的工作，你還算做了嗎
+
+#### 🌍 AI 素養與社會
+15. 為什麼 AI 公司都在搶「上下文視窗」長度
+16. AI 訓練資料從哪來？你的資料有沒有在裡面
+17. 為什麼有些國家要管制 AI，台灣呢
+18. 學 AI 工具，和學 AI 原理，有什麼不同
+19. AI 會取代哪些工作？一個比較誠實的分析
+20. 現在學 AI 的人，五年後的優勢是什麼
+
+每個主題依 **What / Why / How** 框架撰寫。
+
+---
+
 ### Step 3：撰寫繁體中文文章
 
-框架：**What / Why / How** 三段式
+#### 【禁止事項】
+- 嚴禁出現「學生」「給學生」「目標讀者」等用詞
+- 嚴禁加入任何來源引用區塊（「資料來源」「Sources」「參考資料」等）
+- 嚴禁加入關鍵詞速查表
+- 嚴禁在文章開頭加入「目標讀者」標示
+- 嚴禁在標題中出現任何日期、年份或月份——日期只能出現在頁尾
 
-撰寫規範：
+#### 固定文章格式
+
+```
+# [吸引人的大標題]
+
+> [一句話摘要]
+
+---
+
+## 今日速覽
+
+- [主題一簡述]
+- [主題二簡述]
+- [主題三簡述（若有）]
+
+---
+
+## 🔍 [主題一標題]
+
+[內文：是什麼 / 為什麼重要 / 怎麼用，輕鬆口語]
+
+> 💡 **想一想**：[引發思考的問題]
+
+---
+
+## 🔍 [主題二標題]
+
+[內文]
+
+> 💡 **想一想**：[引發思考的問題]
+
+---
+
+## 🔍 [主題三標題（若有）]
+
+[內文]
+
+> 💡 **想一想**：[引發思考的問題]
+
+---
+
+## 🧭 今日重點整理
+
+| 主題 | 核心洞見 |
+|------|---------|
+| [主題一] | [一句話精華] |
+| [主題二] | [一句話精華] |
+
+---
+
+*每日 AI 知識庫 · YYYY-MM-DD · AI 未來學院*
+```
+
+#### 撰寫規範
 - 語言：繁體中文，輕鬆口語
-- 每篇至少一個 AI 素養視角
-- 不加來源引用區塊、不加關鍵詞速查表
+- 每篇至少 1 個 AI 素養視角（工具限制、隱私、負責任使用等）
+
+---
+
+### Step 4：產出逐字稿
+
+完成文章後產出供朗讀的完整逐字稿：
+
+- 語言：繁體中文口語，自然流暢
+- 口播提示標記：【停頓】【長停頓】【語氣：疑問】【語氣：強調】
+- 表格改成「第一⋯⋯第二⋯⋯第三⋯⋯」口播節奏
+- 開場：「嗨，歡迎來到每日 AI 知識庫。」
+- 結尾：「這裡是每日 AI 知識庫，我是你的每日 AI 知識庫播報員。掰掰！」
 - 頁尾：`*每日 AI 知識庫 · YYYY-MM-DD · AI 未來學院*`
 
-### Step 4：儲存 .md 檔案
+---
 
-- 檔名：`ai-knowledge-YYYY-MM-DD.md`
-- 優先存至：`mnt/article-video/`，備用：`mnt/outputs/`
+### Step 5：儲存檔案
+
+在 `mnt/article-video/` 底下建立子資料夾，存入文章與逐字稿：
+
+```
+mnt/article-video/
+└── ai-knowledge-YYYY-MM-DD/
+    ├── ai-knowledge-YYYY-MM-DD.md
+    └── ai-knowledge-YYYY-MM-DD_script.md
+```
 
 ---
 
@@ -354,16 +489,28 @@ Total: ~1020f（34s）
 
 詳見 `progress.md` → Visual Concept Agent 規格。每個 cue 必須包含：`vtt_seconds`、`frame`、`local_frame`、`sentence_type`、`visual.element`、`visual.animation`。
 
-#### ContentColumn 字幕安全區（強制）
+#### 字幕安全區（全片強制，不限 scene 類型）
+
+> 字幕是**全片都在的**。所有 scene 的所有視覺元素，bottom edge 不得低於 `H - SUBTITLE_SAFE = 1800px`。這是絕對邊界。
 
 ```tsx
-const SUBTITLE_SAFE = 120 * S;  // 360px at 4K (17% of 2160) — 勿改回 80*S
-const H = 720 * S;               // canvas height = 2160
-const contentTop = NAV_H + 20 * S;  // 150 + 60 = 210
-// ContentColumn maxHeight = H - contentTop - SUBTITLE_SAFE = 2160 - 210 - 360 = 1590px
+const SUBTITLE_SAFE = 120 * S;  // 360px at 4K — 勿改回 80*S
+const H = 720 * S;               // 2160px
+// 任何元素的 bottom edge 必須 ≤ 1800px
 ```
 
-所有場景內容總高度 **必須 ≤ 1590px（4K）**，否則會被 clip。
+佈局類型對應實作：
+
+| 佈局類型 | 實作方式 |
+|---------|---------|
+| ContentColumn（一般 scene） | `maxHeight = 1590px` + `overflowY: hidden` |
+| AbsoluteFill 置中（TitleScene / SummaryScene） | `paddingBottom: SUBTITLE_SAFE` |
+| AbsoluteFill 自訂定位 | `bottom` ≥ `SUBTITLE_SAFE`，或確認 `top + height ≤ 1800px` |
+
+**Scene Dev 每建立新元件前必確認：**
+- [ ] 這個元件走哪種佈局？
+- [ ] bottom edge 最大值是多少 px？
+- [ ] 是否 ≤ 1800px？
 
 #### Element Fade-Out 規則（多元素 Scene 必須執行）
 
