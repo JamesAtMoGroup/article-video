@@ -28,65 +28,134 @@ Director
 
 ## Visual Concept Agent 規格
 
-### 職責
-讀文章 MD，為每個 topic 決定最適合的視覺動畫形式，輸出動畫規格給 Scene Dev Agent。
+### 核心原則（最重要）
 
-### 輸入
-- `ai-knowledge-YYYY-MM-DD/ai-knowledge-YYYY-MM-DD_script.md`
+> **每一條 VTT 字幕，都是一個視覺設計決策點。**
+> 對每一句台詞問：「觀眾在聽這句話的時候，眼睛應該看到什麼，才能幫助他理解？」
 
-### 輸出
-- `ai-knowledge-YYYY-MM-DD/visual-spec-YYYY-MM-DD.json`
+動畫不是裝飾。每個視覺元素必須在**對應台詞的那一幀**出現，強化觀眾對那句話的理解。
 
-### 動畫類型選擇邏輯
+---
 
-| Topic 性質 | 選用類型 | 範例 |
-|-----------|---------|------|
-| 協議 / 架構 / 系統連接 | `topology` — SVG 節點連線動畫 | MCP 協議、Agent 架構 |
-| 數據 / 比較 / 排名 | `stats` — 數字跑動 + bar 動畫 | 模型 benchmark、市佔率 |
-| 流程 / 步驟 / 時序 | `flowchart` — 步驟依序顯示 | RAG 流程、fine-tuning 步驟 |
-| 抽象概念 / 哲學 | `threejs` — 3D 幾何動畫 | AI 悖論、倫理議題 |
-| 產品發布 / 功能介紹 | `cards` — 文字卡 fadeUp（現有模板）| 新模型發布、工具更新 |
+### 必要輸入（缺一不可）
+
+- `ai-knowledge-YYYY-MM-DD/ai-knowledge-YYYY-MM-DD_script.md` — 原始逐字稿
+- `out/YYYY-MM-DD/ai-knowledge-YYYY-MM-DD.vtt` — **已校正的 VTT**（必須在 QA 通過後才能開始）
+
+---
+
+### 工作流程
+
+**Step 1 — 逐句分類**
+
+讀 VTT，對每一條 cue 標記句子類型：
+
+| 句子類型 | 判斷關鍵字 | 視覺反應 |
+|---------|-----------|---------|
+| `definition` | 「X 叫做 Y」「這個單位就叫做」「就是」 | 顯示概念名稱 + 視覺定義框 |
+| `analogy` | 「就像」「想像成」「你可以把 X 想像成 Y」 | 顯示比喻的視覺對照（左=抽象，右=具體） |
+| `number` | 數字、「大約等於」「約」「%」 | 數字動畫跑動，或 bar/比例視覺 |
+| `cause_effect` | 「因為...所以」「這就解釋了」「這才是」 | before → after 動畫，或箭頭連接兩個狀態 |
+| `step` | 「第一」「第二」「第三」「第四」 | 依序 reveal，前一步保留，新步驟高亮 |
+| `warning` | 「注意」「最容易被誤解」「不是...而是」 | 高亮脈衝、顏色強調（紅或黃） |
+| `transition` | 場景切換台詞（「接下來」「那懂了之後」） | 不需新視覺，等待下一個 scene |
+| `summary` | 「重點整理」「第一...第二...第三」（結尾） | 逐條 recap card 依序出現 |
+
+**Step 2 — 決定視覺元素**
+
+每個視覺元素必須回答：
+1. **What** — 畫面上出現什麼（文字、圖形、數字、圖表、動畫）
+2. **When** — 哪一幀出現（= VTT seconds × 30，必須精確）
+3. **How** — 怎麼進場（fadeUp / scaleIn / drawLine / countUp / slideIn）
+4. **How long** — 停留多久（直到下一個視覺取代它，或 scene 結束）
+
+**Step 3 — 輸出 visual-spec JSON**
+
+---
 
 ### 輸出格式 (`visual-spec-YYYY-MM-DD.json`)
+
 ```json
 {
   "date": "YYYY-MM-DD",
-  "topics": [
+  "scenes": [
     {
-      "index": 1,
-      "title": "Topic 標題",
-      "type": "topology",
-      "description": "用一句話說明這個動畫要呈現什麼",
-      "nodes": ["Claude", "MCP Server", "File System"],
-      "connections": [["Claude", "MCP Server"], ["MCP Server", "File System"]],
-      "color_accent": "green"
-    },
-    {
-      "index": 2,
-      "title": "Topic 標題",
-      "type": "stats",
-      "description": "比較三個模型的 benchmark 分數",
-      "stats": [
-        { "label": "GPT-4o", "value": 92, "unit": "%" },
-        { "label": "Claude 3.5", "value": 88, "unit": "%" }
-      ],
-      "color_accent": "yellow"
-    },
-    {
-      "index": 3,
-      "title": "Topic 標題",
-      "type": "threejs",
-      "description": "抽象幾何球體表現 AI 與人類工作的張力",
-      "color_accent": "green"
+      "scene_id": "token",
+      "scene_start_seconds": 27.0,
+      "scene_start_frame": 810,
+      "cues": [
+        {
+          "vtt_seconds": 30.5,
+          "frame": 915,
+          "local_frame": 105,
+          "cue_text": "AI 讀文字的方式是把文字切成一塊一塊的小單位",
+          "sentence_type": "definition",
+          "visual": {
+            "element": "TokenSplitAnimation",
+            "description": "一段文字從左到右被切割成色塊積木，每塊 pop in",
+            "animation": "splitIn",
+            "accent_color": "green"
+          }
+        },
+        {
+          "vtt_seconds": 38.0,
+          "frame": 1140,
+          "local_frame": 330,
+          "cue_text": "你可以把 Token 想像成積木",
+          "sentence_type": "analogy",
+          "visual": {
+            "element": "AnalogyComparison",
+            "description": "左：文字句子；右：拆開的積木塊（同步 pop in）",
+            "animation": "fadeUp",
+            "accent_color": "green"
+          }
+        },
+        {
+          "vtt_seconds": 86.8,
+          "frame": 2604,
+          "local_frame": 1794,
+          "cue_text": "1000 個 Token 大約等於 750 個英文單字",
+          "sentence_type": "number",
+          "visual": {
+            "element": "EstimateCard",
+            "description": "大數字 1000 countUp，右側顯示 750 英文 / 500 中文",
+            "animation": "countUp + fadeUp",
+            "accent_color": "green"
+          }
+        }
+      ]
     }
   ]
 }
 ```
 
-### 注意事項
-- `cards` 是最輕量的 fallback，用於時間緊或概念不適合視覺化時
-- `topology` 和 `flowchart` 由 Scene Dev 用 SVG + Remotion 實作（參考 `src/MCPDiagram.tsx`）
-- `threejs` 由 Scene Dev 在 `src/three/` 建立新元件
+---
+
+### 視覺元素庫（Scene Dev 可直接使用）
+
+| Element | 適用句子類型 | 說明 |
+|---------|------------|------|
+| `TokenSplitAnimation` | definition | 文字逐字切割成色塊 |
+| `AnalogyComparison` | analogy | 左右對照：抽象概念 vs 具體比喻 |
+| `EstimateCard` | number | 大數字 + 換算公式 |
+| `CompareTable` | number / cause_effect | 表格逐行 reveal |
+| `StepSequence` | step | 步驟依序高亮，前步驟保留但降透明度 |
+| `CauseEffectArrow` | cause_effect | 左框 → 箭頭動畫 → 右框 |
+| `HighlightPulse` | warning | 文字或框脈衝發光 |
+| `DeskViz` | analogy | 桌面視窗比喻的 CSS 動畫 |
+| `TopologyDiagram` | definition (架構) | SVG 節點 + 連線逐一繪製 |
+| `BarChart` | number / cause_effect | 橫向 bar 從 0 animate 到目標值 |
+| `SummaryCards` | summary | 3 張 recap card 依序 fadeUp |
+
+---
+
+### 禁止事項
+
+- ❌ 不能在沒有 corrected VTT 的情況下開始
+- ❌ 不能讓一個 scene 超過 30 秒沒有新的視覺元素出現
+- ❌ 不能只用 `cards` 撐完整個 scene（cards 只能當補充，不能是主體）
+- ❌ 視覺元素的出現時間不能猜測，必須來自 VTT seconds × 30
+- ❌ 不能設計超出 maxHeight=1590px 的元素堆疊（需做 element fade-out）
 
 ---
 

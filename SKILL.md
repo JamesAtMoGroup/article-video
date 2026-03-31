@@ -311,33 +311,48 @@ Total: ~1020f（34s）
 
 ---
 
-### ⚠️ 動畫設計強制要求
+### ⚠️ 動畫設計核心原則
 
-**每個 Scene 必須有視覺動畫元件，不能只是靜態文字 card fade in。**
-**觀眾必須能「看著動畫學習」，不是讀字。**
+> **每一條 VTT 字幕，都是一個視覺設計決策點。**
+> 對每一句台詞問：「觀眾在聽這句話的時候，眼睛應該看到什麼，才能幫助他理解？」
+
+動畫不是裝飾。每個視覺元素必須在對應台詞的那一幀出現，強化觀眾的理解。一個 scene 不能超過 30 秒沒有新視覺元素出現。
+
+#### 句子類型 → 視覺決策
+
+| 句子類型 | 判斷關鍵字 | 視覺設計方向 |
+|---------|-----------|------------|
+| `definition` | 「叫做」「就是」「這個單位就是」 | 概念名稱 + 視覺定義框，splitIn 或 scaleIn |
+| `analogy` | 「就像」「想像成」「把 X 想像成 Y」 | 左右對照：抽象 vs 具體比喻 |
+| `number` | 數字、「大約等於」「約」「%」 | 數字 countUp，或 bar animate width |
+| `cause_effect` | 「因為...所以」「這就解釋了」「這才是」 | before → after，箭頭連結兩狀態 |
+| `step` | 「第一」「第二」「第三」「第四」 | 依序 reveal，前步驟保留但降透明度 |
+| `warning` | 「最容易被誤解」「不是...而是」 | 高亮脈衝，紅或黃強調色 |
+| `transition` | 「接下來」「那懂了之後」 | 不需新視覺，等待 scene 切換 |
+| `summary` | 「重點整理」（結尾段） | recap card 依序 fadeUp |
 
 #### 動畫元件庫（Scene Dev 必讀）
 
-| 元件 | 用途 | 實作方式 |
-|------|------|---------|
-| `TokenBlocksRow` | 展示 Token 切割概念 | CSS 方塊逐一 spring 彈入 |
-| `DeskViz` | 上下文視窗比喻（桌面） | CSS 紙張逐一掉入桌面，最後一張紅色溢出 |
-| `SituationCards` | 3 個情境並排 | useFadeUp 依序顯示 |
-| `CompareTable` | EN/ZH Token 數量比較表 | useFocusHighlight 逐行高亮 |
-| `EstimateCard` | 大數字 + 公式 | spring 彈入 + pulsing glow |
-| `TokenAnalogyBox` | 積木比喻說明 | useFadeIn（opacity only） |
-| `StepCard × N` | 步驟流程 | 依 VTT 時間逐一 useFadeUp |
-| `SummaryScene` | 重點整理 | 3 條回顧 card + pulsing badge |
-| `AnalogyBox` | 核心觀念補充 | useFadeIn + 左側 border |
+| 元件 | 句子類型 | 實作方式 |
+|------|---------|---------|
+| `TokenSplitAnimation` | definition | 文字逐字切割成色塊 spring 彈入 |
+| `AnalogyComparison` | analogy | 左右對照框同步 fadeUp |
+| `TokenBlocksRow` | definition/analogy | CSS 方塊逐一 spring 彈入 |
+| `DeskViz` | analogy | CSS 紙張掉入桌面，最後一張紅色溢出 |
+| `SituationCards` | cause_effect | 3 個情境並排，依序 useFadeUp |
+| `CompareTable` | number | useFocusHighlight 逐行高亮 |
+| `EstimateCard` | number | spring 彈入 + pulsing glow + countUp |
+| `BarChart` | number/cause_effect | 橫向 bar 從 0 animate 到目標值 |
+| `CauseEffectArrow` | cause_effect | 左框 → 箭頭動畫 → 右框 |
+| `StepSequence` | step | 依 VTT 時間逐一 useFadeUp，前步保留 |
+| `HighlightPulse` | warning | 文字或框脈衝發光（紅/黃） |
+| `TopologyDiagram` | definition(架構) | SVG 節點 + 線條逐一繪製 |
+| `SummaryScene` | summary | 3 條 recap card + pulsing badge |
+| `AnalogyBox` | analogy補充 | useFadeIn + 左側 border |
 
-#### 新主題動畫設計原則
+#### Visual Concept Agent 必須輸出的 JSON 格式
 
-- **數字/統計** → 大數字動畫計數 + bar 圖 animate width
-- **流程/步驟** → 箭頭依序出現，SVG path draw-on
-- **比較** → 左右或上下並列，useFocusHighlight 切換
-- **概念/比喻** → CSS 圖示或幾何動畫（不需 Three.js）
-- **架構圖** → SVG 節點 + 線條逐一繪製
-- **比例/佔比** → 圓形或橫向 progress bar animate
+詳見 `progress.md` → Visual Concept Agent 規格。每個 cue 必須包含：`vtt_seconds`、`frame`、`local_frame`、`sentence_type`、`visual.element`、`visual.animation`。
 
 #### ContentColumn 字幕安全區（強制）
 
