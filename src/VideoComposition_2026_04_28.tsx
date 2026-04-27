@@ -795,6 +795,7 @@ function TitleScene() {
 //   61.48s → local 1269  "第三個來源 程式碼"
 //   71.08s → local 1557  "最後 精選策劃資料"
 function Scene1() {
+  const frame = useCurrentFrame();
   const HEADER_AT     = 0;
   const INTRO_AT      = 93;     // 22.28s
   const QUESTION_AT   = 251;    // 27.52s "這些文字從哪裡來?"
@@ -803,6 +804,13 @@ function Scene1() {
   const SRC3_AT       = 1269;   // 61.48s 程式碼
   const SRC4_AT       = 1557;   // 71.08s 精選
   const SOURCES_ANIM_AT = 251;  // animation trigger
+
+  // Element fade-out: header + intro + question fade before SRC3 appears
+  const EARLY_FADE_START = SRC3_AT - 120; // 1149
+  const EARLY_REMOVE     = SRC3_AT - 10;  // 1259
+  const showEarly        = frame < EARLY_REMOVE;
+  const earlyOpacity     = frame > EARLY_FADE_START
+    ? interpolate(frame, [EARLY_FADE_START, EARLY_REMOVE], [1, 0], clamp) : 1;
 
   const dur = SCENES_2026_04_28.scene1.to - SCENES_2026_04_28.scene1.from;
 
@@ -817,51 +825,56 @@ function Scene1() {
   return (
     <SceneFade durationInFrames={dur}>
       <ContentColumn>
-        {/* Header */}
-        <div style={{ ...headerStyle, marginBottom: 16 * S }}>
-          <div style={{
-            display: "inline-block",
-            fontFamily: "'Space Mono', monospace", fontSize: 18 * S,
-            color: C.primary, letterSpacing: "0.1em",
-            background: C.primaryLight, border: `1px solid ${C.primaryBorder}`,
-            borderRadius: 6 * S, padding: `${5 * S}px ${14 * S}px`,
-            marginBottom: 12 * S,
-          }}>第一段</div>
-          <div style={{
-            fontFamily: "'Noto Sans TC', sans-serif", fontSize: 22 * S,
-            color: C.text, fontWeight: "900", lineHeight: 1.3,
-          }}>AI 靠什麼學習？</div>
-        </div>
+        {/* Header + Intro + Question — fade out before SRC3 */}
+        {showEarly && (
+          <div style={{ opacity: earlyOpacity }}>
+            {/* Header */}
+            <div style={{ ...headerStyle, marginBottom: 16 * S }}>
+              <div style={{
+                display: "inline-block",
+                fontFamily: "'Space Mono', monospace", fontSize: 18 * S,
+                color: C.primary, letterSpacing: "0.1em",
+                background: C.primaryLight, border: `1px solid ${C.primaryBorder}`,
+                borderRadius: 6 * S, padding: `${5 * S}px ${14 * S}px`,
+                marginBottom: 12 * S,
+              }}>第一段</div>
+              <div style={{
+                fontFamily: "'Noto Sans TC', sans-serif", fontSize: 22 * S,
+                color: C.text, fontWeight: "900", lineHeight: 1.3,
+              }}>AI 靠什麼學習？</div>
+            </div>
 
-        {/* Intro stat card */}
-        <div style={{ ...introStyle, marginBottom: 16 * S }}>
-          <div style={{
-            background: C.surface,
-            border: `1px solid ${C.primaryBorder}`,
-            borderRadius: 14 * S,
-            padding: `${14 * S}px ${20 * S}px`,
-            boxShadow: `0 0 ${20 * S}px rgba(124,255,178,0.05)`,
-          }}>
-            <div style={{
-              fontFamily: "'Space Mono', monospace", fontSize: 28 * S,
-              color: C.primary, fontWeight: "700",
-              textShadow: `0 0 ${14 * S}px rgba(124,255,178,0.5)`,
-              marginBottom: 6 * S,
-            }}>數千億 ~ 數兆</div>
-            <div style={{
-              fontFamily: "'Noto Sans TC', sans-serif", fontSize: 18 * S,
-              color: C.muted, lineHeight: 1.5,
-            }}>個文字單位餵給模型訓練</div>
+            {/* Intro stat card */}
+            <div style={{ ...introStyle, marginBottom: 16 * S }}>
+              <div style={{
+                background: C.surface,
+                border: `1px solid ${C.primaryBorder}`,
+                borderRadius: 14 * S,
+                padding: `${14 * S}px ${20 * S}px`,
+                boxShadow: `0 0 ${20 * S}px rgba(124,255,178,0.05)`,
+              }}>
+                <div style={{
+                  fontFamily: "'Space Mono', monospace", fontSize: 28 * S,
+                  color: C.primary, fontWeight: "700",
+                  textShadow: `0 0 ${14 * S}px rgba(124,255,178,0.5)`,
+                  marginBottom: 6 * S,
+                }}>數千億 ~ 數兆</div>
+                <div style={{
+                  fontFamily: "'Noto Sans TC', sans-serif", fontSize: 18 * S,
+                  color: C.muted, lineHeight: 1.5,
+                }}>個文字單位餵給模型訓練</div>
+              </div>
+            </div>
+
+            {/* Question prompt */}
+            <div style={{ ...questionStyle, marginBottom: 14 * S }}>
+              <div style={{
+                fontFamily: "'Noto Sans TC', sans-serif", fontSize: 20 * S,
+                color: C.yellow, fontWeight: "700",
+              }}>這些文字從哪裡來？</div>
+            </div>
           </div>
-        </div>
-
-        {/* Question prompt */}
-        <div style={{ ...questionStyle, marginBottom: 14 * S }}>
-          <div style={{
-            fontFamily: "'Noto Sans TC', sans-serif", fontSize: 20 * S,
-            color: C.yellow, fontWeight: "700",
-          }}>這些文字從哪裡來？</div>
-        </div>
+        )}
 
         {/* 4 source cards */}
         <SourceCard style={src1Style} num="01" title="公開網頁" detail="Common Crawl 爬蟲整個網際網路——你的部落格、論壇回覆、公開貼文很可能都在裡面" color={C.primary} />
