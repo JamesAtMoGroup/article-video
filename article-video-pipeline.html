@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日 AI 知識庫 — Pipeline Dashboard</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #000;
+    --surface: #0d0d0d;
+    --border: rgba(255,255,255,0.08);
+    --primary: #7cffb2;
+    --primary-dim: rgba(124,255,178,0.12);
+    --primary-border: rgba(124,255,178,0.2);
+    --text: #fff;
+    --muted: #666;
+    --yellow: #ffd166;
+    --red: #ff6b6b;
+    --font-mono: 'Space Mono', 'Courier New', monospace;
+    --font-body: 'Noto Sans TC', system-ui, sans-serif;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+  }
+  /* grid bg */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none; z-index: 0;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* Header */
+  header { margin-bottom: 48px; }
+  .badge {
+    display: inline-block;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+    color: var(--primary); background: var(--primary-dim);
+    border: 1px solid var(--primary-border);
+    padding: 4px 12px; border-radius: 20px; margin-bottom: 16px;
+  }
+  h1 { font-size: 32px; font-weight: 900; line-height: 1.2; margin-bottom: 8px; }
+  h1 span { color: var(--primary); }
+  .subtitle { color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+  /* Section */
+  section { margin-bottom: 40px; }
+  .section-label {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em;
+    color: var(--muted); text-transform: uppercase; margin-bottom: 16px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+
+  /* Phase Cards */
+  .phase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .phase-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .phase-card:hover { border-color: rgba(255,255,255,0.16); }
+  .phase-card.active { border-color: var(--primary-border); }
+  .phase-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 20px;
+  }
+  .phase-left { display: flex; align-items: center; gap: 12px; }
+  .phase-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+    background: var(--primary-dim); color: var(--primary);
+    border: 1px solid var(--primary-border);
+    flex-shrink: 0;
+  }
+  .phase-title { font-size: 15px; font-weight: 700; }
+  .phase-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .chevron { color: var(--muted); font-size: 12px; transition: transform 0.2s; }
+  .phase-card.active .chevron { transform: rotate(180deg); }
+  .phase-body { display: none; padding: 0 20px 18px; border-top: 1px solid var(--border); }
+  .phase-card.active .phase-body { display: block; }
+  .step-list { list-style: none; margin-top: 14px; }
+  .step-list li {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; line-height: 1.5;
+  }
+  .step-list li:last-child { border-bottom: none; }
+  .step-num {
+    font-family: var(--font-mono); font-size: 10px; color: var(--primary);
+    background: var(--primary-dim); border-radius: 4px;
+    padding: 2px 6px; flex-shrink: 0; margin-top: 1px;
+  }
+  code {
+    font-family: var(--font-mono); font-size: 11px;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+    border-radius: 4px; padding: 2px 6px; color: var(--primary);
+  }
+  .cmd-block {
+    background: rgba(0,0,0,0.6); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 14px; margin: 10px 0;
+    font-family: var(--font-mono); font-size: 12px; color: #aaa;
+    line-height: 1.7; overflow-x: auto; white-space: pre;
+  }
+  .cmd-block .comment { color: #444; }
+  .cmd-block .cmd { color: var(--primary); }
+
+  /* QA Rules */
+  .qa-list { display: flex; flex-direction: column; gap: 12px; }
+  .qa-item {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px 18px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .qa-item.critical { border-color: rgba(255,107,107,0.2); }
+  .qa-num {
+    font-family: var(--font-mono); font-size: 11px; color: var(--yellow);
+    background: rgba(255,209,102,0.1); border: 1px solid rgba(255,209,102,0.2);
+    border-radius: 6px; padding: 3px 8px; flex-shrink: 0;
+  }
+  .qa-content { flex: 1; }
+  .qa-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .qa-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .qa-formula {
+    margin-top: 8px; font-family: var(--font-mono); font-size: 11px;
+    color: var(--primary); background: var(--primary-dim);
+    border: 1px solid var(--primary-border); border-radius: 6px;
+    padding: 6px 10px; display: inline-block;
+  }
+
+  /* Font Size Table */
+  .font-table { width: 100%; border-collapse: collapse; }
+  .font-table th, .font-table td {
+    padding: 10px 14px; text-align: left; font-size: 13px;
+    border-bottom: 1px solid var(--border);
+  }
+  .font-table th {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+    color: var(--muted); font-weight: 400;
+  }
+  .font-table .ok { color: var(--primary); font-family: var(--font-mono); font-size: 12px; }
+  .font-table .warn { color: var(--red); font-family: var(--font-mono); font-size: 12px; }
+  .font-table tr:last-child td { border-bottom: none; }
+  .font-table .highlight td { background: var(--primary-dim); }
+
+  /* Pitfalls */
+  .pitfall-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .pitfall-grid { grid-template-columns: 1fr; } }
+  .pitfall-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 16px;
+  }
+  .pitfall-problem {
+    font-size: 12px; color: var(--red); font-family: var(--font-mono);
+    margin-bottom: 6px; display: flex; align-items: center; gap: 6px;
+  }
+  .pitfall-solution { font-size: 13px; color: #ccc; line-height: 1.5; }
+
+  /* Color Tokens */
+  .token-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+  .token-chip {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 12px;
+  }
+  .color-swatch { width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0; }
+  .token-name { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+  .token-val { font-family: var(--font-mono); font-size: 11px; color: var(--text); }
+
+  /* Footer */
+  footer { margin-top: 60px; text-align: center; font-size: 12px; color: var(--muted); font-family: var(--font-mono); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="badge">ARTICLE-VIDEO PIPELINE</div>
+    <h1>每日 AI 知識庫<br><span>Production Dashboard</span></h1>
+    <p class="subtitle">S=3 · 4K 3840×2160 · 30fps · Remotion + ElevenLabs STS + Whisper</p>
+  </header>
+
+  <!-- PHASE CARDS -->
+  <section>
+    <div class="section-label">Pipeline — 三個 Phase</div>
+    <div class="phase-grid">
+
+      <div class="phase-card" onclick="toggle(this)">
+        <div class="phase-header">
+          <div class="phase-left">
+            <div class="phase-num">1</div>
+            <div>
+              <div class="phase-title">音訊處理</div>
+              <div class="phase-sub">STS → Whisper → VTT</div>
+            </div>
+          </div>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="phase-body">
+          <div class="cmd-block"><span class="cmd">~/.claude/scripts/article-video-phase1.sh YYYY-MM-DD</span></div>
+          <ul class="step-list">
+            <li><span class="step-num">01</span>音檔確認（<code>.wav</code> 必要；<code>.m4a</code> 先 ffmpeg 轉；<code>enhanced.wav</code> 仍須跑 STS）</li>
+            <li><span class="step-num">02</span>ElevenLabs STS — ≤290s 直接單段；>290s silencedetect 切兩段分別跑後 concat</li>
+            <li><span class="step-num">03</span>Whisper medium zh → <code>out/YYYY-MM-DD/YYYY-MM-DD.vtt</code></li>
+            <li><span class="step-num">04</span>opencc <code>s2twp</code> 簡→繁轉換（Whisper 預設輸出簡體）</li>
+            <li><span class="step-num">05</span>寫 <code>.phase1_done</code> + iMessage 通知</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-card" onclick="toggle(this)">
+        <div class="phase-header">
+          <div class="phase-left">
+            <div class="phase-num">2</div>
+            <div>
+              <div class="phase-title">Scene Dev</div>
+              <div class="phase-sub">Claude Agent → TSX → QA</div>
+            </div>
+          </div>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="phase-body">
+          <div class="cmd-block"><span class="cmd">~/.claude/scripts/article-video-phase2.sh YYYY-MM-DD</span></div>
+          <ul class="step-list">
+            <li><span class="step-num">01</span>Claude agent 讀 skill + reference → 寫 <code>VideoComposition_YYYY_MM_DD.tsx</code></li>
+            <li><span class="step-num">02</span><code>npx tsc --noEmit</code> TypeScript 零錯誤</li>
+            <li><span class="step-num">03</span>grep 自動攔截 <code>fontSize &lt; 18*S</code> → 非零 = FAILED</li>
+            <li><span class="step-num">04</span>Python VTT 同步驗算 — 偏差 &gt;5s 警告</li>
+            <li><span class="step-num">05</span>James 在 Remotion Studio 預覽確認後 render</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-card" onclick="toggle(this)">
+        <div class="phase-header">
+          <div class="phase-left">
+            <div class="phase-num">3</div>
+            <div>
+              <div class="phase-title">Render + Upload</div>
+              <div class="phase-sub">mp4 → Rename → Drive</div>
+            </div>
+          </div>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="phase-body">
+          <div class="cmd-block"><span class="cmd">npm run build:YYYY-MM-DD</span>
+<span class="comment"># rename: {標題}-YYYY-MM-DD.mp4</span>
+<span class="cmd">rclone copy out/YYYY-MM-DD/ gdrive:YYYY-MM-DD \
+  --drive-root-folder-id 1Q2Jdflw80FXXDpGMw22OFVbwlqsMoWGz</span></div>
+          <ul class="step-list">
+            <li><span class="step-num">01</span>Render → <code>out/YYYY-MM-DD/YYYY-MM-DD.mp4</code></li>
+            <li><span class="step-num">02</span>Rename：<code>{標題}-YYYY-MM-DD.mp4</code>（標題在前，日期在後）</li>
+            <li><span class="step-num">03</span>rclone upload → Google Drive subfolder <code>YYYY-MM-DD/</code></li>
+            <li><span class="step-num">04</span>寫 <code>.phase3_done</code> + iMessage 通知</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- QA RULES -->
+  <section>
+    <div class="section-label">Scene Dev — 五大強制 QA 規則</div>
+    <div class="qa-list">
+      <div class="qa-item">
+        <div class="qa-num">R1</div>
+        <div class="qa-content">
+          <div class="qa-title">triggerLocalFrame 必須從 VTT 精確計算，禁止估算</div>
+          <div class="qa-desc">開啟 .vtt，找到講者說出該概念的第一句 cue，計算到 frame。</div>
+          <div class="qa-formula">triggerLocalFrame = round(vtt_seconds × 30) − scene_start_frame</div>
+        </div>
+      </div>
+      <div class="qa-item">
+        <div class="qa-num">R2</div>
+        <div class="qa-content">
+          <div class="qa-title">DURATION 必須覆蓋到「這段話說完最後一句 VTT」+ 90f buffer</div>
+          <div class="qa-desc">禁止填固定值 200/280/300。含數字/統計的動畫 DURATION 必須蓋過那個數字被說出的時刻。</div>
+          <div class="qa-formula">DURATION = (last_vtt × 30 − scene_start − trigger) + 90</div>
+        </div>
+      </div>
+      <div class="qa-item">
+        <div class="qa-num">R3</div>
+        <div class="qa-content">
+          <div class="qa-title">動畫內每個 step/element 的 delay 必須對齊 VTT</div>
+          <div class="qa-desc">禁止固定 stagger（delay: 30/70/110/150），除非 VTT 真的均勻分布。</div>
+          <div class="qa-formula">step_delay = round(step_vtt × 30) − scene_start − trigger</div>
+        </div>
+      </div>
+      <div class="qa-item critical">
+        <div class="qa-num">R4</div>
+        <div class="qa-content">
+          <div class="qa-title">Phase A 高度必須估算，超過 CONTENT_H=1620px 用 element fade-out</div>
+          <div class="qa-desc">逐卡估算：padding + lineHeight × 行數 + marginBottom。useFadeUp 起始偏移 22×S=66px 也算入。超限 → 讓早期卡片在新卡片出現前 120f 淡出、10f 前 DOM 移除。</div>
+          <div class="qa-formula">EARLY_FADE_START = LATE_CARD_AT − 120 &nbsp;|&nbsp; EARLY_REMOVE = LATE_CARD_AT − 10</div>
+        </div>
+      </div>
+      <div class="qa-item">
+        <div class="qa-num">R5</div>
+        <div class="qa-content">
+          <div class="qa-title">完成後必須輸出 VTT 同步驗證表</div>
+          <div class="qa-desc">無法填出「覆蓋到」= DURATION 不夠，必須重算。phase2.sh Step 3 Python 自動驗算。</div>
+          <div class="qa-formula">動畫名稱 | trigger(local) | trigger VTT | 講者台詞 | DURATION | 覆蓋到VTT</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FONT SIZE -->
+  <section>
+    <div class="section-label">Font Size 最小值（phase2.sh 自動 grep 攔截）</div>
+    <table class="font-table">
+      <thead>
+        <tr><th>元素類型</th><th>最小值</th><th>螢幕像素</th><th>狀態</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td><strong>絕對最小值（任何元素）</strong></td>
+          <td><code>18 * S</code></td>
+          <td>54px</td>
+          <td class="ok">✓ 強制</td>
+        </tr>
+        <tr>
+          <td>Space Mono labels / badge</td>
+          <td><code>18 * S</code></td>
+          <td>54px</td>
+          <td class="ok">✓</td>
+        </tr>
+        <tr>
+          <td>Body text (Noto Sans TC)</td>
+          <td><code>18 * S</code></td>
+          <td>54px</td>
+          <td class="ok">✓</td>
+        </tr>
+        <tr>
+          <td>Labels / captions / tags</td>
+          <td><code>20 * S</code></td>
+          <td>60px</td>
+          <td class="ok">✓</td>
+        </tr>
+        <tr>
+          <td>Featured / highlight</td>
+          <td><code>20 * S</code></td>
+          <td>60px</td>
+          <td class="ok">✓</td>
+        </tr>
+        <tr>
+          <td>Section heading</td>
+          <td><code>22 * S</code></td>
+          <td>66px</td>
+          <td class="ok">✓</td>
+        </tr>
+        <tr>
+          <td><del>舊規：Space Mono 11*S</del></td>
+          <td><code>11 * S</code></td>
+          <td>33px</td>
+          <td class="warn">✗ 廢止</td>
+        </tr>
+        <tr>
+          <td><del>舊規：Body 14*S</del></td>
+          <td><code>14 * S</code></td>
+          <td>42px</td>
+          <td class="warn">✗ 廢止</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PITFALLS -->
+  <section>
+    <div class="section-label">常見陷阱</div>
+    <div class="pitfall-grid">
+      <div class="pitfall-card">
+        <div class="pitfall-problem">⚠ inbox 只有 .m4a</div>
+        <div class="pitfall-solution">先 <code>ffmpeg -y -i XXX.m4a XXX.wav</code> 再跑 phase1.sh</div>
+      </div>
+      <div class="pitfall-card">
+        <div class="pitfall-problem">⚠ inbox 有 enhanced.wav</div>
+        <div class="pitfall-solution">仍需跑 ElevenLabs STS。enhanced ≠ STS processed。</div>
+      </div>
+      <div class="pitfall-card">
+        <div class="pitfall-problem">⚠ Whisper 輸出簡體中文</div>
+        <div class="pitfall-solution">每次都要跑 opencc s2twp 轉繁體，不可省略。</div>
+      </div>
+      <div class="pitfall-card">
+        <div class="pitfall-problem">⚠ font size &lt; 18*S</div>
+        <div class="pitfall-solution">phase2.sh 自動攔截 FAILED。批次修：Python re.sub 全 bump 到 18*S。</div>
+      </div>
+      <div class="pitfall-card">
+        <div class="pitfall-problem">⚠ ContentColumn 超出 1620px</div>
+        <div class="pitfall-solution">Element fade-out（不是 scrollUp，不是 maxHeight 加大）。逐卡估算高度。</div>
+      </div>
+      <div class="pitfall-card">
+        <div class="pitfall-problem">⚠ 最後一個元素被字幕蓋住</div>
+        <div class="pitfall-solution">useFadeUp 起始偏移 66px 也要算入高度估算。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESIGN TOKENS -->
+  <section>
+    <div class="section-label">Design Tokens</div>
+    <div class="token-grid">
+      <div class="token-chip"><div class="color-swatch" style="background:#000;border:1px solid #333"></div><span class="token-name">bg</span><span class="token-val">#000000</span></div>
+      <div class="token-chip"><div class="color-swatch" style="background:#0d0d0d;border:1px solid #333"></div><span class="token-name">surface</span><span class="token-val">#0d0d0d</span></div>
+      <div class="token-chip"><div class="color-swatch" style="background:#7cffb2"></div><span class="token-name">primary</span><span class="token-val">#7cffb2</span></div>
+      <div class="token-chip"><div class="color-swatch" style="background:#ffd166"></div><span class="token-name">yellow</span><span class="token-val">#ffd166</span></div>
+      <div class="token-chip"><div class="color-swatch" style="background:#ff6b6b"></div><span class="token-name">red</span><span class="token-val">#ff6b6b</span></div>
+      <div class="token-chip"><div class="color-swatch" style="background:#888"></div><span class="token-name">muted</span><span class="token-val">#888888</span></div>
+    </div>
+    <div style="margin-top:16px;font-size:13px;color:var(--muted);">
+      Scale: <code>S = 3</code> &nbsp;|&nbsp;
+      Canvas: <code>3840 × 2160</code> &nbsp;|&nbsp;
+      NAV_H: <code>50*S = 150px</code> &nbsp;|&nbsp;
+      SUBTITLE_SAFE: <code>120*S = 360px</code> &nbsp;|&nbsp;
+      CONTENT_H: <code>1620px</code>
+    </div>
+  </section>
+
+  <footer>每日 AI 知識庫 · article-video pipeline · James × Claude</footer>
+</div>
+
+<script>
+function toggle(card) {
+  card.classList.toggle('active');
+}
+</script>
+</body>
+</html>

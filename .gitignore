@@ -3,3 +3,20 @@ out/
 .DS_Store
 *.log
 public/audio/bgmusic.wav
+
+# Auto-sync safety — exclude large media (kept locally, backed up separately)
+*.wav
+*.mp3
+*.mp4
+*.mov
+*.aac
+*.flac
+ai-knowledge-*/
+public/audio/
+x-mcp/
+*.pyc
+__pycache__/
+*.pyo
+*.egg-info/
+.venv/
+venv/

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日 AI 知識庫 — Pipeline Tool</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #000; --surface: #0d0d0d; --surface2: #111;
+  --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.14);
+  --primary: #7cffb2; --primary-dim: rgba(124,255,178,0.08);
+  --primary-border: rgba(124,255,178,0.2);
+  --text: #fff; --muted: #666; --muted2: #999;
+  --yellow: #ffd166; --red: #ff6b6b;
+  --mono: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+  --sans: system-ui, -apple-system, sans-serif;
+}
+body {
+  background: var(--bg); color: var(--text);
+  font-family: var(--sans); min-height: 100vh;
+  padding: 0 0 80px;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(0,0,0,0.88); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px; display: flex; align-items: center; gap: 32px; height: 52px;
+}
+.nav-brand { font-family: var(--mono); font-size: 12px; color: var(--primary); letter-spacing: 0.08em; }
+.nav-tabs { display: flex; gap: 4px; }
+.tab {
+  font-size: 13px; color: var(--muted2); padding: 6px 14px;
+  border-radius: 8px; cursor: pointer; transition: all 0.15s; border: none;
+  background: none; font-family: var(--sans);
+}
+.tab:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.tab.active { color: var(--primary); background: var(--primary-dim); }
+
+/* LAYOUT */
+.page { display: none; max-width: 800px; margin: 0 auto; padding: 40px 24px; position: relative; z-index: 1; }
+.page.active { display: block; }
+
+/* TYPOGRAPHY */
+h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+h3 { font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+p { font-size: 14px; color: var(--muted2); line-height: 1.6; }
+.label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
+
+/* CARDS */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px 22px; margin-bottom: 16px;
+}
+.card.highlight { border-color: var(--primary-border); }
+
+/* FORM */
+.field { margin-bottom: 16px; }
+.field label { display: block; font-size: 12px; color: var(--muted2); margin-bottom: 6px; font-family: var(--mono); }
+.field input, .field select {
+  width: 100%; background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: 8px; padding: 10px 12px; font-size: 14px; color: var(--text);
+  font-family: var(--sans); outline: none; transition: border-color 0.15s;
+}
+.field input:focus, .field select:focus { border-color: var(--primary-border); }
+.field select option { background: #111; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media(max-width:500px) { .field-row { grid-template-columns: 1fr; } }
+.field-hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+/* PHASE STEPS */
+.phase-block { margin-bottom: 24px; }
+.phase-header {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+  padding-bottom: 12px; border-bottom: 1px solid var(--border);
+}
+.phase-badge {
+  font-family: var(--mono); font-size: 11px; color: var(--primary);
+  background: var(--primary-dim); border: 1px solid var(--primary-border);
+  border-radius: 20px; padding: 3px 10px; flex-shrink: 0;
+}
+.phase-title { font-size: 15px; font-weight: 700; }
+.phase-desc { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+/* CODE BLOCKS */
+.cmd-wrap { position: relative; margin: 10px 0; }
+.cmd-block {
+  background: #050505; border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 16px;
+  font-family: var(--mono); font-size: 12px; color: #ccc;
+  line-height: 1.8; overflow-x: auto; white-space: pre;
+  padding-right: 60px;
+}
+.cmd-block .c { color: #444; }
+.cmd-block .g { color: var(--primary); }
+.cmd-block .y { color: var(--yellow); }
+.copy-btn {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+  border-radius: 6px; padding: 4px 10px; font-size: 11px; color: var(--muted2);
+  cursor: pointer; font-family: var(--mono); transition: all 0.15s;
+}
+.copy-btn:hover { background: var(--primary-dim); color: var(--primary); border-color: var(--primary-border); }
+.copy-btn.copied { color: var(--primary); border-color: var(--primary-border); }
+
+/* STEP LIST */
+.step-list { list-style: none; }
+.step-item {
+  display: flex; gap: 12px; padding: 10px 0;
+  border-bottom: 1px solid var(--border); font-size: 13px; line-height: 1.5;
+  align-items: flex-start;
+}
+.step-item:last-child { border-bottom: none; }
+.step-n {
+  font-family: var(--mono); font-size: 10px; color: var(--primary);
+  background: var(--primary-dim); border-radius: 4px;
+  padding: 2px 7px; flex-shrink: 0; margin-top: 1px;
+}
+code {
+  font-family: var(--mono); font-size: 11px;
+  background: rgba(255,255,255,0.06); border-radius: 4px;
+  padding: 1px 5px; color: var(--primary);
+}
+
+/* QA CHECKLIST */
+.qa-item {
+  display: flex; gap: 14px; padding: 14px 0;
+  border-bottom: 1px solid var(--border); align-items: flex-start;
+}
+.qa-item:last-child { border-bottom: none; }
+.qa-check {
+  width: 20px; height: 20px; border: 1.5px solid var(--border2);
+  border-radius: 6px; cursor: pointer; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s; margin-top: 1px;
+}
+.qa-check.done { background: var(--primary); border-color: var(--primary); color: #000; font-size: 11px; }
+.qa-body { flex: 1; }
+.qa-title { font-size: 14px; font-weight: 600; margin-bottom: 3px; cursor: pointer; }
+.qa-desc { font-size: 12px; color: var(--muted2); line-height: 1.6; }
+.formula {
+  display: inline-block; margin-top: 8px; font-family: var(--mono); font-size: 11px;
+  color: var(--primary); background: var(--primary-dim);
+  border: 1px solid var(--primary-border); border-radius: 6px; padding: 5px 10px;
+}
+
+/* PROGRESS BAR */
+.progress-bar {
+  height: 3px; background: var(--border); border-radius: 2px; margin: 16px 0;
+  overflow: hidden;
+}
+.progress-fill { height: 100%; background: var(--primary); border-radius: 2px; transition: width 0.3s; }
+
+/* WARN BOX */
+.warn { background: rgba(255,107,107,0.06); border: 1px solid rgba(255,107,107,0.2); border-radius: 10px; padding: 12px 14px; font-size: 13px; color: #ffb3b3; margin: 10px 0; }
+.info { background: var(--primary-dim); border: 1px solid var(--primary-border); border-radius: 10px; padding: 12px 14px; font-size: 13px; color: #afffcf; margin: 10px 0; }
+
+/* SECTION DIVIDER */
+.divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+/* TAG */
+.tag {
+  display: inline-block; font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.08em; color: var(--primary);
+  background: var(--primary-dim); border: 1px solid var(--primary-border);
+  border-radius: 20px; padding: 2px 9px; margin-bottom: 12px;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">AI-VIDEO PIPELINE</span>
+  <div class="nav-tabs">
+    <button class="tab active" onclick="showPage('setup')">設定</button>
+    <button class="tab" onclick="showPage('phase1')">Phase 1</button>
+    <button class="tab" onclick="showPage('phase2')">Phase 2</button>
+    <button class="tab" onclick="showPage('phase3')">Phase 3</button>
+    <button class="tab" onclick="showPage('qa')">QA 規則</button>
+  </div>
+</nav>
+
+<!-- ── SETUP ── -->
+<div id="page-setup" class="page active">
+  <div class="tag">STEP 0 · 設定</div>
+  <h2>每日 AI 知識庫 Pipeline</h2>
+  <p style="margin-bottom:28px">填入你的設定，所有指令會自動產生。</p>
+
+  <div class="card highlight">
+    <h3>專案基本資訊</h3>
+    <div class="field-row">
+      <div class="field">
+        <label>日期 (YYYY-MM-DD)</label>
+        <input type="date" id="cfg-date" oninput="update()">
+      </div>
+      <div class="field">
+        <label>音檔格式</label>
+        <select id="cfg-audio" oninput="update()">
+          <option value="wav">.wav（直接使用）</option>
+          <option value="m4a">.m4a（需先轉檔）</option>
+          <option value="enhanced">.wav 已 enhanced（仍須 STS）</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>影片標題（中文）</label>
+      <input type="text" id="cfg-title" placeholder="例：用 AI 寫的東西，版權是誰的" oninput="update()">
+    </div>
+    <div class="field">
+      <label>專案路徑</label>
+      <input type="text" id="cfg-project" value="/Users/yourname/Projects/article-video" oninput="update()">
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>API 與服務設定</h3>
+    <div class="field">
+      <label>ElevenLabs Voice ID</label>
+      <input type="text" id="cfg-voice" placeholder="9lHjugDhwqoxA5MhX0az" oninput="update()">
+      <div class="field-hint">在 ElevenLabs → Voice Lab → 選擇你的聲音 → 複製 Voice ID</div>
+    </div>
+    <div class="field">
+      <label>Google Drive 根目錄 Folder ID</label>
+      <input type="text" id="cfg-drive" placeholder="1Q2Jdflw80FXXDpGMw22OFVbwlqsMoWGz" oninput="update()">
+      <div class="field-hint">Drive URL 裡 /folders/ 後面的那串</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>必要工具安裝確認</h3>
+    <ul class="step-list">
+      <li class="step-item"><span class="step-n">01</span><div><strong>Node.js + Remotion</strong> — <code>npm install</code> 後 <code>npx remotion studio</code> 可開啟</div></li>
+      <li class="step-item"><span class="step-n">02</span><div><strong>Whisper</strong> — <code>pip install openai-whisper</code>，需要 Python 3.9+</div></li>
+      <li class="step-item"><span class="step-n">03</span><div><strong>opencc</strong> — <code>pip install opencc-python-reimplemented</code>（簡→繁轉換）</div></li>
+      <li class="step-item"><span class="step-n">04</span><div><strong>rclone</strong> — <code>brew install rclone</code>，設定 Google Drive remote 名稱為 <code>gdrive</code></div></li>
+      <li class="step-item"><span class="step-n">05</span><div><strong>ffmpeg</strong> — <code>brew install ffmpeg</code></div></li>
+      <li class="step-item"><span class="step-n">06</span><div><strong>ElevenLabs Node SDK</strong> — <code>npm install elevenlabs</code>，API key 存入 <code>~/.zshenv</code> 為 <code>ELEVENLABS_API_KEY</code></div></li>
+      <li class="step-item"><span class="step-n">07</span><div><strong>Claude Code CLI</strong> — <code>npm install -g @anthropic-ai/claude-code</code>，並設定 <code>ANTHROPIC_API_KEY</code></div></li>
+    </ul>
+  </div>
+
+  <div class="info">設定完成後，切換到 Phase 1 開始執行 →</div>
+</div>
+
+<!-- ── PHASE 1 ── -->
+<div id="page-phase1" class="page">
+  <div class="tag">PHASE 1 · 音訊處理</div>
+  <h2>ElevenLabs STS → Whisper → VTT</h2>
+  <p style="margin-bottom:24px">將原始錄音轉換為 AI 音色，並產生字幕檔。</p>
+
+  <div id="p1-m4a-warn" class="warn" style="display:none">
+    ⚠️ 你選擇了 .m4a 格式，需要先轉換為 .wav：
+    <div class="cmd-wrap" style="margin-top:8px">
+      <div class="cmd-block" id="cmd-convert"></div>
+      <button class="copy-btn" onclick="copyCmd('cmd-convert',this)">複製</button>
+    </div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-header">
+      <span class="phase-badge">STEP 1</span>
+      <div>
+        <div class="phase-title">ElevenLabs STS（音色轉換）</div>
+        <div class="phase-desc">將你的聲音轉換為指定 AI 音色</div>
+      </div>
+    </div>
+    <ul class="step-list">
+      <li class="step-item"><span class="step-n">規則</span>≤ 290 秒：直接單段 STS。> 290 秒：自動切兩段、分別 STS 後合併。</li>
+      <li class="step-item"><span class="step-n">注意</span>即使音檔已做過 audio enhancement，仍然需要跑 STS。不可省略。</li>
+    </ul>
+    <div class="cmd-wrap">
+      <div class="cmd-block" id="cmd-sts"></div>
+      <button class="copy-btn" onclick="copyCmd('cmd-sts',this)">複製</button>
+    </div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-header">
+      <span class="phase-badge">STEP 2</span>
+      <div>
+        <div class="phase-title">Whisper 字幕轉錄</div>
+        <div class="phase-desc">從 processed.wav 產生 .vtt 字幕</div>
+      </div>
+    </div>
+    <div class="cmd-wrap">
+      <div class="cmd-block" id="cmd-whisper"></div>
+      <button class="copy-btn" onclick="copyCmd('cmd-whisper',this)">複製</button>
+    </div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-header">
+      <span class="phase-badge">STEP 3</span>
+      <div>
+        <div class="phase-title">簡體 → 繁體中文轉換</div>
+        <div class="phase-desc">Whisper 預設輸出簡體，必須轉換</div>
+      </div>
+    </div>
+    <div class="cmd-wrap">
+      <div class="cmd-block" id="cmd-opencc"></div>
+      <button class="copy-btn" onclick="copyCmd('cmd-opencc',this)">複製</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Inbox 資料夾結構</h3>
+    <ul class="step-list">
+      <li class="step-item"><span class="step-n">必要</span><code id="inbox-wav">inbox/YYYY-MM-DD/YYYY-MM-DD.wav</code> — 原始錄音</li>
+      <li class="step-item"><span class="step-n">必要</span><code id="inbox-script">inbox/YYYY-MM-DD/XXX_script.md</code> — 逐字稿（第一行 = 標題）</li>
+      <li class="step-item"><span class="step-n">選填</span><code id="inbox-article">inbox/YYYY-MM-DD/XXX.md</code> — 原始文章</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ── PHASE 2 ── -->
+<div id="page-phase2" class="page">
+  <div class="tag">PHASE 2 · Scene Dev</div>
+  <h2>Claude Agent 生成 Remotion TSX</h2>
+  <p style="margin-bottom:24px">由 Claude AI 讀取逐字稿 + VTT，自動生成視覺動畫程式碼。</p>
+
+  <div class="phase-block">
+    <div class="phase-header">
+      <span class="phase-badge">STEP 1</span>
+      <div>
+        <div class="phase-title">執行 Scene Dev</div>
+        <div class="phase-desc">Claude 讀 skill → 規劃動畫 → 寫 TSX</div>
+      </div>
+    </div>
+    <div class="cmd-wrap">
+      <div class="cmd-block" id="cmd-phase2"></div>
+      <button class="copy-btn" onclick="copyCmd('cmd-phase2',this)">複製</button>
+    </div>
+    <ul class="step-list" style="margin-top:12px">
+      <li class="step-item"><span class="step-n">自動</span>TypeScript 零錯誤檢查</li>
+      <li class="step-item"><span class="step-n">自動</span>font size grep — 任何 <code>fontSize &lt; 18*S</code> 自動 FAILED</li>
+      <li class="step-item"><span class="step-n">自動</span>VTT 同步驗算 — trigger 偏差 > 5s 警告</li>
+    </ul>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-header">
+      <span class="phase-badge">STEP 2</span>
+      <div>
+        <div class="phase-title">Remotion Studio 預覽</div>
+        <div class="phase-desc">人工確認動畫效果後才能 render</div>
+      </div>
+    </div>
+    <div class="cmd-wrap">
+      <div class="cmd-block" id="cmd-studio"></div>
+      <button class="copy-btn" onclick="copyCmd('cmd-studio',this)">複製</button>
+    </div>
+    <div class="info">在 Studio 中找到你的 Composition，scrub 整個影片確認動畫時機、字體大小、內容不超出字幕保留區。確認後才進 Phase 3。</div>
+  </div>
+</div>
+
+<!-- ── PHASE 3 ── -->
+<div id="page-phase3" class="page">
+  <div class="tag">PHASE 3 · Render + Upload</div>
+  <h2>輸出 mp4 並上傳 Google Drive</h2>
+  <p style="margin-bottom:24px">Render 完成後自動 rename + 上傳。</p>
+
+  <div class="phase-block">
+    <div class="phase-header">
+      <span class="phase-badge">STEP 1</span>
+      <div>
+        <div class="phase-title">Render</div>
+        <div class="phase-desc">4K H.264，約需 10–20 分鐘</div>
+      </div>
+    </div>
+    <div class="cmd-wrap">
+      <div class="cmd-block" id="cmd-render"></div>
+      <button class="copy-btn" onclick="copyCmd('cmd-render',this)">複製</button>
+    </div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-header">
+      <span class="phase-badge">STEP 2</span>
+      <div>
+        <div class="phase-title">Rename + Upload</div>
+        <div class="phase-desc">命名規則：{標題}-{日期}.mp4</div>
+      </div>
+    </div>
+    <div class="cmd-wrap">
+      <div class="cmd-block" id="cmd-upload"></div>
+      <button class="copy-btn" onclick="copyCmd('cmd-upload',this)">複製</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>輸出確認</h3>
+    <ul class="step-list">
+      <li class="step-item"><span class="step-n">✓</span><code id="out-mp4">out/YYYY-MM-DD/{標題}-YYYY-MM-DD.mp4</code></li>
+      <li class="step-item"><span class="step-n">✓</span><code id="out-vtt">out/YYYY-MM-DD/YYYY-MM-DD.vtt</code></li>
+      <li class="step-item"><span class="step-n">✓</span>Google Drive / <span id="out-drive">YYYY-MM-DD</span> / 兩個檔案</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ── QA RULES ── -->
+<div id="page-qa" class="page">
+  <div class="tag">QA 規則</div>
+  <h2>Scene Dev 五大強制規則</h2>
+  <p style="margin-bottom:8px">違反任一條 = 必須重做。勾選完成項目。</p>
+
+  <div class="progress-bar"><div class="progress-fill" id="qa-progress" style="width:0%"></div></div>
+  <p id="qa-count" style="font-size:12px;color:var(--muted);margin-bottom:20px">0 / 5 完成</p>
+
+  <div class="card">
+    <div class="qa-item">
+      <div class="qa-check" id="qc1" onclick="toggleQA(1)"></div>
+      <div class="qa-body">
+        <div class="qa-title" onclick="toggleQA(1)">R1 — triggerLocalFrame 從 VTT 精確計算，禁止估算</div>
+        <div class="qa-desc">開啟 .vtt，找到講者說出概念的那句 cue，乘以 30 減去 scene 起始 frame。</div>
+        <div class="formula">triggerLocalFrame = round(vtt_seconds × 30) − scene_start_frame</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-check" id="qc2" onclick="toggleQA(2)"></div>
+      <div class="qa-body">
+        <div class="qa-title" onclick="toggleQA(2)">R2 — DURATION 覆蓋到最後一句 VTT + 90f buffer</div>
+        <div class="qa-desc">禁止填固定值 200/280/300。含數字的動畫 DURATION 必須蓋過那個數字被說出的時刻。</div>
+        <div class="formula">DURATION = (last_vtt × 30 − scene_start − trigger) + 90</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-check" id="qc3" onclick="toggleQA(3)"></div>
+      <div class="qa-body">
+        <div class="qa-title" onclick="toggleQA(3)">R3 — 每個 step delay 對齊 VTT</div>
+        <div class="qa-desc">禁止固定 stagger（30/70/110/150），除非 VTT 真的均勻分布。</div>
+        <div class="formula">step_delay = round(step_vtt × 30) − scene_start − trigger</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-check" id="qc4" onclick="toggleQA(4)"></div>
+      <div class="qa-body">
+        <div class="qa-title" onclick="toggleQA(4)">R4 — Phase A 高度估算，超過 1620px 用 element fade-out</div>
+        <div class="qa-desc">逐卡估算：padding + lineHeight × 行數 + marginBottom。useFadeUp 起始偏移 66px 也要算入。超限時讓早期卡片在新卡片出現前 120f 淡出、10f 前移除 DOM。</div>
+        <div class="formula">FADE_START = LATE_AT − 120 &nbsp;|&nbsp; REMOVE = LATE_AT − 10</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-check" id="qc5" onclick="toggleQA(5)"></div>
+      <div class="qa-body">
+        <div class="qa-title" onclick="toggleQA(5)">R5 — 輸出 VTT 同步驗證表</div>
+        <div class="qa-desc">無法填出「覆蓋到」= DURATION 不夠，必須重算。phase2 Step 3 Python 自動輸出。</div>
+        <div class="formula">動畫名稱 | trigger VTT | 講者台詞 | DURATION | 覆蓋到</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <h3 style="margin-bottom:16px">Font Size 最小值（自動 grep 攔截）</h3>
+  <div class="card">
+    <ul class="step-list">
+      <li class="step-item"><span class="step-n">min</span><strong>任何元素</strong> → <code>18 * S</code>（54px）— 低於此值自動 FAILED</li>
+      <li class="step-item"><span class="step-n">→</span>Labels / captions → <code>20 * S</code>（60px）</li>
+      <li class="step-item"><span class="step-n">→</span>Featured / highlight → <code>20 * S</code>（60px）</li>
+      <li class="step-item"><span class="step-n">→</span>Section heading → <code>22 * S</code>（66px）</li>
+      <li class="step-item"><span class="step-n">fix</span>批次修正：<code>python3 -c "import re,sys; ..."</code> 全 bump 到 18*S</li>
+    </ul>
+  </div>
+
+  <hr class="divider">
+  <h3 style="margin-bottom:16px">Safe Zone 邊界</h3>
+  <div class="card">
+    <ul class="step-list">
+      <li class="step-item"><span class="step-n">top</span>NAV_H = <code>50 * S = 150px</code> — 導覽列，內容不可進入此區</li>
+      <li class="step-item"><span class="step-n">bottom</span>SUBTITLE_SAFE = <code>120 * S = 360px</code> — 字幕保留區，底部 360px 不可有內容</li>
+      <li class="step-item"><span class="step-n">area</span>CONTENT_H = <code>H − 150 − 360 = 1620px</code> — ContentColumn 可用高度</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+// ── State ──
+const cfg = () => ({
+  date: document.getElementById('cfg-date').value || 'YYYY-MM-DD',
+  title: document.getElementById('cfg-title').value || '{標題}',
+  project: document.getElementById('cfg-project').value || '/path/to/article-video',
+  audio: document.getElementById('cfg-audio').value,
+  voice: document.getElementById('cfg-voice').value || '9lHjugDhwqoxA5MhX0az',
+  drive: document.getElementById('cfg-drive').value || 'YOUR_FOLDER_ID',
+});
+
+function dateDash(d) { return d; }
+function dateUnderscore(d) { return d.replace(/-/g,'_'); }
+
+function update() {
+  const c = cfg();
+  const d = c.date, du = dateUnderscore(d);
+  const p = c.project;
+
+  // m4a warning
+  const m4aWarn = document.getElementById('p1-m4a-warn');
+  m4aWarn.style.display = c.audio === 'm4a' ? 'block' : 'none';
+
+  set('cmd-convert',
+`cd "${p}"
+ffmpeg -y -i inbox/${d}/${d}.m4a inbox/${d}/${d}.wav -loglevel error`);
+
+  set('cmd-sts',
+`<span class="c"># ElevenLabs STS — 輸入你的音檔，輸出 processed.wav</span>
+node ~/.claude/scripts/elevenlabs-sts.js \\
+  "${p}/inbox/${d}/${d}.wav" \\
+  "/tmp/${d}_sts.mp3"
+
+ffmpeg -y -i /tmp/${d}_sts.mp3 \\
+  "${p}/public/audio/${d}-processed.wav" -loglevel error`);
+
+  set('cmd-whisper',
+`mkdir -p "${p}/out/${d}"
+whisper "${p}/public/audio/${d}-processed.wav" \\
+  --model medium \\
+  --language zh \\
+  --output_format vtt \\
+  --output_dir "${p}/out/${d}" \\
+  --task transcribe`);
+
+  set('cmd-opencc',
+`python3 -c "
+import opencc
+c = opencc.OpenCC('s2twp')
+p = '${p}/out/${d}/${d}.vtt'
+with open(p, encoding='utf-8') as f: content = f.read()
+with open(p, 'w', encoding='utf-8') as f: f.write(c.convert(content))
+print('✅ 繁體轉換完成')
+"`);
+
+  set('cmd-phase2',
+`cd "${p}"
+<span class="c"># phase2.sh 自動執行：Scene Dev → TypeScript → font size grep → VTT 驗算</span>
+~/.claude/scripts/article-video-phase2.sh ${d}`);
+
+  set('cmd-studio',
+`cd "${p}"
+npm run start
+<span class="c"># 開瀏覽器 → localhost:3000 → 找 ArticleVideo-${d}</span>`);
+
+  // package.json script
+  set('cmd-render',
+`cd "${p}"
+<span class="c"># 先確認 package.json 有此 script：</span>
+<span class="c"># "build:${d}": "remotion render ArticleVideo-${d} out/${d}/${d}.mp4 --codec h264"</span>
+npm run build:${d}`);
+
+  const titleClean = c.title.replace(/[，。？！、\s]/g,'');
+  set('cmd-upload',
+`<span class="c"># Rename</span>
+mv "${p}/out/${d}/${d}.mp4" \\
+   "${p}/out/${d}/${titleClean}-${d}.mp4"
+
+<span class="c"># Upload to Google Drive</span>
+rclone copy "${p}/out/${d}/" "gdrive:${d}" \\
+  --drive-root-folder-id "${c.drive}" \\
+  --drive-use-trash=false`);
+
+  // inline refs
+  setText('inbox-wav', `inbox/${d}/${d}.wav`);
+  setText('inbox-script', `inbox/${d}/*_script.md`);
+  setText('inbox-article', `inbox/${d}/*.md`);
+  setText('out-mp4', `out/${d}/${titleClean || '{標題}'}-${d}.mp4`);
+  setText('out-vtt', `out/${d}/${d}.vtt`);
+  setText('out-drive', d);
+}
+
+function set(id, html) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
+}
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+}
+
+// ── Tabs ──
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── Copy ──
+function copyCmd(id, btn) {
+  const el = document.getElementById(id);
+  const text = el.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ 複製了';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '複製'; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+// ── QA Checklist ──
+const qaState = [false,false,false,false,false];
+function toggleQA(n) {
+  qaState[n-1] = !qaState[n-1];
+  const el = document.getElementById('qc'+n);
+  el.classList.toggle('done', qaState[n-1]);
+  el.textContent = qaState[n-1] ? '✓' : '';
+  const done = qaState.filter(Boolean).length;
+  document.getElementById('qa-progress').style.width = (done/5*100) + '%';
+  document.getElementById('qa-count').textContent = `${done} / 5 完成`;
+}
+
+// Init
+update();
+document.getElementById('cfg-date').valueAsDate = new Date();
+update();
+</script>
+</body>
+</html>
