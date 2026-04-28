@@ -23,7 +23,9 @@
     "build:2026-04-23": "remotion render ArticleVideo-2026-04-23 out/2026-04-23/2026-04-23.mp4 --codec h264",
     "build:2026-04-24": "remotion render ArticleVideo-2026-04-24 out/2026-04-24/2026-04-24.mp4 --codec h264",
     "build:2026-04-27": "remotion render ArticleVideo-2026-04-27 out/2026-04-27/2026-04-27.mp4 --codec h264",
-    "build:2026-04-28": "remotion render ArticleVideo-2026-04-28 out/2026-04-28/2026-04-28.mp4 --codec h264"
+    "build:2026-04-28": "remotion render ArticleVideo-2026-04-28 out/2026-04-28/2026-04-28.mp4 --codec h264",
+    "build:2026-04-29": "remotion render ArticleVideo-2026-04-29 out/2026-04-29/2026-04-29.mp4 --codec h264",
+    "build:2026-04-30": "remotion render ArticleVideo-2026-04-30 out/2026-04-30/2026-04-30.mp4 --codec h264"
   },
   "keywords": [],
   "author": "",

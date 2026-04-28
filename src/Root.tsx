@@ -19,6 +19,8 @@ import { VideoComposition_2026_04_23, TOTAL_FRAMES_2026_04_23 } from "./VideoCom
 import { VideoComposition_2026_04_24, TOTAL_FRAMES_2026_04_24 } from "./VideoComposition_2026_04_24";
 import { VideoComposition_2026_04_27, TOTAL_FRAMES_2026_04_27 } from "./VideoComposition_2026_04_27";
 import { VideoComposition_2026_04_28, TOTAL_FRAMES_2026_04_28 } from "./VideoComposition_2026_04_28";
+import { VideoComposition_2026_04_29, TOTAL_FRAMES_2026_04_29 } from "./VideoComposition_2026_04_29";
+import { VideoComposition_2026_04_30, TOTAL_FRAMES_2026_04_30 } from "./VideoComposition_2026_04_30";
 import { MCPDiagram, TOTAL_FRAMES_MCP } from "./MCPDiagram";
 import React from "react";
 
@@ -192,6 +194,24 @@ export const RemotionRoot: React.FC = () => {
         id="ArticleVideo-2026-04-28"
         component={VideoComposition_2026_04_28}
         durationInFrames={TOTAL_FRAMES_2026_04_28}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-04-29 — 4K · 為什麼有些國家要管制 AI，台灣呢 */}
+      <Composition
+        id="ArticleVideo-2026-04-29"
+        component={VideoComposition_2026_04_29}
+        durationInFrames={TOTAL_FRAMES_2026_04_29}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-04-30 — 4K · 學 AI 工具 vs 學 AI 原理 */}
+      <Composition
+        id="ArticleVideo-2026-04-30"
+        component={VideoComposition_2026_04_30}
+        durationInFrames={TOTAL_FRAMES_2026_04_30}
         fps={30}
         width={3840}
         height={2160}
