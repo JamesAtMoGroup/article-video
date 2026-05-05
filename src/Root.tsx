@@ -21,6 +21,9 @@ import { VideoComposition_2026_04_27, TOTAL_FRAMES_2026_04_27 } from "./VideoCom
 import { VideoComposition_2026_04_28, TOTAL_FRAMES_2026_04_28 } from "./VideoComposition_2026_04_28";
 import { VideoComposition_2026_04_29, TOTAL_FRAMES_2026_04_29 } from "./VideoComposition_2026_04_29";
 import { VideoComposition_2026_04_30, TOTAL_FRAMES_2026_04_30 } from "./VideoComposition_2026_04_30";
+import { VideoComposition_2026_05_01, TOTAL_FRAMES_2026_05_01 } from "./VideoComposition_2026_05_01";
+import { VideoComposition_2026_05_04, TOTAL_FRAMES_2026_05_04 } from "./VideoComposition_2026_05_04";
+import { VideoComposition_2026_05_05, TOTAL_FRAMES_2026_05_05 } from "./VideoComposition_2026_05_05";
 import { MCPDiagram, TOTAL_FRAMES_MCP } from "./MCPDiagram";
 import React from "react";
 
@@ -212,6 +215,33 @@ export const RemotionRoot: React.FC = () => {
         id="ArticleVideo-2026-04-30"
         component={VideoComposition_2026_04_30}
         durationInFrames={TOTAL_FRAMES_2026_04_30}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-01 — 4K · 本週 AI 大事 — Meta 超級智慧、月費時代終結、Gemini 進 Siri */}
+      <Composition
+        id="ArticleVideo-2026-05-01"
+        component={VideoComposition_2026_05_01}
+        durationInFrames={TOTAL_FRAMES_2026_05_01}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-04 — 4K · 現在學 AI 的人，五年後的優勢是什麼 */}
+      <Composition
+        id="ArticleVideo-2026-05-04"
+        component={VideoComposition_2026_05_04}
+        durationInFrames={TOTAL_FRAMES_2026_05_04}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-05 — 4K · Temperature · 為什麼它決定 AI 有多有創意 */}
+      <Composition
+        id="ArticleVideo-2026-05-05"
+        component={VideoComposition_2026_05_05}
+        durationInFrames={TOTAL_FRAMES_2026_05_05}
         fps={30}
         width={3840}
         height={2160}
