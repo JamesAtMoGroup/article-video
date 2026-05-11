@@ -24,6 +24,10 @@ import { VideoComposition_2026_04_30, TOTAL_FRAMES_2026_04_30 } from "./VideoCom
 import { VideoComposition_2026_05_01, TOTAL_FRAMES_2026_05_01 } from "./VideoComposition_2026_05_01";
 import { VideoComposition_2026_05_04, TOTAL_FRAMES_2026_05_04 } from "./VideoComposition_2026_05_04";
 import { VideoComposition_2026_05_05, TOTAL_FRAMES_2026_05_05 } from "./VideoComposition_2026_05_05";
+import { VideoComposition_2026_05_06, TOTAL_FRAMES_2026_05_06 } from "./VideoComposition_2026_05_06";
+import { VideoComposition_2026_05_07, TOTAL_FRAMES_2026_05_07 } from "./VideoComposition_2026_05_07";
+import { VideoComposition_2026_05_08, TOTAL_FRAMES_2026_05_08 } from "./VideoComposition_2026_05_08";
+import { VideoComposition_2026_05_11, TOTAL_FRAMES_2026_05_11 } from "./VideoComposition_2026_05_11";
 import { MCPDiagram, TOTAL_FRAMES_MCP } from "./MCPDiagram";
 import React from "react";
 
@@ -242,6 +246,42 @@ export const RemotionRoot: React.FC = () => {
         id="ArticleVideo-2026-05-05"
         component={VideoComposition_2026_05_05}
         durationInFrames={TOTAL_FRAMES_2026_05_05}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-06 — 4K · System Prompt · 你看不到的那層指令 */}
+      <Composition
+        id="ArticleVideo-2026-05-06"
+        component={VideoComposition_2026_05_06}
+        durationInFrames={TOTAL_FRAMES_2026_05_06}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-07 — 4K · Prompt Injection · 什麼是 Prompt Injection？AI 也會被駭嗎 */}
+      <Composition
+        id="ArticleVideo-2026-05-07"
+        component={VideoComposition_2026_05_07}
+        durationInFrames={TOTAL_FRAMES_2026_05_07}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-08 — 4K · 本週 AI 大事 — Claude 做夢、金融 & M365、算力大擴張 */}
+      <Composition
+        id="ArticleVideo-2026-05-08"
+        component={VideoComposition_2026_05_08}
+        durationInFrames={TOTAL_FRAMES_2026_05_08}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-11 — 4K · Claude、GPT、Gemini 到底差在哪 */}
+      <Composition
+        id="ArticleVideo-2026-05-11"
+        component={VideoComposition_2026_05_11}
+        durationInFrames={TOTAL_FRAMES_2026_05_11}
         fps={30}
         width={3840}
         height={2160}
