@@ -28,6 +28,7 @@ import { VideoComposition_2026_05_06, TOTAL_FRAMES_2026_05_06 } from "./VideoCom
 import { VideoComposition_2026_05_07, TOTAL_FRAMES_2026_05_07 } from "./VideoComposition_2026_05_07";
 import { VideoComposition_2026_05_08, TOTAL_FRAMES_2026_05_08 } from "./VideoComposition_2026_05_08";
 import { VideoComposition_2026_05_11, TOTAL_FRAMES_2026_05_11 } from "./VideoComposition_2026_05_11";
+import { VideoComposition_2026_05_12, TOTAL_FRAMES_2026_05_12 } from "./VideoComposition_2026_05_12";
 import { MCPDiagram, TOTAL_FRAMES_MCP } from "./MCPDiagram";
 import React from "react";
 
@@ -282,6 +283,15 @@ export const RemotionRoot: React.FC = () => {
         id="ArticleVideo-2026-05-11"
         component={VideoComposition_2026_05_11}
         durationInFrames={TOTAL_FRAMES_2026_05_11}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-12 — 4K · 什麼是 AI 工作流？n8n 能幫你自動化什麼 */}
+      <Composition
+        id="ArticleVideo-2026-05-12"
+        component={VideoComposition_2026_05_12}
+        durationInFrames={TOTAL_FRAMES_2026_05_12}
         fps={30}
         width={3840}
         height={2160}
