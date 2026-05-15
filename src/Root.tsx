@@ -29,6 +29,9 @@ import { VideoComposition_2026_05_07, TOTAL_FRAMES_2026_05_07 } from "./VideoCom
 import { VideoComposition_2026_05_08, TOTAL_FRAMES_2026_05_08 } from "./VideoComposition_2026_05_08";
 import { VideoComposition_2026_05_11, TOTAL_FRAMES_2026_05_11 } from "./VideoComposition_2026_05_11";
 import { VideoComposition_2026_05_12, TOTAL_FRAMES_2026_05_12 } from "./VideoComposition_2026_05_12";
+import { VideoComposition_2026_05_13, TOTAL_FRAMES_2026_05_13 } from "./VideoComposition_2026_05_13";
+import { VideoComposition_2026_05_14, TOTAL_FRAMES_2026_05_14 } from "./VideoComposition_2026_05_14";
+import { VideoComposition_2026_05_15, TOTAL_FRAMES_2026_05_15 } from "./VideoComposition_2026_05_15";
 import { MCPDiagram, TOTAL_FRAMES_MCP } from "./MCPDiagram";
 import React from "react";
 
@@ -292,6 +295,33 @@ export const RemotionRoot: React.FC = () => {
         id="ArticleVideo-2026-05-12"
         component={VideoComposition_2026_05_12}
         durationInFrames={TOTAL_FRAMES_2026_05_12}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-13 — 4K · Fine-tuning vs Prompt Engineering，哪個更值得學 */}
+      <Composition
+        id="ArticleVideo-2026-05-13"
+        component={VideoComposition_2026_05_13}
+        durationInFrames={TOTAL_FRAMES_2026_05_13}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-14 — 4K · 多模態 AI 是什麼？文字、圖片、聲音一起理解 */}
+      <Composition
+        id="ArticleVideo-2026-05-14"
+        component={VideoComposition_2026_05_14}
+        durationInFrames={TOTAL_FRAMES_2026_05_14}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-15 — 4K · 本週 AI 大事 — Mythos Preview 駭系統、ChatGPT 廣告、Gemini Android */}
+      <Composition
+        id="ArticleVideo-2026-05-15"
+        component={VideoComposition_2026_05_15}
+        durationInFrames={TOTAL_FRAMES_2026_05_15}
         fps={30}
         width={3840}
         height={2160}
