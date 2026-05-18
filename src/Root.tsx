@@ -32,6 +32,7 @@ import { VideoComposition_2026_05_12, TOTAL_FRAMES_2026_05_12 } from "./VideoCom
 import { VideoComposition_2026_05_13, TOTAL_FRAMES_2026_05_13 } from "./VideoComposition_2026_05_13";
 import { VideoComposition_2026_05_14, TOTAL_FRAMES_2026_05_14 } from "./VideoComposition_2026_05_14";
 import { VideoComposition_2026_05_15, TOTAL_FRAMES_2026_05_15 } from "./VideoComposition_2026_05_15";
+import { VideoComposition_2026_05_18, TOTAL_FRAMES_2026_05_18 } from "./VideoComposition_2026_05_18";
 import { MCPDiagram, TOTAL_FRAMES_MCP } from "./MCPDiagram";
 import React from "react";
 
@@ -322,6 +323,15 @@ export const RemotionRoot: React.FC = () => {
         id="ArticleVideo-2026-05-15"
         component={VideoComposition_2026_05_15}
         durationInFrames={TOTAL_FRAMES_2026_05_15}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-18 — 4K · Chain of Thought · 為什麼 AI 越想越準 */}
+      <Composition
+        id="ArticleVideo-2026-05-18"
+        component={VideoComposition_2026_05_18}
+        durationInFrames={TOTAL_FRAMES_2026_05_18}
         fps={30}
         width={3840}
         height={2160}
