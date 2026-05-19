@@ -33,6 +33,7 @@ import { VideoComposition_2026_05_13, TOTAL_FRAMES_2026_05_13 } from "./VideoCom
 import { VideoComposition_2026_05_14, TOTAL_FRAMES_2026_05_14 } from "./VideoComposition_2026_05_14";
 import { VideoComposition_2026_05_15, TOTAL_FRAMES_2026_05_15 } from "./VideoComposition_2026_05_15";
 import { VideoComposition_2026_05_18, TOTAL_FRAMES_2026_05_18 } from "./VideoComposition_2026_05_18";
+import { VideoComposition_2026_05_19, TOTAL_FRAMES_2026_05_19 } from "./VideoComposition_2026_05_19";
 import { MCPDiagram, TOTAL_FRAMES_MCP } from "./MCPDiagram";
 import React from "react";
 
@@ -332,6 +333,15 @@ export const RemotionRoot: React.FC = () => {
         id="ArticleVideo-2026-05-18"
         component={VideoComposition_2026_05_18}
         durationInFrames={TOTAL_FRAMES_2026_05_18}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-19 — 4K · 本地部署 AI · 為什麼有人不想用雲端 */}
+      <Composition
+        id="ArticleVideo-2026-05-19"
+        component={VideoComposition_2026_05_19}
+        durationInFrames={TOTAL_FRAMES_2026_05_19}
         fps={30}
         width={3840}
         height={2160}
