@@ -34,6 +34,7 @@ import { VideoComposition_2026_05_14, TOTAL_FRAMES_2026_05_14 } from "./VideoCom
 import { VideoComposition_2026_05_15, TOTAL_FRAMES_2026_05_15 } from "./VideoComposition_2026_05_15";
 import { VideoComposition_2026_05_18, TOTAL_FRAMES_2026_05_18 } from "./VideoComposition_2026_05_18";
 import { VideoComposition_2026_05_19, TOTAL_FRAMES_2026_05_19 } from "./VideoComposition_2026_05_19";
+import { VideoComposition_2026_05_20, TOTAL_FRAMES_2026_05_20 } from "./VideoComposition_2026_05_20";
 import { MCPDiagram, TOTAL_FRAMES_MCP } from "./MCPDiagram";
 import React from "react";
 
@@ -342,6 +343,15 @@ export const RemotionRoot: React.FC = () => {
         id="ArticleVideo-2026-05-19"
         component={VideoComposition_2026_05_19}
         durationInFrames={TOTAL_FRAMES_2026_05_19}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-20 — 4K · Function Calling · 讓 AI 真的能做事 */}
+      <Composition
+        id="ArticleVideo-2026-05-20"
+        component={VideoComposition_2026_05_20}
+        durationInFrames={TOTAL_FRAMES_2026_05_20}
         fps={30}
         width={3840}
         height={2160}
