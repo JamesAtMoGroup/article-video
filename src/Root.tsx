@@ -37,6 +37,7 @@ import { VideoComposition_2026_05_19, TOTAL_FRAMES_2026_05_19 } from "./VideoCom
 import { VideoComposition_2026_05_20, TOTAL_FRAMES_2026_05_20 } from "./VideoComposition_2026_05_20";
 import { VideoComposition_2026_05_21, TOTAL_FRAMES_2026_05_21 } from "./VideoComposition_2026_05_21";
 import { VideoComposition_2026_05_22, TOTAL_FRAMES_2026_05_22 } from "./VideoComposition_2026_05_22";
+import { VideoComposition_2026_05_25, TOTAL_FRAMES_2026_05_25 } from "./VideoComposition_2026_05_25";
 import { MCPDiagram, TOTAL_FRAMES_MCP } from "./MCPDiagram";
 import React from "react";
 
@@ -372,6 +373,15 @@ export const RemotionRoot: React.FC = () => {
         id="ArticleVideo-2026-05-22"
         component={VideoComposition_2026_05_22}
         durationInFrames={TOTAL_FRAMES_2026_05_22}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-25 — 4K · ReAct · AI Agent 怎麼「規劃」任務？ReAct 框架簡介 */}
+      <Composition
+        id="ArticleVideo-2026-05-25"
+        component={VideoComposition_2026_05_25}
+        durationInFrames={TOTAL_FRAMES_2026_05_25}
         fps={30}
         width={3840}
         height={2160}
