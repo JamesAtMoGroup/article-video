@@ -39,6 +39,7 @@ import { VideoComposition_2026_05_21, TOTAL_FRAMES_2026_05_21 } from "./VideoCom
 import { VideoComposition_2026_05_22, TOTAL_FRAMES_2026_05_22 } from "./VideoComposition_2026_05_22";
 import { VideoComposition_2026_05_25, TOTAL_FRAMES_2026_05_25 } from "./VideoComposition_2026_05_25";
 import { VideoComposition_2026_05_26, TOTAL_FRAMES_2026_05_26 } from "./VideoComposition_2026_05_26";
+import { VideoComposition_2026_05_27, TOTAL_FRAMES_2026_05_27 } from "./VideoComposition_2026_05_27";
 import { MCPDiagram, TOTAL_FRAMES_MCP } from "./MCPDiagram";
 import React from "react";
 
@@ -392,6 +393,15 @@ export const RemotionRoot: React.FC = () => {
         id="ArticleVideo-2026-05-26"
         component={VideoComposition_2026_05_26}
         durationInFrames={TOTAL_FRAMES_2026_05_26}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-27 — 4K · 為什麼 AI 訓練需要那麼多電？能源問題有多嚴重 */}
+      <Composition
+        id="ArticleVideo-2026-05-27"
+        component={VideoComposition_2026_05_27}
+        durationInFrames={TOTAL_FRAMES_2026_05_27}
         fps={30}
         width={3840}
         height={2160}
