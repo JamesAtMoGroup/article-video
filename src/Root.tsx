@@ -40,6 +40,7 @@ import { VideoComposition_2026_05_22, TOTAL_FRAMES_2026_05_22 } from "./VideoCom
 import { VideoComposition_2026_05_25, TOTAL_FRAMES_2026_05_25 } from "./VideoComposition_2026_05_25";
 import { VideoComposition_2026_05_26, TOTAL_FRAMES_2026_05_26 } from "./VideoComposition_2026_05_26";
 import { VideoComposition_2026_05_27, TOTAL_FRAMES_2026_05_27 } from "./VideoComposition_2026_05_27";
+import { VideoComposition_2026_05_28, TOTAL_FRAMES_2026_05_28 } from "./VideoComposition_2026_05_28";
 import { MCPDiagram, TOTAL_FRAMES_MCP } from "./MCPDiagram";
 import React from "react";
 
@@ -402,6 +403,15 @@ export const RemotionRoot: React.FC = () => {
         id="ArticleVideo-2026-05-27"
         component={VideoComposition_2026_05_27}
         durationInFrames={TOTAL_FRAMES_2026_05_27}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-28 — 4K · 什麼是 AI Safety？和 AI Alignment 有什麼不同 */}
+      <Composition
+        id="ArticleVideo-2026-05-28"
+        component={VideoComposition_2026_05_28}
+        durationInFrames={TOTAL_FRAMES_2026_05_28}
         fps={30}
         width={3840}
         height={2160}
