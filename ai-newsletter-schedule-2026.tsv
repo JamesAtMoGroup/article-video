@@ -1,0 +1,37 @@
+日期	星期	週次	階段	週題	題目	完成
+2026-06-01	一	Week 1	Phase 1：理解 AI 底層機制	AI 如何訓練與思考	推理模型是什麼？為什麼 AI「想多一點」效果差很多
+2026-06-02	二	Week 1	Phase 1：理解 AI 底層機制	AI 如何訓練與思考	什麼是 RLHF？人類怎麼教 AI 判斷好壞答案
+2026-06-03	三	Week 1	Phase 1：理解 AI 底層機制	AI 如何訓練與思考	什麼是合成資料（Synthetic Data）？AI 開始用 AI 的資料訓練自己
+2026-06-04	四	Week 1	Phase 1：理解 AI 底層機制	AI 如何訓練與思考	知識蒸餾是什麼？小模型如何學大模型的能力
+2026-06-08	一	Week 2	Phase 1：理解 AI 底層機制	AI 系統架構	多代理人系統是什麼？一個 AI 指揮另一個 AI
+2026-06-09	二	Week 2	Phase 1：理解 AI 底層機制	AI 系統架構	AI 的「記憶」怎麼運作？短期、長期、外掛記憶三層架構
+2026-06-10	三	Week 2	Phase 1：理解 AI 底層機制	AI 系統架構	什麼是 AI Gateway？企業如何統一管理 AI 請求
+2026-06-11	四	Week 2	Phase 1：理解 AI 底層機制	AI 系統架構	如何用 AI 建立知識庫？從上傳文件到問答的完整流程
+2026-06-15	一	Week 3	Phase 1：理解 AI 底層機制	AI 在各行各業	AI 寫程式的極限在哪？工程師的角色如何改變
+2026-06-16	二	Week 3	Phase 1：理解 AI 底層機制	AI 在各行各業	AI 如何用在醫療？從影像辨識到新藥研發
+2026-06-17	三	Week 3	Phase 1：理解 AI 底層機制	AI 在各行各業	AI 怎麼改變創意產業？設計師、作家、音樂人的新現實
+2026-06-18	四	Week 3	Phase 1：理解 AI 底層機制	AI 在各行各業	AI 如何改變搜尋習慣？從關鍵字到對話式查詢
+2026-06-22	一	Week 4	Phase 1：理解 AI 底層機制	AI 的邊界與未來	什麼是「湧現能力」（Emergent Abilities）？大模型最神秘的現象
+2026-06-23	二	Week 4	Phase 1：理解 AI 底層機制	AI 的邊界與未來	AGI 是什麼？我們現在距離它有多遠
+2026-06-24	三	Week 4	Phase 1：理解 AI 底層機制	AI 的邊界與未來	AI 如何影響資訊可信度？Deepfake 只是開始
+2026-06-25	四	Week 4	Phase 1：理解 AI 底層機制	AI 的邊界與未來	未來十年，你需要什麼 AI 素養才不會被淘汰
+2026-06-29	一	Week 5	Phase 2：AI 工具實戰	Prompt 工程進階	什麼是 Few-Shot Prompting？用例子教 AI 是最快的方法
+2026-06-30	二	Week 5	Phase 2：AI 工具實戰	Prompt 工程進階	Role Prompting 怎麼用？讓 AI 扮演對你最有幫助的角色
+2026-07-01	三	Week 5	Phase 2：AI 工具實戰	Prompt 工程進階	什麼是 Tree of Thoughts？讓 AI 同時探索多條思路
+2026-07-02	四	Week 5	Phase 2：AI 工具實戰	Prompt 工程進階	如何用 Prompt 讓 AI 輸出穩定格式？JSON、表格、清單都適用
+2026-07-06	一	Week 6	Phase 2：AI 工具實戰	AI 與創作	如何用 AI 輔助寫作？不是取代，而是共創
+2026-07-07	二	Week 6	Phase 2：AI 工具實戰	AI 與創作	AI 生圖怎麼下指令？視覺 Prompt 的設計邏輯
+2026-07-08	三	Week 6	Phase 2：AI 工具實戰	AI 與創作	AI 生成的內容，如何判斷品質好不好？
+2026-07-09	四	Week 6	Phase 2：AI 工具實戰	AI 與創作	為什麼 AI 有時候「太像 AI」？如何讓輸出更有人味
+2026-07-13	一	Week 7	Phase 2：AI 工具實戰	AI 與學習	如何用 AI 幫你學新技能？費曼學習法 × AI
+2026-07-14	二	Week 7	Phase 2：AI 工具實戰	AI 與學習	如何用 AI 整理與消化大量資訊？
+2026-07-15	三	Week 7	Phase 2：AI 工具實戰	AI 與學習	AI 輔助學習的陷阱：依賴 AI 會讓你變笨嗎？
+2026-07-16	四	Week 7	Phase 2：AI 工具實戰	AI 與學習	如何建立你自己的 AI 學習流程？
+2026-07-20	一	Week 8	Phase 3：AI 思維整合	AI 工作流整合	什麼是 AI 工作流的「節點」思維？把任務拆成 AI 能做的步驟
+2026-07-21	二	Week 8	Phase 3：AI 思維整合	AI 工作流整合	如何讓 AI 幫你寫每天的工作摘要？自動化日誌實戰
+2026-07-22	三	Week 8	Phase 3：AI 思維整合	AI 工作流整合	用 AI 做資料分析：從問題到洞見的思維框架
+2026-07-23	四	Week 8	Phase 3：AI 思維整合	AI 工作流整合	如何設計你自己的 AI SOP？
+2026-07-27	一	Week 9	Phase 3：AI 思維整合	AI 使用者自我進化	你有沒有「AI 依賴症」？如何保持獨立判斷力
+2026-07-28	二	Week 9	Phase 3：AI 思維整合	AI 使用者自我進化	什麼時候不該用 AI？人類判斷力的不可替代之處
+2026-07-29	三	Week 9	Phase 3：AI 思維整合	AI 使用者自我進化	如何向別人解釋 AI？成為身邊的 AI 翻譯官
+2026-07-30	四	Week 9	Phase 3：AI 思維整合	AI 使用者自我進化	學了這麼多，你的 AI 使用習慣改變了什麼？

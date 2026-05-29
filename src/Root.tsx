@@ -41,6 +41,7 @@ import { VideoComposition_2026_05_25, TOTAL_FRAMES_2026_05_25 } from "./VideoCom
 import { VideoComposition_2026_05_26, TOTAL_FRAMES_2026_05_26 } from "./VideoComposition_2026_05_26";
 import { VideoComposition_2026_05_27, TOTAL_FRAMES_2026_05_27 } from "./VideoComposition_2026_05_27";
 import { VideoComposition_2026_05_28, TOTAL_FRAMES_2026_05_28 } from "./VideoComposition_2026_05_28";
+import { VideoComposition_2026_05_29, TOTAL_FRAMES_2026_05_29 } from "./VideoComposition_2026_05_29";
 import { MCPDiagram, TOTAL_FRAMES_MCP } from "./MCPDiagram";
 import React from "react";
 
@@ -412,6 +413,15 @@ export const RemotionRoot: React.FC = () => {
         id="ArticleVideo-2026-05-28"
         component={VideoComposition_2026_05_28}
         durationInFrames={TOTAL_FRAMES_2026_05_28}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-05-29 — 4K · 本週 AI 大事 — Claude Opus 4.8、GPT-5.5 Instant 幻覺大減、Gemini 3.5 Flash */}
+      <Composition
+        id="ArticleVideo-2026-05-29"
+        component={VideoComposition_2026_05_29}
+        durationInFrames={TOTAL_FRAMES_2026_05_29}
         fps={30}
         width={3840}
         height={2160}
