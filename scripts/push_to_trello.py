@@ -56,10 +56,10 @@ DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 CHECKLIST_ITEMS = [
     ("撰稿（文章 + 逐字稿）", True),
     ("內容驗證 PASS", True),
-    ("錄音 / TTS", False),
-    ("字幕 VTT 校正", False),
-    ("Remotion 4K Render", False),
-    ("發布（影片 + blog）", False),
+    ("影片製作", False),
+    ("影片檢核", False),
+    ("影片上傳", False),
+    ("影片發佈", False),
 ]
 
 
