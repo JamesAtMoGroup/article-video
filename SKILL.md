@@ -60,40 +60,62 @@ description: 每天自動搜尋最新 AI 資訊，整理成繁體中文學習文
 ### Step 2B：一般觀念型 — 從題目庫挑選主題
 
 > 非週五執行此步驟
+> 選題策略依據 39 集 Kolable 觀看數據（2026-04~05）校準，見下方比例與標題公式。
 
-從以下**題目庫**中挑選 1 個尚未產出過的主題：
+#### 選題類別比例（每月配額，依 ROI 重排）
 
-#### 🧠 AI 基礎概念
-1. AI 為什麼會「幻覺」？它不是在說謊
-2. Token 是什麼？為什麼 AI 有字數限制
-3. RAG 是什麼？讓 AI 記住你的資料
-4. Fine-tuning vs Prompt Engineering，哪個更值得學
-5. 為什麼同一個問題問 AI，每次答案都不一樣
+| 類別 | 目標比例 | 說明 |
+|------|---------|------|
+| C. 應用實戰（拿來解工作） | **30%** ⬆️ | 學員最想看、目前最缺貨，優先 |
+| A. 概念解釋（是什麼/為什麼） | 30% | 仍要，但勿過度供給 |
+| B. 時事 round-up | 20% | 週五固定欄目 |
+| D. 工作角色 series（行銷/業務/PM/HR/主管） | 10% | 擴大受眾 |
+| E. 比較類（GPT vs Claude vs Gemini 等） | 10% | 解選擇焦慮 |
+| F. 純技術內裡（Embedding/評估指標等） | **0%** ❌ | 觀看率最低，禁止 |
 
-#### 🤖 模型與工具
-6. Claude、GPT、Gemini 到底差在哪
-7. 開源模型 vs 閉源模型，你該選哪個
-8. 什麼是 MCP？為什麼最近大家都在講
-9. AI Agent 和一般 AI 聊天有什麼本質差異
-10. 為什麼模型越來越便宜，但能力越來越強
+#### 標題公式（選題前必須對得上其一，否則不動工）
 
-#### ⚙️ AI 應用與工作流
-11. Prompt 寫不好的人都犯了這個錯
-12. 什麼是 AI 工作流？n8n 能幫你自動化什麼
-13. 用 AI 寫的東西，版權是誰的
-14. AI 幫你做完的工作，你還算做了嗎
+1. **擬人化 + 反常識**：「AI 說『___』──其實它根本沒有 ___」
+2. **為什麼 + 反常識**：「為什麼 AI 會 ___？其實它不是 ___」
+3. **新興名詞解謎**：「什麼是 ___？讓 AI ___」
+4. **應用實戰鉤子**：「___（具體工作情境）？AI 幫你 ___」
+5. **本週 AI 大事 round-up**（限週五）
 
-#### 🌍 AI 素養與社會
-15. 為什麼 AI 公司都在搶「上下文視窗」長度
-16. AI 訓練資料從哪來？你的資料有沒有在裡面
-17. 為什麼有些國家要管制 AI，台灣呢
-18. 學 AI 工具，和學 AI 原理，有什麼不同
-19. AI 會取代哪些工作？一個比較誠實的分析
-20. 現在學 AI 的人，五年後的優勢是什麼
+**❌ 禁止標題公式（基於冷清數據）**：「___ 的直覺解釋」「___ 的方法和指標」「___ 從哪來」「純哲學討論題」。
+
+#### 題目庫（優先序，已套公式；挑 1 個尚未產出過的）
+
+**C. 應用實戰（最優先）**
+1. 會議 1 小時整理紀錄？AI 三招砍到 5 分鐘
+2. Email 想不出開頭？AI 30 秒幫你寫
+3. 老闆要簡報明天 8 點交？AI 生產線拆解
+4. 面試前一晚，AI 怎麼幫你準備到位
+5. 週報寫不出來？讓 AI 幫你 review 一週
+
+**A. 概念 / 反常識**
+6. ChatGPT 越來越笨？其實是這個原因
+7. 為什麼 AI 一本正經地胡說八道？它真的不知道自己錯了
+8. 你以為 Prompt 越詳細越好？其實有上限
+9. 什麼是 Reasoning Model？為什麼它比一般 AI 慢但「想得對」
+10. 什麼是 Computer Use？AI 真的會用你的電腦了
+11. 什麼是 Long Context？百萬 token 能幹嘛
+12. 什麼是 Vibe Coding？它跟 AI Coding 差在哪
+
+**D. 工作角色 series（每月 1 職位，做 4 集 mini series）**
+13. 行銷人的 AI 工作流 — 從受眾洞察到 Ads 文案
+14. 業務的 AI 工作流 — 客戶研究 + 提案 + 跟進
+15. PM 的 AI 工作流 — PRD + 競品 + Spec
+16. HR 的 AI 工作流 — 招募 + 績效 + 培訓
+
+**E. 比較類**
+17. Claude vs GPT vs Gemini — 5 種場景該用哪個
+18. Cursor vs Windsurf vs Copilot — 寫程式選哪個 IDE
+19. 免費版 vs Pro 版 — 哪些情境該升級付費
 
 每個主題依 **What / Why / How** 框架撰寫。
 
 **⚠️ 文章大標題（`#` 標題）必須直接使用題目庫中的文字，不得自行改寫或發揮。**
+**⚠️ Series 主題：把同職位 2–3 集綁成 series，文末引導看下一集。**
 
 ---
 
@@ -162,6 +184,8 @@ description: 每天自動搜尋最新 AI 資訊，整理成繁體中文學習文
 #### 撰寫規範
 - 語言：繁體中文，輕鬆口語
 - 每篇至少 1 個 AI 素養視角（工具限制、隱私、負責任使用等）
+- **每篇必含 1 個 actionable 收尾**（解 4→5 月觀看率衰退）：在「今日重點整理」後加一段
+  「✅ 今天就試試看」，給一句**學員今天看完立刻能用的 prompt 或工具操作**。逐字稿同步加入此口播段。
 
 ---
 
@@ -178,15 +202,77 @@ description: 每天自動搜尋最新 AI 資訊，整理成繁體中文學習文
 
 ---
 
-### Step 5：儲存檔案
+### Step 4.5：內容驗證閘門（強制，未通過禁止寫入正式 / 禁止進入 Part B）
 
-在 `mnt/article-video/` 底下建立子資料夾，存入文章與逐字稿：
+> **零污染準則：任何文章/逐字稿在進入正式資料夾或 Part B 影片前，必須通過驗證。**
+> 驗證分兩層：L1 結構（腳本全自動）+ L2 事實查證（你先 WebSearch，再由腳本 gate）。
+
+**執行順序（嚴格）：**
+
+1. **先寫到 isolation（staging），不要直接寫正式資料夾：**
+   `mnt/article-video/.staging/YYYY-MM-DD/ai-knowledge-YYYY-MM-DD.md`（含 `_script.md`）。
+
+2. **抽取可查證宣稱 → WebSearch → 填寫 `_claims.json`。**
+   對每一條「事實型宣稱」（模型發布、版本號、日期、數字、價格、公司動作、功能宣稱），
+   用 WebSearch 以英文關鍵字查證，逐條填入 ledger。**時事型至少 2 條 verified，觀念型至少 1 條。**
+   `_claims.json` schema：
+
+   ```json
+   {
+     "date": "YYYY-MM-DD",
+     "mode": "news | concept",
+     "claims": [
+       {
+         "id": "c1",
+         "claim": "可查證的具體宣稱（例：Claude Opus 4.8 於 2026-05-28 發布）",
+         "verdict": "verified | refuted | unverifiable",
+         "confidence": 0.0,
+         "sources": ["https://官方或一級媒體連結"],
+         "evidence": "一句話佐證摘要"
+       }
+     ]
+   }
+   ```
+
+   - `verified` 必須附至少一個 `http` 來源。
+   - 任一 `refuted` → 腳本直接 FAIL（代表正文有錯誤資訊，**必須改寫**）。
+   - `unverifiable`（查不到佐證）不得計入 verified 門檻；若時事型湊不到 2 條 verified，**該事件不得寫入**。
+
+3. **跑驗證腳本（dry-run，不搬移）：**
+
+   ```bash
+   python3 scripts/verify_content.py --root mnt/article-video \
+     --date YYYY-MM-DD --staging mnt/article-video/.staging/YYYY-MM-DD --mode auto
+   ```
+
+   - 退出碼 `0` = PASS；`1` = FAIL（禁止寫入）；`2` = 執行錯誤。
+   - 報告寫於 staging 的 `_verify.json`，日誌於 `mnt/article-video/.logs/`。
+
+4. **FAIL → 依 `_verify.json` 的 errors 修正後重跑，直到 PASS。嚴禁略過。**
+
+5. **PASS → 才允許 promote 到正式資料夾（自動 backup 被覆蓋檔案）：**
+
+   ```bash
+   python3 scripts/verify_content.py --root mnt/article-video \
+     --date YYYY-MM-DD --staging mnt/article-video/.staging/YYYY-MM-DD \
+     --mode auto --promote
+   ```
+
+> 注意：`_claims.json` / `_verify.json` 是稽核軌跡，**只放在資料夾、不得寫進文章正文**（仍遵守「正文禁止來源引用區塊」）。
+
+---
+
+### Step 5：儲存檔案（僅在 Step 4.5 PASS 後）
+
+promote 後，正式子資料夾應包含：
 
 ```
 mnt/article-video/
 └── ai-knowledge-YYYY-MM-DD/
     ├── ai-knowledge-YYYY-MM-DD.md
-    └── ai-knowledge-YYYY-MM-DD_script.md
+    ├── ai-knowledge-YYYY-MM-DD_script.md
+    ├── _claims.json        ← 事實查證 ledger（稽核用）
+    └── _verify.json        ← 驗證報告 result=PASS（稽核用）
 ```
 
 ---
