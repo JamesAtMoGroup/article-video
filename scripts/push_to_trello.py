@@ -38,6 +38,8 @@ import json
 import logging
 import os
 import re
+import shutil
+import subprocess
 import sys
 import urllib.parse
 import urllib.request
@@ -149,6 +151,59 @@ def resolve_list_id(creds, logger):
 
 
 # ----------------------------------------------------------------------------
+# Google Drive 內容連結（協作者實際存取的地方）
+# ----------------------------------------------------------------------------
+
+def _find_rclone():
+    """launchd 的 PATH 很精簡，這裡額外找常見安裝位置。"""
+    p = shutil.which("rclone")
+    if p:
+        return p
+    for cand in ("/opt/homebrew/bin/rclone", "/usr/local/bin/rclone", "/usr/bin/rclone"):
+        if os.path.isfile(cand):
+            return cand
+    return None
+
+
+def resolve_drive_link(creds, date, logger):
+    """回傳 (當天子資料夾連結 or None, 母資料夾連結 or None)。
+
+    用 rclone 在母資料夾底下找 ai-knowledge-{date} 子夾並深連；
+    任何失敗都退回母資料夾連結，絕不讓建卡流程因 Drive 解析而失敗。
+    """
+    parent_id = creds.get("DRIVE_FOLDER_ID", "").strip()
+    if not parent_id:
+        return None, None
+    parent_url = "https://drive.google.com/drive/folders/{}".format(parent_id)
+    remote = (creds.get("DRIVE_REMOTE", "") or "gdrive").strip()
+    rclone = _find_rclone()
+    if not rclone:
+        logger.warning("找不到 rclone，卡片改用 Drive 母資料夾連結")
+        return None, parent_url
+    sub_name = "ai-knowledge-{}".format(date)
+    try:
+        out = subprocess.run(
+            [rclone, "lsjson", remote + ":",
+             "--drive-root-folder-id", parent_id, "--dirs-only"],
+            capture_output=True, text=True, timeout=60)
+        if out.returncode != 0:
+            logger.warning("rclone lsjson 失敗（rc=%s）：%s；改用母資料夾連結",
+                           out.returncode, (out.stderr or "").strip()[:200])
+            return None, parent_url
+        dirs = json.loads(out.stdout or "[]")
+        sub = next((d for d in dirs if d.get("Name") == sub_name), None)
+        if sub and sub.get("ID"):
+            url = "https://drive.google.com/drive/folders/{}".format(sub["ID"])
+            logger.info("解析 Drive 當天資料夾：%s → %s", sub_name, url)
+            return url, parent_url
+        logger.info("Drive 尚無當天子夾「%s」，改用母資料夾連結", sub_name)
+        return None, parent_url
+    except (subprocess.TimeoutExpired, json.JSONDecodeError, OSError) as e:
+        logger.warning("解析 Drive 連結失敗：%s；改用母資料夾連結", e)
+        return None, parent_url
+
+
+# ----------------------------------------------------------------------------
 # 取得當天題目
 # ----------------------------------------------------------------------------
 
@@ -240,6 +295,12 @@ def create_card(creds, list_id, name, desc, due, logger):
     return trello_post("/cards", params, logger)
 
 
+def attach_url(creds, card_id, url, name, logger):
+    params = _auth(creds)
+    params.update({"url": url, "name": name})
+    return trello_post("/cards/{}/attachments".format(card_id), params, logger)
+
+
 def add_checklist(creds, card_id, items, logger):
     params = _auth(creds)
     params.update({"name": "製作流程"})
@@ -256,20 +317,32 @@ def add_checklist(creds, card_id, items, logger):
 # 主流程
 # ----------------------------------------------------------------------------
 
-def build_card_content(root, date, topic):
+def build_card_content(root, date, topic, drive_day_url=None, drive_parent_url=None):
     name = topic if topic else "每日 AI 知識庫 — {}".format(date)
     folder = "ai-knowledge-{}".format(date)
-    article = "{}/ai-knowledge-{}.md".format(folder, date)
-    script = "{}/ai-knowledge-{}_script.md".format(folder, date)
     weekday = dt.date.fromisoformat(date).strftime("%A")
     is_friday = dt.date.fromisoformat(date).weekday() == 4
     kind = "週五時事型" if is_friday else "一般觀念型"
+    # 內容區塊：優先給協作者可直接存取的 Drive 連結，本機路徑只當備註。
+    if drive_day_url:
+        content = "📂 內容（Google Drive）：{}".format(drive_day_url)
+    elif drive_parent_url:
+        content = (
+            "📂 內容（Google Drive 母資料夾）：{url}\n"
+            "   當天資料夾：`{folder}/`（內容同步後會出現在母資料夾底下）"
+        ).format(url=drive_parent_url, folder=folder)
+    else:
+        content = (
+            "檔案（本機，協作者無法直接存取）：\n"
+            "- 文章：`{folder}/ai-knowledge-{date}.md`\n"
+            "- 逐字稿：`{folder}/ai-knowledge-{date}_script.md`"
+        ).format(folder=folder, date=date)
     desc = (
         "**每日 AI 知識庫 — {date}（{wd}）**\n\n"
         "類型：{kind}\n\n"
-        "檔案：\n- 文章：`{article}`\n- 逐字稿：`{script}`\n\n"
+        "{content}\n\n"
         "驗證：產出後須通過 `scripts/verify_content.py` 閘門才可發布。"
-    ).format(date=date, wd=weekday, kind=kind, article=article, script=script)
+    ).format(date=date, wd=weekday, kind=kind, content=content)
     # Trello due 需 ISO8601；設當天 09:00 當地時間
     due = "{}T09:00:00.000Z".format(date)
     return name, desc, due
@@ -304,7 +377,9 @@ def run(args):
             return 2
 
     topic = get_topic(root, args.date, logger)
-    name, desc, due = build_card_content(root, args.date, topic)
+    drive_day_url, drive_parent_url = resolve_drive_link(creds, args.date, logger)
+    name, desc, due = build_card_content(
+        root, args.date, topic, drive_day_url, drive_parent_url)
     logger.info("卡名：%s", name)
     logger.info("Due ：%s", due)
 
@@ -331,6 +406,10 @@ def run(args):
         logger.info("已建立卡片：%s", card_url)
         add_checklist(creds, card_id, CHECKLIST_ITEMS, logger)
         logger.info("已加入 checklist（%d 項）", len(CHECKLIST_ITEMS))
+        attach_target = drive_day_url or drive_parent_url
+        if attach_target:
+            attach_url(creds, card_id, attach_target, "📂 Drive 內容資料夾", logger)
+            logger.info("已附上 Drive 連結：%s", attach_target)
         logger.info("=== 完成 ===")
         return 0
     except urllib.error.HTTPError as e:
