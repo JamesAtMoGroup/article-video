@@ -20,3 +20,7 @@ __pycache__/
 *.egg-info/
 .venv/
 venv/
+
+# Trello 憑證（本機限定，絕不上 git）
+.trello.local
+*.env

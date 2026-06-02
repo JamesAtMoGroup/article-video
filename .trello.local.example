@@ -1,0 +1,12 @@
+# Trello 憑證範本 —— 複製成 .trello.local 後填入你自己的值
+# .trello.local 已被 .gitignore 排除，不會上 GitHub，也不要貼到聊天視窗。
+#
+# 取得方式：
+#   TRELLO_KEY   ：到 https://trello.com/power-ups/admin 建一個 Power-Up，取得 API Key
+#   TRELLO_TOKEN ：在同頁用該 Key 產生 Token（授權你的帳號）
+#   TRELLO_LIST_ID：打開目標看板，網址後加 .json，搜尋你要放卡片那個清單的 "id"
+#                   （或之後請我用 key/token 幫你列出清單，挑一個）
+
+TRELLO_KEY=在這裡貼上你的_key
+TRELLO_TOKEN=在這裡貼上你的_token
+TRELLO_LIST_ID=在這裡貼上目標清單ID

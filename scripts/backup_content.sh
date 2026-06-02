@@ -79,7 +79,7 @@ if [[ $DO_FULL -eq 1 ]]; then
   FULL_DIR="$DEST/article-video-full"
   log "=== FULL 模式：整包備份（排除 node_modules）==="
   mkdir -p "$FULL_DIR"
-  FOPTS=(-a --delete --human-readable --info=stats2
+  FOPTS=(-a --delete --human-readable --stats
          --exclude 'node_modules/' --exclude '.DS_Store')
   [[ $DRY_RUN -eq 1 ]] && FOPTS+=(--dry-run)
   rsync "${FOPTS[@]}" "$REPO_ROOT/" "$FULL_DIR/" 2>&1 | tee -a "$LOG"
@@ -125,7 +125,7 @@ log "將備份 ${#SOURCES[@]} 個項目"
 
 # ---- 目的地 ----------------------------------------------------------------
 DEST_DIR="$DEST/article-video-content"
-RSYNC_OPTS=(-a --delete --human-readable --info=stats2)
+RSYNC_OPTS=(-a --delete --human-readable --stats)
 [[ $DRY_RUN -eq 1 ]] && RSYNC_OPTS+=(--dry-run)
 
 # 目的地資料夾骨架一律建立（dry-run 也建空目錄，以便 rsync 正確預覽；不複製內容）
