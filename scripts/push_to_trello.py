@@ -51,13 +51,15 @@ LOCAL_CRED_FILE = ".trello.local"
 CONFIG_FILE = ".trello.config"
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
+# (名稱, 推卡時是否已完成)。撰稿 + 內容驗證在推卡前必然已完成，預設打勾；
+# 其餘為後續製作待辦。
 CHECKLIST_ITEMS = [
-    "撰稿（文章 + 逐字稿）",
-    "內容驗證閘門 PASS（verify_content.py）",
-    "錄音 / TTS",
-    "字幕 VTT 校正",
-    "Remotion 4K Render",
-    "發布（影片 + blog）",
+    ("撰稿（文章 + 逐字稿）", True),
+    ("內容驗證 PASS", True),
+    ("錄音 / TTS", False),
+    ("字幕 VTT 校正", False),
+    ("Remotion 4K Render", False),
+    ("發布（影片 + blog）", False),
 ]
 
 
@@ -292,7 +294,24 @@ def find_existing_card(creds, list_id, name, logger):
 def create_card(creds, list_id, name, desc, due, logger):
     params = _auth(creds)
     params.update({"idList": list_id, "name": name, "desc": desc, "due": due, "pos": "top"})
+    member_id = creds.get("TRELLO_MEMBER_ID", "").strip()
+    if member_id:
+        params["idMembers"] = member_id
     return trello_post("/cards", params, logger)
+
+
+def assign_member(creds, card_id, member_id, logger):
+    """對既有卡片補指派負責人（已指派則 Trello 回 400，視為無害略過）。"""
+    p = _auth(creds)
+    p["value"] = member_id
+    try:
+        trello_post("/cards/{}/idMembers".format(card_id), p, logger)
+        logger.info("已指派負責人（member_id=%s）", member_id)
+    except urllib.error.HTTPError as e:
+        if e.code == 400:
+            logger.info("負責人已在卡片上，略過。")
+        else:
+            raise
 
 
 def attach_url(creds, card_id, url, name, logger):
@@ -306,9 +325,9 @@ def add_checklist(creds, card_id, items, logger):
     params.update({"name": "製作流程"})
     chk = trello_post("/cards/{}/checklists".format(card_id), params, logger)
     chk_id = chk["id"]
-    for it in items:
+    for name, done in items:
         p = _auth(creds)
-        p.update({"name": it, "checked": "false"})
+        p.update({"name": name, "checked": "true" if done else "false"})
         trello_post("/checklists/{}/checkItems".format(chk_id), p, logger)
     return chk_id
 
@@ -340,8 +359,7 @@ def build_card_content(root, date, topic, drive_day_url=None, drive_parent_url=N
     desc = (
         "**每日 AI 知識庫 — {date}（{wd}）**\n\n"
         "類型：{kind}\n\n"
-        "{content}\n\n"
-        "驗證：產出後須通過 `scripts/verify_content.py` 閘門才可發布。"
+        "{content}"
     ).format(date=date, wd=weekday, kind=kind, content=content)
     # Trello due 需 ISO8601；設當天 09:00 當地時間
     due = "{}T09:00:00.000Z".format(date)
@@ -385,7 +403,8 @@ def run(args):
 
     if args.dry_run:
         logger.info("[dry-run] 將建立卡片，描述如下：\n%s", desc)
-        logger.info("[dry-run] checklist：%s", " / ".join(CHECKLIST_ITEMS))
+        logger.info("[dry-run] checklist：%s", " / ".join(
+            "{}{}".format("✓" if d else "·", n) for n, d in CHECKLIST_ITEMS))
         logger.info("[dry-run] 未呼叫 Trello API。")
         return 0
 
@@ -399,6 +418,9 @@ def run(args):
         existing = find_existing_card(creds, list_id, name, logger)
         if existing:
             logger.info("已存在同名卡片（id=%s），略過建立（去重）。", existing)
+            member_id = creds.get("TRELLO_MEMBER_ID", "").strip()
+            if member_id:
+                assign_member(creds, existing, member_id, logger)
             return 0
         card = create_card(creds, list_id, name, desc, due, logger)
         card_id = card["id"]
