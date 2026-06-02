@@ -58,8 +58,9 @@ CHECKLIST_ITEMS = [
     ("內容驗證 PASS", True),
     ("影片製作", False),
     ("影片檢核", False),
-    ("影片上傳", False),
+    ("媒體庫上傳", False),
     ("影片發佈", False),
+    ("雲端備份", False),
 ]
 
 
