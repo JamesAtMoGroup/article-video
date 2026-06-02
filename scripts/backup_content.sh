@@ -26,17 +26,22 @@ set -euo pipefail
 DEST=""
 DO_TAR=0
 DRY_RUN=0
+DO_FULL=0
 
 usage() {
-  echo "用法: $0 <destination_dir> [--tar] [--dry-run]" >&2
+  echo "用法: $0 <destination_dir> [--full] [--tar] [--dry-run]" >&2
   echo "  <destination_dir>  備份目的地（外接硬碟 / 雲端同步資料夾）" >&2
-  echo "  --tar              額外產出 article-video-content-<ts>.tar.gz" >&2
+  echo "  --full             整包備份（整個資料夾，僅排除 node_modules）——換機推薦" >&2
+  echo "  --tar              額外產出 tar.gz 封存檔" >&2
   echo "  --dry-run          僅預覽，不實際複製" >&2
+  echo >&2
+  echo "預設（不加 --full）：只備份 gitignored 內容資產（ai-knowledge-*/, public/audio/, out/）" >&2
   exit 2
 }
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
+    --full) DO_FULL=1; shift ;;
     --tar) DO_TAR=1; shift ;;
     --dry-run) DRY_RUN=1; shift ;;
     -h|--help) usage ;;
@@ -67,7 +72,35 @@ trap 'err "備份中止（第 $LINENO 行）"; exit 1' ERR
 
 log "repo  = $REPO_ROOT"
 log "dest  = $DEST"
-log "tar   = $DO_TAR   dry-run = $DRY_RUN"
+log "full  = $DO_FULL   tar = $DO_TAR   dry-run = $DRY_RUN"
+
+# ---- --full：整包備份（換機用，含未 commit 程式碼與 git 歷史）-------------
+if [[ $DO_FULL -eq 1 ]]; then
+  FULL_DIR="$DEST/article-video-full"
+  log "=== FULL 模式：整包備份（排除 node_modules）==="
+  mkdir -p "$FULL_DIR"
+  FOPTS=(-a --delete --human-readable --info=stats2
+         --exclude 'node_modules/' --exclude '.DS_Store')
+  [[ $DRY_RUN -eq 1 ]] && FOPTS+=(--dry-run)
+  rsync "${FOPTS[@]}" "$REPO_ROOT/" "$FULL_DIR/" 2>&1 | tee -a "$LOG"
+  if [[ $DRY_RUN -eq 0 ]]; then
+    SIZE="$(du -sh "$FULL_DIR" | cut -f1)"
+    log "整包大小（不含 node_modules）：$SIZE"
+    if [[ $DO_TAR -eq 1 ]]; then
+      TARBALL="$DEST/article-video-full-$TS.tar.gz"
+      log "打包 tar.gz → $TARBALL"
+      tar -czf "$TARBALL" -C "$FULL_DIR" . 2>&1 | tee -a "$LOG"
+      log "tar 完成：$(du -sh "$TARBALL" | cut -f1)"
+    fi
+  fi
+  log "=== FULL 備份完成 ==="
+  echo
+  echo "完成。新電腦還原方式："
+  echo "  1) rsync -a \"$FULL_DIR/\" ~/Projects/article-video/"
+  echo "  2) cd ~/Projects/article-video && npm install"
+  echo "日誌：$LOG"
+  exit 0
+fi
 
 # ---- 要備份的內容資產（皆為 gitignore，git 沒有）--------------------------
 # 只列存在的項目，避免 rsync 對缺漏路徑報錯
