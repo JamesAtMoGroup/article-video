@@ -44,6 +44,7 @@ import { VideoComposition_2026_05_28, TOTAL_FRAMES_2026_05_28 } from "./VideoCom
 import { VideoComposition_2026_05_29, TOTAL_FRAMES_2026_05_29 } from "./VideoComposition_2026_05_29";
 import { VideoComposition_2026_06_01, TOTAL_FRAMES_2026_06_01 } from "./VideoComposition_2026_06_01";
 import { VideoComposition_2026_06_02, TOTAL_FRAMES_2026_06_02 } from "./VideoComposition_2026_06_02";
+import { VideoComposition_2026_06_03, TOTAL_FRAMES_2026_06_03 } from "./VideoComposition_2026_06_03";
 import { MCPDiagram, TOTAL_FRAMES_MCP } from "./MCPDiagram";
 import React from "react";
 
@@ -442,6 +443,15 @@ export const RemotionRoot: React.FC = () => {
         id="ArticleVideo-2026-06-02"
         component={VideoComposition_2026_06_02}
         durationInFrames={TOTAL_FRAMES_2026_06_02}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-06-03 — 4K · 合成資料 · 什麼是合成資料？AI 開始用 AI 的資料訓練自己 */}
+      <Composition
+        id="ArticleVideo-2026-06-03"
+        component={VideoComposition_2026_06_03}
+        durationInFrames={TOTAL_FRAMES_2026_06_03}
         fps={30}
         width={3840}
         height={2160}
