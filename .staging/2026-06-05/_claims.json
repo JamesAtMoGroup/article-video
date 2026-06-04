@@ -1,0 +1,72 @@
+{
+  "date": "2026-06-05",
+  "mode": "news",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "Anthropic 於 2026-06-01 祕密向 SEC 遞交 IPO 申請文件，最快今年秋天掛牌上市",
+      "verdict": "verified",
+      "confidence": 0.95,
+      "sources": [
+        "https://www.cnbc.com/2026/06/01/anthropic-ipo-s1-prospectus.html",
+        "https://fortune.com/2026/06/01/anthropic-confidentially-files-ipo-965-billion-valuation/"
+      ],
+      "evidence": "CNBC 與 Fortune 報導 Anthropic 於 6 月 1 日祕密遞交 IPO 草案文件，準備最快秋天上市。"
+    },
+    {
+      "id": "c2",
+      "claim": "Anthropic 完成約 650 億美元募資，估值達 9,650 億美元，首度超越 OpenAI 約 8,520 億美元的估值",
+      "verdict": "verified",
+      "confidence": 0.93,
+      "sources": [
+        "https://fortune.com/2026/06/01/anthropic-confidentially-files-ipo-965-billion-valuation/",
+        "https://finance.yahoo.com/markets/stocks/articles/anthropic-hits-965-billion-valuation-104626610.html"
+      ],
+      "evidence": "Fortune／Yahoo Finance 報導 Anthropic 以 965B 估值募得 65B，首次超越 OpenAI 的估值。"
+    },
+    {
+      "id": "c3",
+      "claim": "微軟在 Build 2026（2026-06-02）推出第一個自研推理模型 MAI-Thinking-1，未蒸餾任何第三方模型，在 SWE-Bench Pro 編程能力追平 Claude Opus 4.6",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://microsoft.ai/news/introducing-mai-thinking-1/",
+        "https://www.cnbc.com/2026/06/02/microsoft-unveils-new-ai-models-lessen-reliance-on-openai-lower-costs.html"
+      ],
+      "evidence": "微軟官方與 CNBC 指 MAI-Thinking-1 為其首個自研推理模型，未用 OpenAI 資料，SWE-Bench Pro 上比肩 Claude Opus 4.6。"
+    },
+    {
+      "id": "c4",
+      "claim": "微軟同場推出 MAI-Code-1-Flash 編程模型，已推送至所有 GitHub Copilot 方案並整合進 VS Code",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://www.cnbc.com/2026/06/02/microsoft-unveils-new-ai-models-lessen-reliance-on-openai-lower-costs.html",
+        "https://www.neowin.net/news/microsoft-unveils-mai-thinking-1-reasoning-and-mai-code-1-coding-models/"
+      ],
+      "evidence": "CNBC／Neowin 報導 MAI-Code-1-Flash 為小型編程模型，已上線所有 GitHub Copilot 方案並整合 VS Code。"
+    },
+    {
+      "id": "c5",
+      "claim": "OpenAI 宣布 GPT-4.5 將於 2026-06-27 從 ChatGPT 下線，距其 2026 年 2 月上線僅約四個月；o3 排定 8 月 26 日下線",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://www.ghacks.net/2026/06/03/openai-upgrades-gpt-5-5-instant-and-confirms-retirement-of-o3-and-gpt-4-5-models/",
+        "https://www.bleepingcomputer.com/news/artificial-intelligence/openai-upgrades-gpt-55-as-it-plans-to-retire-legacy-chatgpt-models/"
+      ],
+      "evidence": "gHacks／BleepingComputer 報導 OpenAI 確認 GPT-4.5 於 6/27 下線、o3 於 8/26 下線。"
+    },
+    {
+      "id": "c6",
+      "claim": "Google 的 Gemini 3.5 Flash 已達正式上線（GA），主打在代理與編程任務維持高水準並保有 Flash 系列速度與低成本",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/changelog",
+        "https://llm-stats.com/llm-updates"
+      ],
+      "evidence": "Google Gemini API 變更紀錄與 llm-stats 顯示 Gemini 3.5 Flash 已 GA。"
+    }
+  ]
+}

@@ -77,7 +77,8 @@ FOOTER_CORE_RE = re.compile(r"每日 AI 知識庫.*AI 未來學院")
 FOOTER_DATED_RE = re.compile(r"每日 AI 知識庫\s*·\s*(\d{4}-\d{2}-\d{2})\s*·\s*AI 未來學院")
 
 # 逐字稿規範
-SCRIPT_FIRSTLINE_RE = re.compile(r"^#\s*逐字稿\s*—")
+# 第一行格式：'# 逐字稿 — [大標題]'；group(1) 擷取大標題以與文章 H1 對齊校驗
+SCRIPT_FIRSTLINE_RE = re.compile(r"^#\s*逐字稿\s*—\s*(?P<title>.+?)\s*$")
 SCRIPT_OPEN = "歡迎來到每日 AI 知識庫"
 SCRIPT_CLOSE_SIGN = "播報員"
 SCRIPT_CLOSE_BYE = "掰掰"
@@ -224,16 +225,28 @@ def lint_article(article_text, date, mode, strict, rep, logger):
             (rep.err if strict else rep.warn)(code, "文章缺少『{}』段落".format(must))
 
 
-def lint_script(script_text, rep, strict, logger):
+def lint_script(script_text, rep, strict, logger, article_title=None):
     first = ""
     for line in script_text.splitlines():
         if line.strip():
             first = line.strip()
             break
-    if not SCRIPT_FIRSTLINE_RE.match(first):
+    m = SCRIPT_FIRSTLINE_RE.match(first)
+    if not m:
         (rep.err if strict else rep.warn)(
             "SCR_FIRSTLINE",
             "逐字稿第一行應為『# 逐字稿 — [大標題]』，實際：'{}'".format(first[:60]))
+
+    # 標題對齊校驗：逐字稿大標題必須等於文章 H1（去重正規化後比對）
+    if m and article_title:
+        script_title = m.group("title").strip()
+        if normalize_title(script_title) != normalize_title(article_title):
+            rep.err(
+                "SCR_TITLE_MISMATCH",
+                "逐字稿標題與文章 H1 不一致：script='{}' / article='{}'".format(
+                    script_title[:60], article_title[:60]))
+        else:
+            logger.info("script/article title aligned: %s", script_title)
 
     if SCRIPT_OPEN not in script_text:
         rep.err("SCR_NO_OPEN", "逐字稿缺少開場白『…歡迎來到每日 AI 知識庫』")
@@ -427,7 +440,8 @@ def run(args):
         lint_article(article_text, args.date, mode, args.strict, rep, logger)
         check_history_dup(root, args.date, extract_title(article_text), mode, rep, logger)
     if script_text:
-        lint_script(script_text, rep, args.strict, logger)
+        lint_script(script_text, rep, args.strict, logger,
+                    article_title=extract_title(article_text) if article_text else None)
 
     verify_claims(claims_path, mode, args.min_verified, rep, logger)
 

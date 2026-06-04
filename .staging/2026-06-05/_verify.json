@@ -1,0 +1,27 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-06-04T18:07:18+00:00",
+  "meta": {
+    "date": "2026-06-05",
+    "mode": "news",
+    "strict": false,
+    "source_dir": "/sessions/ecstatic-loving-goldberg/mnt/article-video/.staging/2026-06-05",
+    "log": "/sessions/ecstatic-loving-goldberg/mnt/article-video/.logs/verify-2026-06-05-20260604-180718.log",
+    "min_verified": 2
+  },
+  "errors": [],
+  "warnings": [],
+  "info": {
+    "source_dir": "/sessions/ecstatic-loving-goldberg/mnt/article-video/.staging/2026-06-05",
+    "date": "2026-06-05",
+    "mode": "news",
+    "title": "本週 AI 大事：AI 三巨頭洗牌，你的工具正在換代",
+    "history_scanned": true,
+    "claims": {
+      "total": 6,
+      "verified": 6,
+      "refuted": 0,
+      "unverifiable": 0
+    }
+  }
+}
