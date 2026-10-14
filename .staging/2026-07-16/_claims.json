@@ -1,0 +1,50 @@
+{
+  "date": "2026-07-16",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "測驗效應（testing effect）：Roediger 與 Karpicke 的經典研究顯示，練習回想（retrieval practice）的一組在一週後約保留 61% 內容，而重複重讀的一組僅約 40%。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://learninglab.psych.purdue.edu/downloads/2007/2007_Karpicke_Roediger_JML.pdf",
+        "https://files.eric.ed.gov/fulltext/ED599273.pdf"
+      ],
+      "evidence": "Roediger & Karpicke 2006 實驗：repeated retrieval 組一週後保留約 61%，repeated study（重讀）組約 40%；檢索練習優於重讀為學習科學共識。"
+    },
+    {
+      "id": "c2",
+      "claim": "檢索練習與間隔複習（spaced repetition）在 Dunlosky 等人對十種學習策略的大型評比中，屬於少數被評為「高效用（high utility）」的方法。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": [
+        "https://files.eric.ed.gov/fulltext/ED599273.pdf",
+        "https://www.sciencedirect.com/topics/psychology/testing-effect"
+      ],
+      "evidence": "Dunlosky et al. 對十種學習技巧的效用評比中，practice testing 與 distributed practice 為僅有的兩項 high-utility 技術。"
+    },
+    {
+      "id": "c3",
+      "claim": "Google NotebookLM 的回答僅依據使用者上傳的來源（grounded in your sources）並附帶引用可點回原文，且能由來源自動生成測驗（quiz）與字卡（flashcards），答題後可點「explain」查看含引用的說明。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://blog.google/innovation-and-ai/models-and-research/google-labs/notebooklm-student-features/",
+        "https://notebooklm.google/"
+      ],
+      "evidence": "Google 官方部落格與產品頁：NotebookLM 只用上傳來源作答並提供 citations；新增 flashcards 與 quizzes，可調難度，並可 explain 回溯原始出處。"
+    },
+    {
+      "id": "c4",
+      "claim": "MIT Media Lab〈Your Brain on ChatGPT〉提出的「認知負債」指出：早期依賴 LLM 造成淺層編碼與較差回憶，因此 AI 不應用於替代檢索與思考的環節。",
+      "verdict": "verified",
+      "confidence": 0.88,
+      "sources": [
+        "https://www.media.mit.edu/publications/your-brain-on-chatgpt/",
+        "https://arxiv.org/abs/2506.08872"
+      ],
+      "evidence": "MIT Media Lab / arXiv 2506.08872：LLM 組 EEG 連結最弱、回憶最差，研究者稱之為 cognitive debt。"
+    }
+  ]
+}

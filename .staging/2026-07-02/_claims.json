@@ -1,0 +1,27 @@
+{
+  "date": "2026-07-02",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "OpenAI 的 JSON mode 能提升模型產生『有效 JSON』的可靠度，但不保證輸出符合特定 schema；Structured Outputs 則讓模型的 token 生成被約束，嚴格符合所提供的 JSON Schema（不漏必填欄位、不產生無效列舉值）。",
+      "verdict": "verified",
+      "confidence": 0.93,
+      "sources": [
+        "https://openai.com/index/introducing-structured-outputs-in-the-api/",
+        "https://developers.openai.com/api/docs/guides/structured-outputs"
+      ],
+      "evidence": "OpenAI：JSON mode 提升產生有效 JSON 的可靠度但不保證符合 schema；Structured Outputs 保證回應遵循所供 JSON Schema，模型 token 生成被約束以完全符合。"
+    },
+    {
+      "id": "c2",
+      "claim": "Structured Outputs 的底層技術是受約束解碼（constrained sampling/decoding）：預設取樣時模型可自由選任意 token（因而可能產生無效 JSON），受約束後則只能選會維持結構有效的 token。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://openai.com/index/introducing-structured-outputs-in-the-api/"
+      ],
+      "evidence": "OpenAI 說明：approach 基於 constrained sampling/decoding；預設取樣不受約束、可隨時選到使 JSON 無效的 token，約束後使輸出符合 schema。"
+    }
+  ]
+}

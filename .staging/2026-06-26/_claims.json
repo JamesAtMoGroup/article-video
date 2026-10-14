@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-26",
+  "mode": "news",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "OpenAI 於 2026-06-18 為 macOS 版 Codex 應用（版本 26.616）推出「Record & Replay」功能：使用者在 Mac 上示範一次重複性工作後，Codex 會將該示範轉成可重複使用、可檢視與可編輯的技能；它生成的是自然語言的技能描述（理解意圖）而非機械式點擊重播，需搭配 Computer Use 並於初期僅限 macOS。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://developers.openai.com/codex/record-and-replay", "https://the-decoder.com/openais-codex-can-now-watch-you-work-once-and-repeat-the-task-forever/", "https://www.techtimes.com/articles/318759/20260620/openai-codex-automation-gains-record-replay-show-it-once-skip-script.htm"],
+      "evidence": "OpenAI Codex 官方頁與 The Decoder、TechTimes 報導：6/18 隨 Codex v26.616 推出、示範一次轉成可編輯技能、以自然語言描述意圖而非重播點擊、macOS-only 且需 Computer Use。"
+    },
+    {
+      "id": "c2",
+      "claim": "Anthropic 於 2026-06-23 推出「Claude Tag」，將 Claude 以常駐共用隊友形式嵌入 Slack：頻道內任何人可用 @Claude 委派任務、同一頻道為同一個 Claude 可接力協作，並有可主動追蹤與提醒的 ambient 模式；以 Opus 4.8 運作，取代原本的 Claude in Slack app，初期 beta 開放給 Claude Team 與 Enterprise；Anthropic 稱其產品團隊約 65% 程式碼由內部版本產生。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://www.anthropic.com/news/introducing-claude-tag", "https://techcrunch.com/2026/06/23/anthropics-claude-tag-is-learning-your-company-one-slack-message-at-a-time/", "https://venturebeat.com/technology/anthropic-launches-claude-tag-replacing-its-slack-app-with-a-persistent-ai-teammate-that-learns-monitors-and-works-autonomously"],
+      "evidence": "Anthropic 官方公告與 TechCrunch、VentureBeat 報導：6/23 推出、@Claude 委派、共用接力、ambient 主動追蹤、Opus 4.8、取代 Slack app、Team/Enterprise beta、內部 65% 程式碼。"
+    },
+    {
+      "id": "c3",
+      "claim": "Google 於 2026-06-24 將「Computer Use（電腦操作）」內建為 Gemini 3.5 Flash 的工具：AI 可檢視螢幕截圖並回傳滑鼠點擊、捲動、鍵盤輸入等動作，能跨瀏覽器、手機與桌面環境建構代理；在 OSWorld-Verified 評測得 78.4 分（對手 GPT-5.5 為 78.7）且價格更低；目前為 preview，並提供敏感動作前需使用者確認與偵測提示注入即停止的安全護欄。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-computer-use-gemini-3-5-flash/", "https://www.neowin.net/news/google-adds-built-in-computer-control-to-gemini-35-flash/", "https://www.techtimes.com/articles/319071/20260625/gemini-computer-use-baked-gemini-35-flash-screen-control-now-pairs-search-maps.htm"],
+      "evidence": "Google 官方部落格與 Neowin、TechTimes 報導：6/24 起 Computer Use 內建於 Gemini 3.5 Flash、看截圖回傳動作、跨瀏覽器/手機/桌面、OSWorld-Verified 78.4 vs 78.7、preview、確認與防注入護欄。"
+    }
+  ]
+}

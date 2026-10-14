@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-16",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "在一項刊於 JAMA Network Open 的研究中，ChatGPT（GPT-4）單獨處理困難病例時診斷推理分數約 90%，高於醫生（含使用聊天機器人者）約 76%。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": ["https://www.statnews.com/2025/01/31/chatgpt-beats-doctors-diagnosis-ai-history-medicine-technology/"],
+      "evidence": "STAT 與多家報導引述 JAMA Network Open 研究：GPT-4 單獨達約 90% 診斷推理分數，醫生約 76%；評分含鑑別診斷的解釋能力。"
+    },
+    {
+      "id": "c2",
+      "claim": "美國 FDA 至 2025 年底已授權約 1,451 項 AI 醫療裝置，其中約四分之三（約 76%、1,104 項）為放射科影像用途。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://theimagingwire.com/2025/12/10/ai-enabled-medical-devices-granted-fda-marketing-authorization/", "https://theimagingwire.com/2026/03/11/numbers-from-the-fda-show-radiology-is-maintaining-its-lead/"],
+      "evidence": "The Imaging Wire 引用 FDA 數據：截至 2025 年底約 1,451 項 AI-enabled 裝置，放射科約 1,104 項佔約 76%。"
+    },
+    {
+      "id": "c3",
+      "claim": "一份彙整 83 項研究的系統性回顧與統合分析顯示，生成式 AI 與醫師的整體診斷準確率約 52%，兩者整體並無顯著差異；另有研究顯示醫師搭配 ChatGPT 並未明顯提升準確率。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": ["https://www.nature.com/articles/s41746-025-01543-z", "https://www.sciencedaily.com/releases/2024/11/241113123419.htm"],
+      "evidence": "npj Digital Medicine 統合分析（83 studies）整體準確率約 52.1%、AI 與醫師無顯著差異；UVA Health 研究指醫師用 ChatGPT Plus 準確率未顯著提升。"
+    }
+  ]
+}

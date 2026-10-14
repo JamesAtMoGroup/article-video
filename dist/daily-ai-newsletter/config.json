@@ -1,0 +1,6 @@
+{
+  "_comment": "填好這份再開始使用。project_dir 必填；drive_parent_folder_id 留空字串則跳過 Drive 上傳。詳見 SETUP.md",
+  "project_dir": "REPLACE_ME",
+  "drive_parent_folder_id": "",
+  "schedule_tsv": "ai-newsletter-schedule.tsv"
+}

@@ -1,0 +1,38 @@
+{
+  "date": "2026-06-15",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "在 GitHub 的對照實驗中，使用 GitHub Copilot 的開發者完成一個 JavaScript HTTP 伺服器任務的速度比未使用者快約 55%（約 1 小時 11 分 對 2 小時 41 分）。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-on-developer-productivity-and-happiness/"],
+      "evidence": "GitHub 官方研究報告指出使用 Copilot 的一組平均 1h11m 完成、未使用組平均 2h41m，快 55%，統計顯著 P=.0017。"
+    },
+    {
+      "id": "c2",
+      "claim": "METR 於 2025 年 7 月發表的隨機對照試驗發現，16 位經驗豐富的開源開發者在自己熟悉的大型專案中使用 AI 編碼工具時，完成任務時間反而增加約 19%，但他們自認 AI 讓自己快了約 20%。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://arxiv.org/abs/2507.09089", "https://metr.org/blog/2026-02-24-uplift-update/"],
+      "evidence": "METR 研究（arXiv 2507.09089）顯示允許使用 AI 使完成時間增加 19%，開發者卻估計加快約 20%，感知與實際相差約 39-40 個百分點，主因為清理與反覆檢查 AI 產出。"
+    },
+    {
+      "id": "c3",
+      "claim": "Veracode 2025 年的測試分析了上百個 LLM 在 80 項編碼任務上的輸出，發現當有安全與不安全寫法可選時，GenAI 約有 45% 的機率選擇不安全寫法；Java 不安全比率超過 70%，且更新更大的模型並未明顯改善。",
+      "verdict": "verified",
+      "confidence": 0.88,
+      "sources": ["https://www.veracode.com/blog/genai-code-security-report/", "https://www.businesswire.com/news/home/20250730694951/en/AI-Generated-Code-Poses-Major-Security-Risks-in-Nearly-Half-of-All-Development-Tasks-Veracode-Research-Reveals"],
+      "evidence": "Veracode GenAI Code Security Report 指出 45% 案例引入安全漏洞；Java 失敗率逾 70%，XSS 86%、Log Injection 88%，且大型/新模型未較安全，屬結構性問題。"
+    },
+    {
+      "id": "c4",
+      "claim": "一項分析超過 220 萬份 AI 生成程式碼樣本（16 個模型、Python 與 JavaScript）的研究發現，約 19.7%（44 萬多份）的樣本至少含一個被幻覺捏造、不存在的套件名稱，並衍生出「slopsquatting」供應鏈攻擊。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": ["https://www.bleepingcomputer.com/news/security/ai-hallucinated-code-dependencies-become-new-supply-chain-risk/", "https://en.wikipedia.org/wiki/Slopsquatting"],
+      "evidence": "研究產生 223 萬份樣本，44 萬多份（19.7%）含至少一個幻覺套件名；攻擊者搶註這些假名稱植入惡意程式，即 slopsquatting。"
+    }
+  ]
+}

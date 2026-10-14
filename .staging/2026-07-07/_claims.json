@@ -1,0 +1,37 @@
+{
+  "date": "2026-07-07",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "Midjourney 提供 --ar 參數指定長寬比（預設為 1:1 正方形），並提供 --no 參數排除不想要的元素。",
+      "verdict": "verified",
+      "confidence": 0.95,
+      "sources": [
+        "https://docs.midjourney.com/hc/en-us/articles/31894244298125-Aspect-Ratio",
+        "https://docs.midjourney.com/hc/en-us/articles/32859204029709-Parameter-List"
+      ],
+      "evidence": "Midjourney 官方文件：--ar 改變預設 1:1 長寬比；--no 為 negative prompt，用來排除元素。"
+    },
+    {
+      "id": "c2",
+      "claim": "Midjourney 官方說明 --no（排除）參數並非每次都百分之百有效，結果會有變數。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": [
+        "https://docs.midjourney.com/hc/en-us/articles/32859204029709-Parameter-List"
+      ],
+      "evidence": "官方與多方文件指出 --no 不保證 100% 生效，結果可能有變。"
+    },
+    {
+      "id": "c3",
+      "claim": "主流文生圖模型（如 Stable Diffusion、Midjourney）以擴散（diffusion）原理運作：從隨機雜訊逐步還原成符合文字描述的影像。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://docs.midjourney.com/hc/en-us/categories/32013335627533-Documentation"
+      ],
+      "evidence": "文生圖主流架構為 diffusion，由雜訊逐步去噪生成，屬公認技術事實。"
+    }
+  ]
+}

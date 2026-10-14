@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-19",
+  "mode": "news",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "OpenAI 於 2026-06-04 開始推送新一代 ChatGPT 記憶架構「Dreaming V3」，以背景程序自動跨多年對話合成記憶；內部評測事實記憶準確率自 2025 年版約 67.9% 提升至 2026 年版約 82.8%，並透過約 5 倍的運算成本下降得以大規模服務，且首次擴及免費用戶。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://openai.com/index/chatgpt-memory-dreaming/", "https://www.techtimes.com/articles/317840/20260605/chatgpt-memory-dreaming-update-openai-rewrites-personalization-engine-limits-audit-trail.htm"],
+      "evidence": "OpenAI 官方 Dreaming 頁面與 TechTimes 報導：背景合成、自動更新記憶；事實記憶 67.9%→82.8%；約 5x 運算成本下降；2026-06-04 起含免費層。"
+    },
+    {
+      "id": "c2",
+      "claim": "Anthropic 於 2026-06-09 公開發表 Claude Fable 5（並提供僅限特定客戶的 Claude Mythos 5），定價為每百萬輸入 token 10 美元、每百萬輸出 token 50 美元，內建安全路由（約低於 5% 對話改由 Claude Opus 4.8 回答）；2026-06-12 因美國政府出口管制指令宣布暫停這兩款模型的存取。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://www.anthropic.com/news/claude-fable-5-mythos-5", "https://www.cnbc.com/2026/06/09/anthropic-mythos-claude-fable-5.html", "https://www.infoq.com/news/2026/06/claude-5-release/"],
+      "evidence": "Anthropic 官方公告與 CNBC、InfoQ 報導：6/9 上線、$10/$50 定價、<5% 改用 Opus 4.8、能更長自主工作；6/12 因出口管制指令暫停。"
+    },
+    {
+      "id": "c3",
+      "claim": "Google 在 I/O 2026（2026-05-19）發表並陸續推出 Gemini 應用改版，包含每日簡報（Daily Brief）、影片模型 Gemini Omni（可由文字/圖像/音訊/影片任意組合生成影片）、全天候個人代理 Gemini Spark（在使用者授權下於 Workspace 採取行動），以及 Gemini 3.5 Flash。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": ["https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni-3-5-videos/", "https://www.androidauthority.com/google-gemini-neural-expressive-gemini-spark-daily-brief-omni-updates-3668384/", "https://techcrunch.com/2026/05/19/google-updates-its-gemini-app-to-take-on-chatgpt-and-claude-at-io-2026/"],
+      "evidence": "Google 官方部落格與 Android Authority、TechCrunch 報導：Daily Brief、Gemini Omni 影片模型、Gemini Spark 主動代理、Gemini 3.5 Flash，於 I/O 2026 發表後陸續推送。"
+    }
+  ]
+}

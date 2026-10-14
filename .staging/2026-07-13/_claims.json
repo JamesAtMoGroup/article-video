@@ -1,0 +1,50 @@
+{
+  "date": "2026-07-13",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "OpenAI 在 ChatGPT 推出「study mode」，以蘇格拉底式提問、提示與自我反思引導使用者一步步想通問題，而非直接給出答案。",
+      "verdict": "verified",
+      "confidence": 0.93,
+      "sources": [
+        "https://openai.com/index/chatgpt-study-mode/",
+        "https://help.openai.com/en/articles/11780217-chatgpt-study-mode-faq"
+      ],
+      "evidence": "OpenAI 官方公告：study mode 以 Socratic questioning、hints、self-reflection prompts 引導理解，不直接給答案；與約 40 所機構的教育與學習科學專家合作設計。"
+    },
+    {
+      "id": "c2",
+      "claim": "Google 在 Gemini 推出由 LearnLM 支援的「Guided Learning」，用提問與步驟拆解引導深入理解而非只給快速答案，且對所有 Gemini 使用者免費開放。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://blog.google/products/gemini/guided-learning-google-gemini/",
+        "https://blog.google/products-and-platforms/products/education/guided-learning/"
+      ],
+      "evidence": "Google 官方部落格：Guided Learning 以開放式提問與 step-by-step breakdown 促成 deeper understanding，由 LearnLM 支援，對所有 Gemini 使用者 no cost。"
+    },
+    {
+      "id": "c3",
+      "claim": "學習科學中的「protégé effect」指出：為了教別人而準備（甚至只是被預先告知稍後要教人），比單純為自己讀書帶來更深理解與更好的後測表現，且在最困難的題目上差距最明顯。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": [
+        "https://aaalab.stanford.edu/assets/papers/2009/Protege_Effect_Teachable_Agents.pdf",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6336728/"
+      ],
+      "evidence": "Stanford AAA Lab 與 PMC 之 learning-by-teaching 研究：expecting to teach 即改變編碼與組織策略，提升理解與保留；實驗顯示 teaching-expectancy 組後測顯著較佳，難題差距最大。"
+    },
+    {
+      "id": "c4",
+      "claim": "費曼學習法以物理學家費曼（Richard Feynman）命名，核心流程為：選定概念、用外行也能懂的簡單語言解釋、標出卡住或只能靠術語硬撐之處、回頭補足後再講一次。",
+      "verdict": "verified",
+      "confidence": 0.82,
+      "sources": [
+        "https://www.diygenius.com/learning-by-teaching/",
+        "https://thelearnerlab.com/protege-effect/"
+      ],
+      "evidence": "多方學習方法文獻一致描述 Feynman technique 的四步流程與「無法簡單說明即代表未真正理解」的核心主張。"
+    }
+  ]
+}

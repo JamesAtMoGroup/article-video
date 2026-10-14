@@ -1,0 +1,38 @@
+{
+  "date": "2026-06-22",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "Meta Advantage+ 是 Meta 的 AI 廣告自動化套件，涵蓋受眾配對、創意變化、版位選擇、預算與出價的全程自動化。",
+      "verdict": "verified",
+      "confidence": 0.95,
+      "sources": [
+        "https://www.facebook.com/business/ads/meta-advantage-plus",
+        "https://www.adtaxi.com/blog/metas-ai-advertising-plans-what-to-expect-in-2026-and-how-to-prepare/"
+      ],
+      "evidence": "Meta 官方 Advantage+ 產品頁與多家行銷媒體說明，Advantage+ 為 Meta AI 廣告自動化套件，自動化涵蓋 targeting、creative optimization、placement、budget allocation 與 bidding。"
+    },
+    {
+      "id": "c2",
+      "claim": "Google Performance Max 內建生成式 AI 素材生成功能，廣告主只要提供產品網址，Google AI 會讀取頁面並自動生成文案與圖片素材。",
+      "verdict": "verified",
+      "confidence": 0.95,
+      "sources": [
+        "https://blog.google/products/ads-commerce/get-creative-with-generative-ai-in-performance-max/",
+        "https://support.google.com/google-ads/answer/14150602?hl=en"
+      ],
+      "evidence": "Google 官方部落格與 Google Ads 說明中心：Performance Max 的 Asset generation 面板輸入網址後，Google AI 會摘要產品/服務並建議與生成文字與圖片素材。"
+    },
+    {
+      "id": "c3",
+      "claim": "生成式 AI 產出的廣告文案可能出現幻覺（捏造功能、錯誤數字、誇大承諾），廣告主需自行查核與承擔責任。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": [
+        "https://support.google.com/google-ads/answer/14150602?hl=en"
+      ],
+      "evidence": "屬已被廣泛記錄的生成式 AI 通則；Google Ads 素材生成說明亦要求廣告主檢閱並對最終投放素材負責，呼應文中『把 AI 文案當草稿不當定稿』的素養觀點。"
+    }
+  ]
+}

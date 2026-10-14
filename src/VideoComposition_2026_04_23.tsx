@@ -8,13 +8,19 @@ import {
   staticFile,
   useCurrentFrame,
   useVideoConfig,
+  delayRender,
+  continueRender,
 } from "remotion";
 import React from "react";
 import { loadFont as loadNotoSansTC } from "@remotion/google-fonts/NotoSansTC";
 import { loadFont as loadSpaceMono } from "@remotion/google-fonts/SpaceMono";
 
-loadNotoSansTC("normal", { weights: ["400", "700", "900"] });
-loadSpaceMono("normal", { weights: ["400", "700"] });
+const fontHandle = delayRender("Loading fonts");
+const fontNotoTC = loadNotoSansTC("normal", { weights: ["400", "700", "900"] });
+const fontSpaceMono = loadSpaceMono("normal", { weights: ["400", "700"] });
+Promise.all([fontNotoTC.waitUntilDone(), fontSpaceMono.waitUntilDone()])
+  .then(() => continueRender(fontHandle))
+  .catch(() => continueRender(fontHandle));
 
 // ── Scale & canvas ─────────────────────────────────────────────────────────
 const S = 3;
@@ -496,7 +502,7 @@ function TitleScene() {
     <SceneFade durationInFrames={dur}>
       <AbsoluteFill style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", paddingBottom: SUBTITLE_SAFE, paddingLeft: 80 * S, paddingRight: 80 * S, textAlign: "center" }}>
         <div style={{ ...badgeOp, marginBottom: 14 * S }}>
-          <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 18 * S, color: C.primary, letterSpacing: "0.12em", background: C.primaryLight, border: `1px solid ${C.primaryBorder}`, borderRadius: 6 * S, padding: `${4 * S}px ${12 * S}px` }}>每日 AI 知識庫</span>
+          <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 18 * S, color: C.primary, letterSpacing: "0.12em", background: C.primaryLight, border: `1px solid ${C.primaryBorder}`, borderRadius: 6 * S, padding: `${4 * S}px ${12 * S}px` }}></span>
         </div>
         <h1 style={{ margin: 0, lineHeight: 1.15, fontFamily: "'Noto Sans TC', sans-serif", fontWeight: 900, fontSize: 38 * S, color: C.text }}>
           <WordReveal text="為什麼 AI 公司" startFrame={10} staggerPerWord={6} fontSize={38 * S} color={C.text} fontFamily="'Noto Sans TC', sans-serif" fontWeight={900} />

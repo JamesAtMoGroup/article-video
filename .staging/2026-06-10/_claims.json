@@ -1,0 +1,22 @@
+{
+  "date": "2026-06-10",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "Microsoft 365 Copilot 可在 PowerPoint 中依使用者提供的 Word 文件自動產生整份簡報草稿，並根據文件的標題、子標題、表格與圖片建立投影片，還能附上講者備忘稿。",
+      "verdict": "verified",
+      "confidence": 0.92,
+      "sources": ["https://support.microsoft.com/en-us/office/create-a-new-presentation-with-copilot-in-powerpoint-3222ee03-f5a4-4d27-8642-9c387ab4854d"],
+      "evidence": "Microsoft 官方支援文件說明 Copilot in PowerPoint 可由 Word 文件建立簡報草稿，依標題、子標題、表格、圖片產生投影片並附 speaker notes。"
+    },
+    {
+      "id": "c2",
+      "claim": "在 PowerPoint 中由檔案建立簡報（create presentation from file）的 Copilot 功能需要 Designer 授權。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": ["https://support.microsoft.com/en-us/office/create-a-new-presentation-with-copilot-in-powerpoint-3222ee03-f5a4-4d27-8642-9c387ab4854d"],
+      "evidence": "Microsoft 支援文件指出，從檔案建立簡報等功能需要 Designer 授權；Copilot Pro 可用單一 Word 檔，Microsoft 365 Copilot 另支援 PDF。"
+    }
+  ]
+}
