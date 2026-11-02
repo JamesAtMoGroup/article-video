@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-06-22T10:02:20+00:00",
+  "meta": {
+    "date": "2026-06-23",
+    "mode": "concept",
+    "strict": false,
+    "source_dir": "/sessions/lucid-cool-allen/mnt/article-video/.staging/2026-06-23",
+    "log": "/sessions/lucid-cool-allen/mnt/article-video/.logs/verify-2026-06-23-20260622-100220.log",
+    "min_verified": 1
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "ART_FOOTER_NODATE",
+      "msg": "頁尾未含日期，建議格式『每日 AI 知識庫 · 2026-06-23 · AI 未來學院』"
+    }
+  ],
+  "info": {
+    "source_dir": "/sessions/lucid-cool-allen/mnt/article-video/.staging/2026-06-23",
+    "date": "2026-06-23",
+    "mode": "concept",
+    "title": "AGI 是什麼？我們離「AI 超越人類」還有多遠",
+    "history_scanned": true,
+    "claims": {
+      "total": 3,
+      "verified": 3,
+      "refuted": 0,
+      "unverifiable": 0
+    }
+  }
+}

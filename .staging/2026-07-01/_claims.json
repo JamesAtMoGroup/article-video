@@ -1,0 +1,28 @@
+{
+  "date": "2026-07-01",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "Tree of Thoughts（ToT，思維樹）是 Yao 等人提出的提示／推理框架，把解題視為在一棵樹上搜尋：每個節點是一個中間推理步驟（thought），模型在每一步生成多個候選想法並啟發式評估其進展，可用 BFS/DFS 等搜尋演算法在樹上前進或回溯。",
+      "verdict": "verified",
+      "confidence": 0.95,
+      "sources": [
+        "https://arxiv.org/abs/2305.10601",
+        "https://www.promptingguide.ai/techniques/tot"
+      ],
+      "evidence": "論文〈Tree of Thoughts: Deliberate Problem Solving with Large Language Models〉(arXiv:2305.10601)：將解題框為樹狀搜尋，節點為 thought（中間步驟），可生成多個候選並以啟發式評估，支援 BFS/DFS。"
+    },
+    {
+      "id": "c2",
+      "claim": "作者在 Game of 24、創意寫作、迷你填字（Mini Crosswords）三項任務上測試，這些任務是 Chain-of-Thought 與多數投票等方法容易卡住的；ToT 在三項任務上都顯著優於這些基準，並發表於 NeurIPS 2023。",
+      "verdict": "verified",
+      "confidence": 0.92,
+      "sources": [
+        "https://github.com/princeton-nlp/tree-of-thought-llm",
+        "https://proceedings.neurips.cc/paper_files/paper/2023/file/271db9922b8d1f4dd7aaef84ed5ac703-Paper-Conference.pdf"
+      ],
+      "evidence": "作者於 Game of 24、Creative Writing、Mini Crosswords 測試（CoT 與 majority voting 表現不佳的任務），ToT 三項皆顯著提升；論文發表於 NeurIPS 2023。"
+    }
+  ]
+}

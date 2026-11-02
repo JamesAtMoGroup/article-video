@@ -1,0 +1,71 @@
+{
+  "date": "2026-07-24",
+  "mode": "news",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "Google 於本週推出主力模型 Gemini 3.6 Flash 並正式上線（generally available），一般使用者可在 Gemini App 使用，同時提供 AI Studio 與 Gemini API。",
+      "verdict": "verified",
+      "confidence": 0.95,
+      "sources": [
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/",
+        "https://9to5google.com/2026/07/21/gemini-3-6-flash-launch/"
+      ],
+      "evidence": "Google 官方部落格與 9to5Google 報導 2026-07-21 正式推出 Gemini 3.6 Flash，day-one 於 Gemini App、AI Studio、Gemini API 可用。"
+    },
+    {
+      "id": "c2",
+      "claim": "Gemini 3.6 Flash 定位為更快更省的 workhorse 模型：相較 3.5 Flash 用更少步驟與約 17% 更少輸出 token，輸出價格更低；同場並推出更輕量的 3.5 Flash-Lite，且預告下一代 Gemini 4。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://9to5google.com/2026/07/21/gemini-3-6-flash-launch/",
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/"
+      ],
+      "evidence": "9to5Google：3.6 Flash 較 3.5 Flash 少約 17% 輸出 token、輸出價由 $9 降至 $7.50/1M；同步發表 3.5 Flash-Lite 並 tease Gemini 4。"
+    },
+    {
+      "id": "c3",
+      "claim": "OpenAI 將 ChatGPT 自訂指令（custom instructions）字數上限自 1,500 提高到 5,000 字（三倍多），適用付費方案，並套用於過去與未來的對話。",
+      "verdict": "verified",
+      "confidence": 0.92,
+      "sources": [
+        "https://cryptobriefing.com/openai-chatgpt-custom-instructions-5000-characters/",
+        "https://findskill.ai/blog/chatgpt-custom-instructions-5000-characters/"
+      ],
+      "evidence": "多家報導 2026-07-15 OpenAI 將自訂指令上限自 1,500 提高至 5,000 字，付費方案適用，套用於既有與新對話。"
+    },
+    {
+      "id": "c4",
+      "claim": "Anthropic 將 Cowork 從桌機版擴大到網頁（claude.ai）與行動裝置（iOS／Android），以 beta 形式推出。",
+      "verdict": "verified",
+      "confidence": 0.92,
+      "sources": [
+        "https://claude.com/blog/cowork-web-mobile",
+        "https://9to5mac.com/2026/07/13/anthropic-expanding-claude-cowork-to-mobile-and-web-details-here/"
+      ],
+      "evidence": "Anthropic 官方部落格與 9to5Mac 報導 Cowork 由桌機擴展至 web 與 iOS/Android（beta，先開放 Max 方案）。"
+    },
+    {
+      "id": "c5",
+      "claim": "Cowork 新增排程任務與背景執行，透過託管於 Anthropic 伺服器的遠端 session，可在裝置離線時仍持續作業並執行排程任務。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://claude.com/blog/cowork-web-mobile",
+        "https://9to5mac.com/2026/07/13/anthropic-expanding-claude-cowork-to-mobile-and-web-details-here/"
+      ],
+      "evidence": "官方說明 remote sessions 於 Anthropic 伺服器執行，可在無裝置在線下持續工作並跑排程任務（例：早上自動備妥簡報、跟進信擬好但不寄出）。"
+    },
+    {
+      "id": "c6",
+      "claim": "（排除項）Claude Opus 5 於本週正式發表——經查證為未證實：截至 2026-07-24 Anthropic 未官方發布，現役旗艦仍為 Opus 4.8，故不納入正文。",
+      "verdict": "unverifiable",
+      "confidence": 0.2,
+      "sources": [
+        "https://www.testingcatalog.com/anthropic-preparing-for-potential-claude-opus-5-rollout/"
+      ],
+      "evidence": "多來源顯示 Opus 5 僅為預測市場/社群傳言（Polymarket 一度 88%），Anthropic 無 model card／API ID／公告；現役為 Opus 4.8（5/28）。已從正文剔除避免污染。"
+    }
+  ]
+}

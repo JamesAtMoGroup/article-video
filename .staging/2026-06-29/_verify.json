@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-06-28T18:06:13+00:00",
+  "meta": {
+    "date": "2026-06-29",
+    "mode": "concept",
+    "strict": false,
+    "source_dir": "/sessions/vigilant-jolly-davinci/mnt/article-video/.staging/2026-06-29",
+    "log": "/sessions/vigilant-jolly-davinci/mnt/article-video/.logs/verify-2026-06-29-20260628-180613.log",
+    "min_verified": 1
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "ART_FOOTER_NODATE",
+      "msg": "頁尾未含日期，建議格式『每日 AI 知識庫 · 2026-06-29 · AI 未來學院』"
+    }
+  ],
+  "info": {
+    "source_dir": "/sessions/vigilant-jolly-davinci/mnt/article-video/.staging/2026-06-29",
+    "date": "2026-06-29",
+    "mode": "concept",
+    "title": "什麼是 Few-Shot Prompting？用例子教 AI 是最快的方法",
+    "history_scanned": true,
+    "claims": {
+      "total": 2,
+      "verified": 2,
+      "refuted": 0,
+      "unverifiable": 0
+    }
+  }
+}

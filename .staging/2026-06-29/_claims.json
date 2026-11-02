@@ -1,0 +1,28 @@
+{
+  "date": "2026-06-29",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "大型語言模型能從提示詞中當下給的少數範例（input-output 示範）抓出規律並套用到新題目，完全不需要重新訓練或更新模型權重；此能力由 OpenAI GPT-3 論文〈Language Models are Few-Shot Learners〉提出並普及。",
+      "verdict": "verified",
+      "confidence": 0.93,
+      "sources": [
+        "https://www.freecodecamp.org/news/ai-paper-review-language-models-are-few-shot-learners-gpt-3/",
+        "https://arxiv.org/pdf/2309.13205"
+      ],
+      "evidence": "GPT-3 論文證明足夠大的語言模型可直接從 prompt 內的少數示範學會新任務——無需重新訓練、無梯度更新，僅靠自然語言寫成的幾個 demonstrations。"
+    },
+    {
+      "id": "c2",
+      "claim": "在脈絡中學習（in-context learning）指模型在推論階段，僅憑提示詞裡的幾個 input-output 範例就能快速適應新任務，且不需要任何參數更新（不同於 fine-tuning）。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://arxiv.org/pdf/2309.13205",
+        "https://vitalflux.com/in-context-learning-gpt-3-concepts-examples/"
+      ],
+      "evidence": "文獻：in-context few-shot learners 在推論時以少數範例快速適應新任務，無需參數更新；context 由可選 prompt head 加上 n 個 in-context（輸入-輸出對）範例組成。"
+    }
+  ]
+}

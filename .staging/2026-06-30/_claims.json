@@ -1,0 +1,27 @@
+{
+  "date": "2026-06-30",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "Role Prompting（角色／persona 提示）是一種提示工程技巧：在提問前指派 AI 一個角色或人設（如醫生、編輯、Linux 終端機），藉此影響其語氣、詳略與切入視角；可放在開頭一句、系統指令或 few-shot 範例中。",
+      "verdict": "verified",
+      "confidence": 0.92,
+      "sources": [
+        "https://learnprompting.org/docs/advanced/zero_shot/role_prompting",
+        "https://www.prompthub.us/blog/role-prompting-does-adding-personas-to-your-prompts-really-make-a-difference"
+      ],
+      "evidence": "資料：persona pattern 要求 AI『act as』某角色再給任務；role prompting 可作為單行開頭、系統指令或嵌入 few-shot，會改變用詞、詳細度與風險取向。"
+    },
+    {
+      "id": "c2",
+      "claim": "在有標準答案的事實性問題上，替模型加上專家角色／persona 並未穩定提升正確率，有時甚至產生負面效果；其效益主要出現在開放性、創意性任務，而非準確度導向的任務。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": [
+        "https://www.prompthub.us/blog/role-prompting-does-adding-personas-to-your-prompts-really-make-a-difference"
+      ],
+      "evidence": "PromptHub 研究：跨數千道事實題，系統 persona 未改善表現、偶有負面效果；persona 對 open-ended（如創意寫作）有效，對 accuracy-based（如分類）通常無益。"
+    }
+  ]
+}

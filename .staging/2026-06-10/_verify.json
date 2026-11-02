@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-06-09T03:42:58+00:00",
+  "meta": {
+    "date": "2026-06-10",
+    "mode": "concept",
+    "strict": false,
+    "source_dir": "/sessions/modest-eager-babbage/mnt/article-video/.staging/2026-06-10",
+    "log": "/sessions/modest-eager-babbage/mnt/article-video/.logs/verify-2026-06-10-20260609-034258.log",
+    "min_verified": 1
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "ART_FOOTER_NODATE",
+      "msg": "頁尾未含日期，建議格式『每日 AI 知識庫 · 2026-06-10 · AI 未來學院』"
+    }
+  ],
+  "info": {
+    "source_dir": "/sessions/modest-eager-babbage/mnt/article-video/.staging/2026-06-10",
+    "date": "2026-06-10",
+    "mode": "concept",
+    "title": "老闆要簡報明天 8 點交？AI 生產線拆解",
+    "history_scanned": true,
+    "claims": {
+      "total": 2,
+      "verified": 2,
+      "refuted": 0,
+      "unverifiable": 0
+    }
+  }
+}

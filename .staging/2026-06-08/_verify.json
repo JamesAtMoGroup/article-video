@@ -1,0 +1,27 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-06-08T03:02:06+00:00",
+  "meta": {
+    "date": "2026-06-08",
+    "mode": "concept",
+    "strict": false,
+    "source_dir": "/sessions/trusting-beautiful-noether/mnt/article-video/.staging/2026-06-08",
+    "log": "/sessions/trusting-beautiful-noether/mnt/article-video/.logs/verify-2026-06-08-20260608-030206.log",
+    "min_verified": 1
+  },
+  "errors": [],
+  "warnings": [],
+  "info": {
+    "source_dir": "/sessions/trusting-beautiful-noether/mnt/article-video/.staging/2026-06-08",
+    "date": "2026-06-08",
+    "mode": "concept",
+    "title": "一個 AI 指揮一群 AI？多代理人系統怎麼分工",
+    "history_scanned": true,
+    "claims": {
+      "total": 4,
+      "verified": 4,
+      "refuted": 0,
+      "unverifiable": 0
+    }
+  }
+}

@@ -8,13 +8,19 @@ import {
   staticFile,
   useCurrentFrame,
   useVideoConfig,
+  delayRender,
+  continueRender,
 } from "remotion";
 import React from "react";
 import { loadFont as loadNotoSansTC } from "@remotion/google-fonts/NotoSansTC";
 import { loadFont as loadSpaceMono } from "@remotion/google-fonts/SpaceMono";
 
-loadNotoSansTC("normal", { weights: ["400", "700", "900"] });
-loadSpaceMono("normal", { weights: ["400", "700"] });
+const fontHandle = delayRender("Loading fonts");
+const fontNotoTC = loadNotoSansTC("normal", { weights: ["400", "700", "900"] });
+const fontSpaceMono = loadSpaceMono("normal", { weights: ["400", "700"] });
+Promise.all([fontNotoTC.waitUntilDone(), fontSpaceMono.waitUntilDone()])
+  .then(() => continueRender(fontHandle))
+  .catch(() => continueRender(fontHandle));
 
 // ── Scale & canvas (4K = 3840×2160) ──────────────────────────────────────────
 const S = 3;
@@ -532,7 +538,7 @@ function TitleScene({ dur }: { dur: number }) {
           <span style={{
             fontFamily: "'Space Mono', monospace", fontSize: 12 * S,
             color: C.muted, letterSpacing: "0.1em",
-          }}>PROMPT MASTERY · 2026-04-14</span>
+          }}></span>
         </div>
 
         {/* Title */}

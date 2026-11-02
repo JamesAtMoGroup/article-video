@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-06-18T03:57:58+00:00",
+  "meta": {
+    "date": "2026-06-19",
+    "mode": "news",
+    "strict": false,
+    "source_dir": "/sessions/clever-nice-goodall/mnt/article-video/.staging/2026-06-19",
+    "log": "/sessions/clever-nice-goodall/mnt/article-video/.logs/verify-2026-06-19-20260618-035758.log",
+    "min_verified": 2
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "ART_FOOTER_NODATE",
+      "msg": "頁尾未含日期，建議格式『每日 AI 知識庫 · 2026-06-19 · AI 未來學院』"
+    }
+  ],
+  "info": {
+    "source_dir": "/sessions/clever-nice-goodall/mnt/article-video/.staging/2026-06-19",
+    "date": "2026-06-19",
+    "mode": "news",
+    "title": "本週 AI 大事：ChatGPT 記憶自動進化、Claude 最強模型上線又暫停、Gemini 變身主動代理",
+    "history_scanned": true,
+    "claims": {
+      "total": 3,
+      "verified": 3,
+      "refuted": 0,
+      "unverifiable": 0
+    }
+  }
+}

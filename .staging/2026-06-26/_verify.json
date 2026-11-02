@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-06-25T18:06:34+00:00",
+  "meta": {
+    "date": "2026-06-26",
+    "mode": "news",
+    "strict": false,
+    "source_dir": "/sessions/peaceful-intelligent-ramanujan/mnt/article-video/.staging/2026-06-26",
+    "log": "/sessions/peaceful-intelligent-ramanujan/mnt/article-video/.logs/verify-2026-06-26-20260625-180634.log",
+    "min_verified": 2
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "ART_FOOTER_NODATE",
+      "msg": "頁尾未含日期，建議格式『每日 AI 知識庫 · 2026-06-26 · AI 未來學院』"
+    }
+  ],
+  "info": {
+    "source_dir": "/sessions/peaceful-intelligent-ramanujan/mnt/article-video/.staging/2026-06-26",
+    "date": "2026-06-26",
+    "mode": "news",
+    "title": "本週 AI 大事：ChatGPT 看一次就學會、Claude 進駐 Slack、Gemini 學會用電腦",
+    "history_scanned": true,
+    "claims": {
+      "total": 3,
+      "verified": 3,
+      "refuted": 0,
+      "unverifiable": 0
+    }
+  }
+}

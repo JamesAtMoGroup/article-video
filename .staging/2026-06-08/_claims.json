@@ -1,0 +1,38 @@
+{
+  "date": "2026-06-08",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "Anthropic 的多代理人系統（Claude Opus 4 為主管、Claude Sonnet 4 為子代理人）在其內部研究評測上，表現比單一 Claude Opus 4 高出 90.2%。",
+      "verdict": "verified",
+      "confidence": 0.95,
+      "sources": ["https://www.anthropic.com/engineering/multi-agent-research-system"],
+      "evidence": "Anthropic 工程部落格 How we built our multi-agent research system 載明多代理人系統（Opus 4 lead + Sonnet 4 subagents）在內部研究 eval 上比單一 Opus 4 高出 90.2%。"
+    },
+    {
+      "id": "c2",
+      "claim": "依 Anthropic 數據，多代理人系統的 token 用量約為一般聊天對話的 15 倍。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://www.anthropic.com/engineering/multi-agent-research-system"],
+      "evidence": "同篇 Anthropic 部落格指出 agents 約用 4 倍於 chat 的 tokens，multi-agent 系統約用 15 倍於 chat 的 tokens。"
+    },
+    {
+      "id": "c3",
+      "claim": "微軟的 AutoGen 是開源的多代理人框架，目前已進入維護模式，後繼者為 Microsoft Agent Framework。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://github.com/microsoft/autogen", "https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-autogen/"],
+      "evidence": "微軟 GitHub 與 Microsoft Learn 文件說明 AutoGen 為開源多代理人對話框架，現為 maintenance mode，新專案建議改用 Microsoft Agent Framework（其 enterprise-ready 後繼者）。"
+    },
+    {
+      "id": "c4",
+      "claim": "Anthropic 的多代理人研究系統採用協調者—執行者（orchestrator/lead agent 派發 subagents 並行搜尋）架構。",
+      "verdict": "verified",
+      "confidence": 0.92,
+      "sources": ["https://www.anthropic.com/engineering/multi-agent-research-system"],
+      "evidence": "部落格描述 lead agent 規劃並拆解 query，建立並行子代理人同時搜尋，最後彙整，即 orchestrator-worker 模式。"
+    }
+  ]
+}

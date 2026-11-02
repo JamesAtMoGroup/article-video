@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-06-21T18:06:59+00:00",
+  "meta": {
+    "date": "2026-06-22",
+    "mode": "concept",
+    "strict": false,
+    "source_dir": "/sessions/lucid-cool-allen/mnt/article-video/.staging/2026-06-22",
+    "log": "/sessions/lucid-cool-allen/mnt/article-video/.logs/verify-2026-06-22-20260621-180659.log",
+    "min_verified": 1
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "ART_FOOTER_NODATE",
+      "msg": "頁尾未含日期，建議格式『每日 AI 知識庫 · 2026-06-22 · AI 未來學院』"
+    }
+  ],
+  "info": {
+    "source_dir": "/sessions/lucid-cool-allen/mnt/article-video/.staging/2026-06-22",
+    "date": "2026-06-22",
+    "mode": "concept",
+    "title": "行銷人的 AI 工作流——從受眾洞察到 Ads 文案",
+    "history_scanned": true,
+    "claims": {
+      "total": 3,
+      "verified": 3,
+      "refuted": 0,
+      "unverifiable": 0
+    }
+  }
+}

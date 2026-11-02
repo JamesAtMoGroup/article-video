@@ -1,0 +1,50 @@
+{
+  "date": "2026-07-15",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "MIT Media Lab 研究〈Your Brain on ChatGPT〉將參與者分為 LLM、搜尋引擎、純大腦三組進行論說文寫作並以 EEG 量測，發現純大腦組腦區連結最強而 LLM 組最弱，研究者以「認知負債（cognitive debt）」描述此現象。",
+      "verdict": "verified",
+      "confidence": 0.93,
+      "sources": [
+        "https://www.media.mit.edu/publications/your-brain-on-chatgpt/",
+        "https://arxiv.org/abs/2506.08872"
+      ],
+      "evidence": "MIT Media Lab / arXiv 2506.08872：三組設計（LLM / Search Engine / Brain-only），EEG 顯示 Brain-only 連結最強、LLM 最弱；提出 cognitive debt 概念，指早期依賴 AI 造成淺層編碼與回憶不佳。"
+    },
+    {
+      "id": "c2",
+      "claim": "該 MIT 研究中，使用 LLM 寫作的參與者事後難以引用自己所寫文章的內容，顯示內容未被深度內化。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": [
+        "https://www.media.mit.edu/projects/your-brain-on-chatgpt/overview/",
+        "https://arxiv.org/abs/2506.08872"
+      ],
+      "evidence": "研究摘要指出 LLM 組 recall 表現不佳、無法引用自身文章，作為 cognitive debt 的核心症狀之一。"
+    },
+    {
+      "id": "c3",
+      "claim": "微軟研究院與卡內基美隆大學 2025 年針對數百位知識工作者、近千個真實生成式 AI 使用情境的調查發現：對 AI 工具信心越高者，批判性思考行為越少；對自身能力信心越高者，批判性思考越多。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://www.microsoft.com/en-us/research/publication/the-impact-of-generative-ai-on-critical-thinking-self-reported-reductions-in-cognitive-effort-and-confidence-effects-from-a-survey-of-knowledge-workers/",
+        "https://www.forbes.com/sites/charlestowersclark/2025/03/14/how-ai-changes-critical-thinking-new-microsoft-research-findings/"
+      ],
+      "evidence": "Microsoft Research/CMU 論文（CHI 2025）：319 位知識工作者、936 個使用情境；higher confidence in AI 對應較少 critical thinking，higher self-confidence 對應較多。"
+    },
+    {
+      "id": "c4",
+      "claim": "認知卸載（cognitive offloading）並非新事物（筆記、計算機、搜尋引擎皆是），但生成式 AI 的差別在於被卸載的是推理與判斷本身，而非僅是儲存與檢索。",
+      "verdict": "verified",
+      "confidence": 0.8,
+      "sources": [
+        "https://www.microsoft.com/en-us/research/publication/the-impact-of-generative-ai-on-critical-thinking-self-reported-reductions-in-cognitive-effort-and-confidence-effects-from-a-survey-of-knowledge-workers/",
+        "https://arxiv.org/pdf/2508.21036"
+      ],
+      "evidence": "Microsoft/CMU 與 CHI 2025 Tools for Thought 綜述均指出 GenAI 使 comprehension/synthesis/evaluation 等認知工作的努力顯著降低，卸載範圍延伸至推理層次。"
+    }
+  ]
+}

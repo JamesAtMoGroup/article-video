@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-07-14T11:46:57+08:00",
+  "meta": {
+    "date": "2026-07-16",
+    "mode": "concept",
+    "strict": false,
+    "source_dir": "/sessions/magical-adoring-goldberg/mnt/article-video/.staging/2026-07-16",
+    "log": "/sessions/magical-adoring-goldberg/mnt/article-video/.logs/verify-2026-07-16-20260714-114657.log",
+    "min_verified": 1
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "ART_FOOTER_NODATE",
+      "msg": "頁尾未含日期，建議格式『每日 AI 知識庫 · 2026-07-16 · AI 未來學院』"
+    }
+  ],
+  "info": {
+    "source_dir": "/sessions/magical-adoring-goldberg/mnt/article-video/.staging/2026-07-16",
+    "date": "2026-07-16",
+    "mode": "concept",
+    "title": "如何建立你自己的 AI 學習流程？",
+    "history_scanned": true,
+    "claims": {
+      "total": 4,
+      "verified": 4,
+      "refuted": 0,
+      "unverifiable": 0
+    }
+  }
+}
