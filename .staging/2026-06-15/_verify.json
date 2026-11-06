@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-06-14T18:07:27+00:00",
+  "meta": {
+    "date": "2026-06-15",
+    "mode": "concept",
+    "strict": false,
+    "source_dir": "/sessions/inspiring-nice-mayer/mnt/article-video/.staging/2026-06-15",
+    "log": "/sessions/inspiring-nice-mayer/mnt/article-video/.logs/verify-2026-06-15-20260614-180727.log",
+    "min_verified": 1
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "ART_FOOTER_NODATE",
+      "msg": "頁尾未含日期，建議格式『每日 AI 知識庫 · 2026-06-15 · AI 未來學院』"
+    }
+  ],
+  "info": {
+    "source_dir": "/sessions/inspiring-nice-mayer/mnt/article-video/.staging/2026-06-15",
+    "date": "2026-06-15",
+    "mode": "concept",
+    "title": "AI 寫程式比工程師快？這 3 種情況你最好別讓它寫",
+    "history_scanned": true,
+    "claims": {
+      "total": 4,
+      "verified": 4,
+      "refuted": 0,
+      "unverifiable": 0
+    }
+  }
+}

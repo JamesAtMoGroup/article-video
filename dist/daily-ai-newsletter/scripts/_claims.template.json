@@ -1,0 +1,22 @@
+{
+  "date": "YYYY-MM-DD",
+  "mode": "news",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "把正文裡每一條可查證的事實宣稱寫成一句具體陳述（含版本號/日期/數字）",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://官方部落格或一級媒體連結"],
+      "evidence": "一句話佐證摘要"
+    },
+    {
+      "id": "c2",
+      "claim": "查不到佐證的宣稱標 unverifiable，且不得計入 verified 門檻",
+      "verdict": "unverifiable",
+      "confidence": 0.2,
+      "sources": [],
+      "evidence": "WebSearch 無一級來源"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-09",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "ChatGPT 的記憶（Memory）功能自 2024 年 4 月起推出「儲存的記憶」，並於 2024 年 9 月開放給免費與付費（Plus/Team/Enterprise）使用者，能跨對話記住使用者資訊。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://openai.com/index/memory-and-new-controls-for-chatgpt/", "https://help.openai.com/en/articles/8590148-memory-faq"],
+      "evidence": "OpenAI 官方記憶功能頁與說明中心載明 Memory 於 2024 年 4 月推出 saved memories，並在 2024 年 9 月 5 日開放給 Free/Plus/Team/Enterprise 使用者，可跨對話保存使用者資訊。"
+    },
+    {
+      "id": "c2",
+      "claim": "目前 Claude 全系列模型的標準上下文視窗為 20 萬（200K）token。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://www.morphllm.com/claude-context-window"],
+      "evidence": "多份資料說明 Claude 現行模型標準上下文視窗為 200K token，部分模型另提供 1M token 的 beta。"
+    },
+    {
+      "id": "c3",
+      "claim": "Google Gemini 2.5 Pro 提供 100 萬（1M）token 的上下文視窗。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://www.datastudios.org/post/google-gemini-context-window-token-limits-model-comparison-and-workflow-strategies-for-late-2025"],
+      "evidence": "資料說明 Gemini 2.5 Pro 具備 1M token 的上下文視窗（部分版本上看 2M）。"
+    }
+  ]
+}

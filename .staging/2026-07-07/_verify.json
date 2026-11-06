@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-07-06T14:16:25+08:00",
+  "meta": {
+    "date": "2026-07-07",
+    "mode": "concept",
+    "strict": false,
+    "source_dir": "/sessions/great-ecstatic-cray/mnt/article-video/.staging/2026-07-07",
+    "log": "/sessions/great-ecstatic-cray/mnt/article-video/.logs/verify-2026-07-07-20260706-141625.log",
+    "min_verified": 1
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "ART_FOOTER_NODATE",
+      "msg": "頁尾未含日期，建議格式『每日 AI 知識庫 · 2026-07-07 · AI 未來學院』"
+    }
+  ],
+  "info": {
+    "source_dir": "/sessions/great-ecstatic-cray/mnt/article-video/.staging/2026-07-07",
+    "date": "2026-07-07",
+    "mode": "concept",
+    "title": "AI 生圖怎麼下指令？視覺 Prompt 的設計邏輯",
+    "history_scanned": true,
+    "claims": {
+      "total": 3,
+      "verified": 3,
+      "refuted": 0,
+      "unverifiable": 0
+    }
+  }
+}

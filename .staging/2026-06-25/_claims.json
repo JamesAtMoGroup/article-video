@@ -1,0 +1,27 @@
+{
+  "date": "2026-06-25",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "世界經濟論壇《Future of Jobs Report 2025》指出，AI 與大數據是成長最快的技能，而雇主最看重的核心技能是『分析思考』，約七成企業視為必要。",
+      "verdict": "verified",
+      "confidence": 0.92,
+      "sources": [
+        "https://www.weforum.org/publications/the-future-of-jobs-report-2025/in-full/3-skills-outlook/",
+        "https://www.weforum.org/stories/2025/01/future-of-jobs-report-2025-jobs-of-the-future-and-the-skills-you-need-to-get-them/"
+      ],
+      "evidence": "WEF 報告：analytical thinking 為首要核心技能（7/10 企業視為必要）；AI and big data 為成長最快技能。"
+    },
+    {
+      "id": "c2",
+      "claim": "緊接在分析思考之後，雇主重視的核心特質包含韌性與彈性、好奇心與終身學習等以人為本的能力。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": [
+        "https://www.weforum.org/publications/the-future-of-jobs-report-2025/in-full/3-skills-outlook/"
+      ],
+      "evidence": "WEF 報告：resilience, flexibility and agility、curiosity and lifelong learning 等社會情緒能力同列重要且上升中。"
+    }
+  ]
+}

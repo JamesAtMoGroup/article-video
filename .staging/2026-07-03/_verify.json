@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-07-03T02:59:07+00:00",
+  "meta": {
+    "date": "2026-07-03",
+    "mode": "news",
+    "strict": false,
+    "source_dir": "/sessions/great-ecstatic-cray/mnt/article-video/.staging/2026-07-03",
+    "log": "/sessions/great-ecstatic-cray/mnt/article-video/.logs/verify-2026-07-03-20260703-025907.log",
+    "min_verified": 2
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "ART_FOOTER_NODATE",
+      "msg": "頁尾未含日期，建議格式『每日 AI 知識庫 · 2026-07-03 · AI 未來學院』"
+    }
+  ],
+  "info": {
+    "source_dir": "/sessions/great-ecstatic-cray/mnt/article-video/.staging/2026-07-03",
+    "date": "2026-07-03",
+    "mode": "news",
+    "title": "本週 AI 大事：Claude 變科學工作台、GPT-5.6 只先給少數人、Gemini 幫你訂位買菜",
+    "history_scanned": true,
+    "claims": {
+      "total": 6,
+      "verified": 6,
+      "refuted": 0,
+      "unverifiable": 0
+    }
+  }
+}

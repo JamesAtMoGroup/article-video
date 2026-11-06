@@ -1,0 +1,37 @@
+{
+  "date": "2026-07-09",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "Google DeepMind 的 SynthID 會在 AI 生成的文字、圖片與音訊嵌入人類無法察覺的隱形浮水印，且已擴及 Gemini 生成的文字。",
+      "verdict": "verified",
+      "confidence": 0.93,
+      "sources": [
+        "https://deepmind.google/models/synthid/",
+        "https://blog.google/innovation-and-ai/products/google-synthid-ai-content-detector/"
+      ],
+      "evidence": "官方說明 SynthID 對 image/audio/text/video 嵌入不可見浮水印，並擴展到 Gemini app/web 產生的文字。"
+    },
+    {
+      "id": "c2",
+      "claim": "Google 已推出 SynthID Detector 入口，用來辨識內容是否含有以 Google AI 生成的 SynthID 浮水印。",
+      "verdict": "verified",
+      "confidence": 0.88,
+      "sources": [
+        "https://blog.google/innovation-and-ai/products/google-synthid-ai-content-detector/"
+      ],
+      "evidence": "2025 年 5 月 Google 宣布 SynthID Detector 驗證入口，可判斷內容是否含 SynthID 浮水印。"
+    },
+    {
+      "id": "c3",
+      "claim": "大型語言模型逐字預測「統計上最可能」的詞，傾向產生平均、安全、缺乏鮮明個人觀點的文字，即所謂『AI 味』。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": [
+        "https://deepmind.google/models/synthid/"
+      ],
+      "evidence": "LLM 以機率預測 next token 為公認運作原理；SynthID 文字浮水印正是作用在 token 抽樣層，佐證此機制。"
+    }
+  ]
+}

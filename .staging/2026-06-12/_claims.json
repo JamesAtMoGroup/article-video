@@ -1,0 +1,38 @@
+{
+  "date": "2026-06-12",
+  "mode": "news",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "Anthropic 於 2026 年 6 月 9 日推出 Claude Fable 5，屬於排在 Opus 之上的新「Mythos 級」，是其最強且一般可用的模型，在 SWE-Bench Pro 上約 80% 分數，較 Opus 4.8 約高出 11 個百分點。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://venturebeat.com/technology/anthropic-brings-mythos-to-the-masses-with-claude-fable-5-its-most-powerful-generally-available-model-ever", "https://www.finout.io/blog/claude-fable-5-mythos-5-pricing-benchmarks"],
+      "evidence": "VentureBeat 稱 Fable 5 為 Anthropic 史上最強的一般可用模型；Finout 列出 SWE-Bench Pro Fable 5 80.3% 對 Opus 4.8 69.2%（約 +11 點）。"
+    },
+    {
+      "id": "c2",
+      "claim": "Claude Fable 5 一般版內建安全分類器，會把網路攻擊、生物等高風險查詢轉交（fallback）給 Opus 4.8 回答，且此 fallback 約在低於 5%（約二十次一次）的對話中觸發。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": ["https://www.digitalapplied.com/blog/claude-fable-5-mythos-5-release-benchmarks-2026", "https://www.finout.io/blog/claude-fable-5-mythos-5-pricing-benchmarks"],
+      "evidence": "報導指 Fable 5 有 safety classifiers 將敏感查詢 route 給 Opus 4.8，fallback 觸發於少於 5% 的 sessions（約 1/20）。"
+    },
+    {
+      "id": "c3",
+      "claim": "OpenAI 於 2026 年 6 月（約 6/4 起）推出 ChatGPT 新記憶系統「Dreaming」，會在背景自動回顧並更新對使用者的記憶（如把『七月要去新加坡』改寫為『七月去過新加坡』），並提供『記憶來源』讓使用者查看與刪改，Plus/Pro 記憶容量翻倍。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://openai.com/index/chatgpt-memory-dreaming/", "https://www.engadget.com/2187811/chatgpt-s-memory-is-getting-better-especially-if-you-re-on-the-free-tier/"],
+      "evidence": "OpenAI 官方 Dreaming 公告與 Engadget 報導描述背景自動更新記憶、時間感知改寫、memory sources 可見可改、Plus/Pro 記憶翻倍。"
+    },
+    {
+      "id": "c4",
+      "claim": "Google 2026 年 6 月為 Gemini 推出 Gemini Omni（結合文字/圖片/聲音/影片輸入並生成影片）與 Deep Think 頂級推理模式（先對 Google AI Ultra 訂閱者開放），並推出多模態嵌入模型 gemini-embedding-2-preview。",
+      "verdict": "verified",
+      "confidence": 0.82,
+      "sources": ["https://blog.mean.ceo/google-gemini-news-june-2026/", "https://ai.google.dev/gemini-api/docs/changelog"],
+      "evidence": "六月 Gemini 更新彙整指 Deep Think、Deep Research、Gemini Live、Gemini Omni 為重點；Gemini Omni 推向結合文字圖片音訊影片的影片創作；API changelog 列 gemini-embedding-2-preview 多模態嵌入。"
+    }
+  ]
+}

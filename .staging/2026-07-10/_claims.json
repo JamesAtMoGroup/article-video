@@ -1,0 +1,39 @@
+{
+  "date": "2026-07-10",
+  "mode": "news",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "Claude Sonnet 5 原生支援 1M token 脈絡窗，並成為 Claude Code 的預設模型；促銷定價為每百萬 token 輸入 2 美元、輸出 10 美元，至 2026 年 8 月 31 日。",
+      "verdict": "verified",
+      "confidence": 0.92,
+      "sources": [
+        "https://platform.claude.com/docs/en/about-claude/models/whats-new-sonnet-5",
+        "https://platform.claude.com/docs/en/about-claude/pricing"
+      ],
+      "evidence": "官方文件與多方報導：Sonnet 5 預設 1M token 脈絡窗、為 Claude Code 預設模型，促銷價 $2/$10 per Mtok 至 2026-08-31，之後 $3/$15。"
+    },
+    {
+      "id": "c2",
+      "claim": "ChatGPT 讓使用者可在記憶摘要頁刪除個別記憶，並可將記憶功能整個關閉；此控制先於網頁版對所有使用者開放，行動裝置陸續推出。",
+      "verdict": "verified",
+      "confidence": 0.88,
+      "sources": [
+        "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
+        "https://releasebot.io/updates/openai/chatgpt"
+      ],
+      "evidence": "OpenAI 更新說明：使用者可刪除記憶摘要頁上的記憶並關閉記憶，web 全面開放、mobile 陸續推出。"
+    },
+    {
+      "id": "c3",
+      "claim": "ChatGPT for PowerPoint 已對 ChatGPT Business 工作區正式上線（GA），可直接在 Microsoft PowerPoint 建立與修改可編輯的投影片。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": [
+        "https://help.openai.com/en/articles/11391654-chatgpt-business-release-notes",
+        "https://releasebot.io/updates/openai/chatgpt"
+      ],
+      "evidence": "ChatGPT Business 更新說明：ChatGPT for PowerPoint 對 Business 工作區 GA，可在 PowerPoint 內建立/修改可編輯簡報。"
+    }
+  ]
+}

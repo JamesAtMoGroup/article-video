@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-06-29T11:12:07+00:00",
+  "meta": {
+    "date": "2026-07-02",
+    "mode": "concept",
+    "strict": false,
+    "source_dir": "/sessions/vigilant-jolly-davinci/mnt/article-video/.staging/2026-07-02",
+    "log": "/sessions/vigilant-jolly-davinci/mnt/article-video/.logs/verify-2026-07-02-20260629-111207.log",
+    "min_verified": 1
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "ART_FOOTER_NODATE",
+      "msg": "頁尾未含日期，建議格式『每日 AI 知識庫 · 2026-07-02 · AI 未來學院』"
+    }
+  ],
+  "info": {
+    "source_dir": "/sessions/vigilant-jolly-davinci/mnt/article-video/.staging/2026-07-02",
+    "date": "2026-07-02",
+    "mode": "concept",
+    "title": "如何用 Prompt 讓 AI 輸出穩定格式？JSON、表格、清單都適用",
+    "history_scanned": true,
+    "claims": {
+      "total": 2,
+      "verified": 2,
+      "refuted": 0,
+      "unverifiable": 0
+    }
+  }
+}

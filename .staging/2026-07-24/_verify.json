@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-07-24T02:11:22+08:00",
+  "meta": {
+    "date": "2026-07-24",
+    "mode": "news",
+    "strict": false,
+    "source_dir": "/sessions/happy-lucid-knuth/mnt/article-video/.staging/2026-07-24",
+    "log": "/sessions/happy-lucid-knuth/mnt/article-video/.logs/verify-2026-07-24-20260724-021122.log",
+    "min_verified": 2
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "ART_FOOTER_NODATE",
+      "msg": "頁尾未含日期，建議格式『每日 AI 知識庫 · 2026-07-24 · AI 未來學院』"
+    }
+  ],
+  "info": {
+    "source_dir": "/sessions/happy-lucid-knuth/mnt/article-video/.staging/2026-07-24",
+    "date": "2026-07-24",
+    "mode": "news",
+    "title": "本週 AI 大事：Gemini 3.6 Flash 更快更便宜、ChatGPT 自訂指令變長、Claude Cowork 上手機能排程",
+    "history_scanned": true,
+    "claims": {
+      "total": 6,
+      "verified": 5,
+      "refuted": 0,
+      "unverifiable": 1
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-07-09T10:49:10+08:00",
+  "meta": {
+    "date": "2026-07-10",
+    "mode": "news",
+    "strict": false,
+    "source_dir": "/sessions/vibrant-cool-cray/mnt/article-video/.staging/2026-07-10",
+    "log": "/sessions/vibrant-cool-cray/mnt/article-video/.logs/verify-2026-07-10-20260709-104910.log",
+    "min_verified": 2
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "ART_FOOTER_NODATE",
+      "msg": "頁尾未含日期，建議格式『每日 AI 知識庫 · 2026-07-10 · AI 未來學院』"
+    }
+  ],
+  "info": {
+    "source_dir": "/sessions/vibrant-cool-cray/mnt/article-video/.staging/2026-07-10",
+    "date": "2026-07-10",
+    "mode": "news",
+    "title": "本週 AI 大事：Claude Sonnet 5 百萬脈絡上線、ChatGPT 記憶能刪能關、ChatGPT 直接做 PowerPoint",
+    "history_scanned": true,
+    "claims": {
+      "total": 3,
+      "verified": 3,
+      "refuted": 0,
+      "unverifiable": 0
+    }
+  }
+}

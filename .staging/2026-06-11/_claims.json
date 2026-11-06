@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-11",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "Google NotebookLM 的回答只根據使用者上傳的來源生成，並附上可點回原文的內嵌引用；若答案不在來源中則不會回答。",
+      "verdict": "verified",
+      "confidence": 0.92,
+      "sources": ["https://support.google.com/notebooklm/answer/16164461?hl=en"],
+      "evidence": "Google NotebookLM 官方說明與多份指南指出，NotebookLM grounded 於使用者來源、答案附內嵌引用可追回原文，且若來源中沒有答案就不回答。"
+    },
+    {
+      "id": "c2",
+      "claim": "NotebookLM 採用檢索增強生成（RAG）技術，先從上傳來源找出相關內容再生成答案，以降低幻覺。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": ["https://www.kzsoftworks.com/blog/notebooklm-this-ai-is-grounded-in-your-documents-not-the-whole-internet"],
+      "evidence": "多份說明指出 NotebookLM 的核心是 RAG（Retrieval-Augmented Generation），先檢索來源相關事實再作答，因此較不易幻覺。"
+    },
+    {
+      "id": "c3",
+      "claim": "NotebookLM 免費版每個筆記本最多可加入 50 個來源，每個來源上限約 50 萬字或 200MB。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": ["https://support.google.com/notebooklm/answer/16164461?hl=en"],
+      "evidence": "Google 官方與指南說明 NotebookLM 每個來源可達約 50 萬字或 200MB，免費版每個 notebook 最多 50 個來源。"
+    }
+  ]
+}

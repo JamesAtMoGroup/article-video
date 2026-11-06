@@ -1,0 +1,37 @@
+{
+  "date": "2026-07-08",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "OpenAI 曾推出自家的 AI 文字偵測器（AI Text Classifier），後因準確率過低而下架。",
+      "verdict": "verified",
+      "confidence": 0.95,
+      "sources": [
+        "https://searchengineland.com/openai-ai-classifier-no-longer-available-429912",
+        "https://openai.com/index/new-ai-classifier-for-indicating-ai-written-text/"
+      ],
+      "evidence": "OpenAI 於 2023 年 7 月 20 日下架 AI Text Classifier，官方理由為 low rate of accuracy。"
+    },
+    {
+      "id": "c2",
+      "claim": "OpenAI 該偵測器僅能正確辨認約 26% 的 AI 生成文字，並將約 9% 的人類文字誤判為 AI。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://searchengineland.com/openai-ai-classifier-no-longer-available-429912"
+      ],
+      "evidence": "官方評估：正確辨識 AI 文字僅 26%，人類文字誤報率 9%。文中以『約四分之一』『約一成』對應。"
+    },
+    {
+      "id": "c3",
+      "claim": "大型語言模型會產生『幻覺』：以自信流暢的語氣捏造不存在的事實、數字或引用。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://news.ycombinator.com/item?id=36862850"
+      ],
+      "evidence": "『幻覺』為業界公認且廣泛記載的 LLM 現象，偵測器不可靠亦佐證需人工查證。"
+    }
+  ]
+}

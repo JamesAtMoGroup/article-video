@@ -7,6 +7,9 @@ import { VideoComposition_2026_03_30, TOTAL_FRAMES_2026_03_30 } from "./VideoCom
 import { VideoComposition_2026_03_31, TOTAL_FRAMES_2026_03_31 } from "./VideoComposition_2026_03_31";
 import { VideoComposition_2026_04_01, TOTAL_FRAMES_2026_04_01 } from "./VideoComposition_2026_04_01";
 import { VideoComposition_2026_04_02, TOTAL_FRAMES_2026_04_02 } from "./VideoComposition_2026_04_02";
+import { VideoComposition_2026_04_08, TOTAL_FRAMES_2026_04_08 } from "./VideoComposition_2026_04_08";
+import { VideoComposition_2026_04_09, TOTAL_FRAMES_2026_04_09 } from "./VideoComposition_2026_04_09";
+import { VideoComposition_2026_04_13, TOTAL_FRAMES_2026_04_13 } from "./VideoComposition_2026_04_13";
 import { VideoComposition_2026_04_14, TOTAL_FRAMES_2026_04_14 } from "./VideoComposition_2026_04_14";
 import { VideoComposition_2026_04_15, TOTAL_FRAMES_2026_04_15 } from "./VideoComposition_2026_04_15";
 import { VideoComposition_2026_04_16, TOTAL_FRAMES_2026_04_16 } from "./VideoComposition_2026_04_16";
@@ -47,6 +50,13 @@ import { VideoComposition_2026_06_02, TOTAL_FRAMES_2026_06_02 } from "./VideoCom
 import { VideoComposition_2026_06_03, TOTAL_FRAMES_2026_06_03 } from "./VideoComposition_2026_06_03";
 import { VideoComposition_2026_06_04, TOTAL_FRAMES_2026_06_04 } from "./VideoComposition_2026_06_04";
 import { VideoComposition_2026_06_05, TOTAL_FRAMES_2026_06_05 } from "./VideoComposition_2026_06_05";
+import { VideoComposition_2026_06_08, TOTAL_FRAMES_2026_06_08 } from "./VideoComposition_2026_06_08";
+import { VideoComposition_2026_06_09, TOTAL_FRAMES_2026_06_09 } from "./VideoComposition_2026_06_09";
+import { VideoComposition_2026_06_10, TOTAL_FRAMES_2026_06_10 } from "./VideoComposition_2026_06_10";
+import { VideoComposition_2026_06_11, TOTAL_FRAMES_2026_06_11 } from "./VideoComposition_2026_06_11";
+import { VideoComposition_2026_06_12, TOTAL_FRAMES_2026_06_12 } from "./VideoComposition_2026_06_12";
+import { VideoComposition_2026_06_15, TOTAL_FRAMES_2026_06_15 } from "./VideoComposition_2026_06_15";
+import { VideoComposition_2026_06_16, TOTAL_FRAMES_2026_06_16 } from "./VideoComposition_2026_06_16";
 import { MCPDiagram, TOTAL_FRAMES_MCP } from "./MCPDiagram";
 import React from "react";
 
@@ -112,6 +122,33 @@ export const RemotionRoot: React.FC = () => {
         id="ArticleVideo-2026-04-02"
         component={VideoComposition_2026_04_02}
         durationInFrames={TOTAL_FRAMES_2026_04_02}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-04-08 — 4K · AI 幻覺 · AI 為什麼會「幻覺」？它不是在說謊 */}
+      <Composition
+        id="ArticleVideo-2026-04-08"
+        component={VideoComposition_2026_04_08}
+        durationInFrames={TOTAL_FRAMES_2026_04_08}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-04-09 — 4K · RAG · RAG 是什麼？讓 AI 記住你的資料 */}
+      <Composition
+        id="ArticleVideo-2026-04-09"
+        component={VideoComposition_2026_04_09}
+        durationInFrames={TOTAL_FRAMES_2026_04_09}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-04-13 — 4K · 什麼是 MCP？為什麼最近大家都在講 */}
+      <Composition
+        id="ArticleVideo-2026-04-13"
+        component={VideoComposition_2026_04_13}
+        durationInFrames={TOTAL_FRAMES_2026_04_13}
         fps={30}
         width={3840}
         height={2160}
@@ -472,6 +509,69 @@ export const RemotionRoot: React.FC = () => {
         id="ArticleVideo-2026-06-05"
         component={VideoComposition_2026_06_05}
         durationInFrames={TOTAL_FRAMES_2026_06_05}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-06-08 — 4K · 多代理人系統 · 一個 AI 指揮一群 AI？多代理人系統怎麼分工 */}
+      <Composition
+        id="ArticleVideo-2026-06-08"
+        component={VideoComposition_2026_06_08}
+        durationInFrames={TOTAL_FRAMES_2026_06_08}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-06-09 — 4K · AI 真的記得你嗎？拆解短期、長期、外掛三種記憶 */}
+      <Composition
+        id="ArticleVideo-2026-06-09"
+        component={VideoComposition_2026_06_09}
+        durationInFrames={TOTAL_FRAMES_2026_06_09}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-06-10 — 4K · AI 生產線 · 老闆要簡報明天 8 點交？AI 生產線拆解 */}
+      <Composition
+        id="ArticleVideo-2026-06-10"
+        component={VideoComposition_2026_06_10}
+        durationInFrames={TOTAL_FRAMES_2026_06_10}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-06-11 — 4K · 專屬知識庫 · 如何用 AI 打造你的專屬知識庫？上傳文件到問答全流程 */}
+      <Composition
+        id="ArticleVideo-2026-06-11"
+        component={VideoComposition_2026_06_11}
+        durationInFrames={TOTAL_FRAMES_2026_06_11}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-06-12 — 4K · 本週 AI 大事 — Claude Fable 5 登場、ChatGPT 記憶會做夢、Gemini 全能影音 */}
+      <Composition
+        id="ArticleVideo-2026-06-12"
+        component={VideoComposition_2026_06_12}
+        durationInFrames={TOTAL_FRAMES_2026_06_12}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-06-15 — 4K · AI 寫程式比工程師快？這 3 種情況你最好別讓它寫 */}
+      <Composition
+        id="ArticleVideo-2026-06-15"
+        component={VideoComposition_2026_06_15}
+        durationInFrames={TOTAL_FRAMES_2026_06_15}
+        fps={30}
+        width={3840}
+        height={2160}
+      />
+      {/* 2026-06-16 — 4K · 醫療 AI · AI 看病比醫生還準？真實臨床的盲點與醫療 AI 怎麼用 */}
+      <Composition
+        id="ArticleVideo-2026-06-16"
+        component={VideoComposition_2026_06_16}
+        durationInFrames={TOTAL_FRAMES_2026_06_16}
         fps={30}
         width={3840}
         height={2160}

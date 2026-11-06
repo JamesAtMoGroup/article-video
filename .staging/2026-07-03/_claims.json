@@ -1,0 +1,71 @@
+{
+  "date": "2026-07-03",
+  "mode": "news",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "Claude Science 不是新模型，底層跑的是既有付費用戶可用的 Claude Opus 4.8，是一套整合工具與資料的工作台（harness）。",
+      "verdict": "verified",
+      "confidence": 0.95,
+      "sources": [
+        "https://www.anthropic.com/news/claude-science-ai-workbench",
+        "https://techcrunch.com/2026/06/30/anthropics-claude-science-bets-on-workflow-not-a-new-model-to-win-over-scientists/"
+      ],
+      "evidence": "官方與 TechCrunch 皆說 Claude Science 是 harness，非新模型，跑在 Claude Opus 4.8 上。"
+    },
+    {
+      "id": "c2",
+      "claim": "Claude Science 串接超過 60 個科學資料庫，並預先配置基因體、單細胞、蛋白質體、結構生物學、化學資訊等領域的技能與連接器。",
+      "verdict": "verified",
+      "confidence": 0.92,
+      "sources": [
+        "https://www.anthropic.com/news/claude-science-ai-workbench",
+        "https://www.hpcwire.com/aiwire/2026/06/30/anthropic-launches-claude-science-ai-workbench-for-scientific-research/"
+      ],
+      "evidence": "官方公告列出 60+ curated skills/connectors，涵蓋 genomics、single-cell、proteomics、structural biology、cheminformatics。"
+    },
+    {
+      "id": "c3",
+      "claim": "Claude Science 內建一個審查代理（reviewer agent），會查核引用與計算、標出並修正錯誤，且每個結果可追回程式碼、可重現。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://www.anthropic.com/news/claude-science-ai-workbench",
+        "https://www.technologyreview.com/2026/06/30/1139987/claude-science-is-anthropics-newest-flagship-product/"
+      ],
+      "evidence": "官方描述 reviewer agent 檢查 citations 與 calculations、flag/correct errors，結果 reproducible 且 traced to code。"
+    },
+    {
+      "id": "c4",
+      "claim": "OpenAI 預覽 GPT-5.6 系列，分 Sol（旗艦）、Terra（日常平衡）、Luna（便宜快速）三等級；只有 Sol 解鎖 max reasoning effort 與 ultra 多子代理模式，初期僅開放給約 20 家獲核准公司。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://openai.com/index/previewing-gpt-5-6-sol/",
+        "https://venturebeat.com/technology/openai-unveils-gpt-5-6-sol-terra-and-luna-models-but-only-accessible-to-limited-preview-partners-for-now-per-us-gov"
+      ],
+      "evidence": "OpenAI 公告三等級與 ultra 模式；VentureBeat 報導限量預覽給約 20 家獲政府核准的公司。"
+    },
+    {
+      "id": "c5",
+      "claim": "GPT-5.6 Sol 開啟 ultra 模式在某基準約 91.9%，高於一般 Sol 的 88.8%，佐證多子代理拆解確有提升。",
+      "verdict": "verified",
+      "confidence": 0.8,
+      "sources": [
+        "https://www.datacamp.com/blog/gpt-5-6-sol-luna-terra",
+        "https://openai.com/index/previewing-gpt-5-6-sol/"
+      ],
+      "evidence": "報導引用 Sol Ultra 91.9% vs Sol 88.8%，說明 subagent 方法有效。"
+    },
+    {
+      "id": "c6",
+      "claim": "Gemini Spark 登陸 macOS（Beta，先給美國 Google AI Ultra 訂閱者），並連接 Canva、Dropbox、Instacart、OpenTable、Zillow Rentals，以及 Google Tasks 與 Keep。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://blog.google/innovation-and-ai/products/gemini-app/gemini-spark-updates-june-2026/"
+      ],
+      "evidence": "官方部落格宣布 Spark macOS 版與 Canva/Dropbox/Instacart/OpenTable/Zillow、Tasks/Keep 整合。"
+    }
+  ]
+}

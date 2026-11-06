@@ -1,0 +1,38 @@
+{
+  "date": "2026-06-24",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "深偽（deepfake）相關的累積金融詐騙損失已突破 15.6 億美元，其中超過 10 億美元集中在近一年內發生，相較 2019–2023 合計約 1.3 億美元大幅暴增。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": [
+        "https://deepstrike.io/blog/deepfake-statistics-2025",
+        "https://www.eftsure.com/statistics/deepfake-statistics/"
+      ],
+      "evidence": "多份深偽統計彙整：累積損失達 $1.56B，2025 一年超過 $1B，2019–2023 合計約 $130M。"
+    },
+    {
+      "id": "c2",
+      "claim": "超過 50% 的金融專業人士回報曾遇到深偽詐騙嘗試，約 60% 的組織自認未準備好應對深偽威脅。",
+      "verdict": "verified",
+      "confidence": 0.82,
+      "sources": [
+        "https://zerothreat.ai/blog/deepfake-and-ai-phishing-statistics",
+        "https://www.brightdefense.com/resources/deepfake-statistics/"
+      ],
+      "evidence": "統計：53% 金融專業人士回報深偽詐騙嘗試；60% 組織自認沒準備好、過半主管團隊未受訓。"
+    },
+    {
+      "id": "c3",
+      "claim": "對抗深偽的來源驗證方法包含 C2PA（內容來源與真實性聯盟）的加密內容憑證；但偵測與偽造是持續的軍備競賽，沒有靜態偵測工具能長期有效。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": [
+        "https://www.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2025/gen-ai-trust-standards.html"
+      ],
+      "evidence": "Deloitte 等指出 provenance/C2PA 內容憑證為主要對策，且偵測器輸出常被用作對抗式訓練訊號，使偽造繞過特定偵測。"
+    }
+  ]
+}

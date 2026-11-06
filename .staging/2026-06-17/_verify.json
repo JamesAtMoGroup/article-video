@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-06-15T09:57:07+00:00",
+  "meta": {
+    "date": "2026-06-17",
+    "mode": "concept",
+    "strict": false,
+    "source_dir": "/sessions/inspiring-nice-mayer/mnt/article-video/.staging/2026-06-17",
+    "log": "/sessions/inspiring-nice-mayer/mnt/article-video/.logs/verify-2026-06-17-20260615-095707.log",
+    "min_verified": 1
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "ART_FOOTER_NODATE",
+      "msg": "頁尾未含日期，建議格式『每日 AI 知識庫 · 2026-06-17 · AI 未來學院』"
+    }
+  ],
+  "info": {
+    "source_dir": "/sessions/inspiring-nice-mayer/mnt/article-video/.staging/2026-06-17",
+    "date": "2026-06-17",
+    "mode": "concept",
+    "title": "AI 會搶走設計師、作家的飯碗嗎？創意工作的新現實",
+    "history_scanned": true,
+    "claims": {
+      "total": 3,
+      "verified": 3,
+      "refuted": 0,
+      "unverifiable": 0
+    }
+  }
+}

@@ -8,13 +8,19 @@ import {
   staticFile,
   useCurrentFrame,
   useVideoConfig,
+  delayRender,
+  continueRender,
 } from "remotion";
 import React from "react";
 import { loadFont as loadNotoSansTC } from "@remotion/google-fonts/NotoSansTC";
 import { loadFont as loadSpaceMono } from "@remotion/google-fonts/SpaceMono";
 
-loadNotoSansTC("normal", { weights: ["400", "700", "900"] });
-loadSpaceMono("normal", { weights: ["400", "700"] });
+const fontHandle = delayRender("Loading fonts");
+const fontNotoTC = loadNotoSansTC("normal", { weights: ["400", "700", "900"] });
+const fontSpaceMono = loadSpaceMono("normal", { weights: ["400", "700"] });
+Promise.all([fontNotoTC.waitUntilDone(), fontSpaceMono.waitUntilDone()])
+  .then(() => continueRender(fontHandle))
+  .catch(() => continueRender(fontHandle));
 
 // ── Scale & canvas (4K = 3840×2160) ───────────────────────────────────────
 const S = 3;
@@ -794,7 +800,7 @@ function TitleScene() {
             border: `1px solid ${C.primaryBorder}`,
             borderRadius: 6 * S, padding: `${6 * S}px ${14 * S}px`,
             fontWeight: 700,
-          }}>每日 AI 知識庫</span>
+          }}></span>
         </div>
 
         {/* H1 line 1 */}

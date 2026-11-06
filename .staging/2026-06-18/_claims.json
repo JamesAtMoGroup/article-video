@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-18",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "當 Google 搜尋出現 AI Overviews（AI 摘要）時，零點擊率升至約 83%；整體約有近六成的 Google 搜尋以零點擊收場。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": ["https://superprompt.com/blog/zero-click-search-worsens-58-percent-google-no-clicks-november-2025-recovery-strategies", "https://sqmagazine.co.uk/ai-overviews-statistics/"],
+      "evidence": "多份分析引用 Semrush/業界數據：AI Overviews 出現時 zero-click 約 83%；2025 年約 58–60% Google 搜尋無點擊。"
+    },
+    {
+      "id": "c2",
+      "claim": "2025 年 Google 導向出版／內容網站的流量全球約下滑三分之一（約 33%），且現階段 AI 工具導回的轉介流量遠不足以彌補。",
+      "verdict": "verified",
+      "confidence": 0.82,
+      "sources": ["https://www.adexchanger.com/publishers/the-ai-search-reckoning-is-dismantling-open-web-traffic-and-publishers-may-never-recover/", "https://www.pixelmojo.io/blogs/google-traffic-dropped-33-percent-ai-search-shift"],
+      "evidence": "Press Gazette/Chartbeat 數據指 2025 年 Google 對出版商流量全球降約 33%；ChatGPT/Perplexity 等 AI 轉介僅佔出版商轉介流量極小比例（約 0.02%/0.002%）。"
+    },
+    {
+      "id": "c3",
+      "claim": "生成式 AI 在搜尋與問答情境中存在『幻覺』，會以高度自信產出不存在或錯誤的資訊，因此重要查詢需查證來源與交叉比對。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": ["https://en.wikipedia.org/wiki/Hallucination_(artificial_intelligence)"],
+      "evidence": "AI 幻覺為已被廣泛記錄的現象：大型語言模型會生成看似可信但與事實不符的內容，業界普遍建議核對來源。"
+    }
+  ]
+}

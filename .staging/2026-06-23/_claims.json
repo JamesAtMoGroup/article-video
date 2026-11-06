@@ -1,0 +1,38 @@
+{
+  "date": "2026-06-23",
+  "mode": "concept",
+  "claims": [
+    {
+      "id": "c1",
+      "claim": "在 ARC-AGI-2 抽象推理基準上，最強 AI 模型分數已達約 85%，而人類個人平均表現約為 66%。",
+      "verdict": "verified",
+      "confidence": 0.9,
+      "sources": [
+        "https://arcprize.org/arc-agi/2",
+        "https://benchlm.ai/benchmarks/arcAgi2"
+      ],
+      "evidence": "ARC Prize 官方與基準排行榜：ARC-AGI-2 領先模型分數約 85%（GPT-5.5），人類平均約 66%。"
+    },
+    {
+      "id": "c2",
+      "claim": "在更新更難的 ARC-AGI-3 上，幾乎所有頂尖前沿模型得分不到 1%，而人類可達接近滿分，顯示通用推理仍有巨大缺口。",
+      "verdict": "verified",
+      "confidence": 0.88,
+      "sources": [
+        "https://arcprize.org/",
+        "https://medium.com/@AdithyaGiridharan/arc-agi-3-dropped-and-frontier-ai-scored-less-than-1-90cd70e65a61"
+      ],
+      "evidence": "ARC-AGI-3 推出後，前沿模型得分低於 1%，人類接近 100%，凸顯模型在全新題型上的泛化失敗。"
+    },
+    {
+      "id": "c3",
+      "claim": "ARC Prize 分析指出，單純擴大模型規模（scaling）不足以達到 AGI，通往 AGI 仍需新的突破。",
+      "verdict": "verified",
+      "confidence": 0.85,
+      "sources": [
+        "https://arcprize.org/blog/arc-prize-2025-results-analysis"
+      ],
+      "evidence": "ARC Prize 結果分析：scaling alone will not reach AGI；refinement loops 等結構化方法為主要進展軸。"
+    }
+  ]
+}

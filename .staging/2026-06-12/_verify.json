@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "checked_at": "2026-06-12T03:33:53+00:00",
+  "meta": {
+    "date": "2026-06-12",
+    "mode": "news",
+    "strict": false,
+    "source_dir": "/sessions/hopeful-peaceful-lovelace/mnt/article-video/.staging/2026-06-12",
+    "log": "/sessions/hopeful-peaceful-lovelace/mnt/article-video/.logs/verify-2026-06-12-20260612-033353.log",
+    "min_verified": 2
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "code": "ART_FOOTER_NODATE",
+      "msg": "頁尾未含日期，建議格式『每日 AI 知識庫 · 2026-06-12 · AI 未來學院』"
+    }
+  ],
+  "info": {
+    "source_dir": "/sessions/hopeful-peaceful-lovelace/mnt/article-video/.staging/2026-06-12",
+    "date": "2026-06-12",
+    "mode": "news",
+    "title": "本週 AI 大事：Claude Fable 5 登場、ChatGPT 記憶會做夢、Gemini 全能影音",
+    "history_scanned": true,
+    "claims": {
+      "total": 4,
+      "verified": 4,
+      "refuted": 0,
+      "unverifiable": 0
+    }
+  }
+}
